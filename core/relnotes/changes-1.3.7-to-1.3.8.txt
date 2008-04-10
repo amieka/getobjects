@@ -1,0 +1,2080 @@
+2007-12-19
+
+Generic
+- misc Foundation enhancements
+- plenty of JavaDoc comments
+- a bit of cleanup in the KVC implementation
+
+AppServer
+- new WODynamicKeyPathAssociation
+- added WOQualifierAssociation (q:), <#if> style conditions
+- WOConditional: 'v' binding as a shortcut for 'value'
+- added WOHTMLElementAttributes element to render .class/!style bindings
+  in various dynamic elements
+- added support for WO style component actions
+- parse <#a> tags with an 'action' attribute as a WOHyperlink
+- rewrote element-id generation
+- use element-id as WOHyperlink DOM id
+- added explicit assignment of element-id to various elements
+- added @actions (actions invoked via element-id, instantiated like DAs)
+- added -WOAutoOpenInBrowser property
+- added -WOProjectDirectory property
+- added 'self' KVC key to NSObjects
+- parsed <#submit> as WOSubmitButton
+- changed to form-takevalues handling
+- moved link generators to own subpackage
+- WEFormToRemote is now a subclass of WOForm
+- added F() convenience function to WOComponent
+- improvements to WORedirect
+- detect property lists in String 'list' bindings (list="(1,2,3)")
+- added WOSearchField (Safari search fields)
+- added WOLabelAssociation (label:)
+- added iText PDF generation example (HelloPDF)
+- added JFreeChart generation example (HelloChart)
+- added Java2D thumbnail generation example (HelloThumbnail)
+- can now deliver java.awt.BufferedImage results to browser
+- can now deliver java.awt.Image results to browser
+- fixes to WOSessionStore checkout handling
+- proper support for cookie based session-ids (and URL less ones)
+- added max-age support to WOCookie
+- fixes to awake/sleep handling
+- cleanups in Servlet runner
+- refactored WODirectAction invocation
+- association-prefix factory is now in WOAssociation
+- improved WOResourceManager API for class lookup
+- improved error handling in WONumberFormatter
+- added extra-var support to WOApplication (threadsafe Map)
+
+JoObjects/OFS
+- Major API change: the objectTraversalPath now includes the root object
+- changed internals for IJoSecuredObject
+- added JoPathAssociation (jo:)
+- some work on JMI
+- some work on OFS backend
+- added a sample application (HelloJo)
+- prepared support for XML product descriptions
+
+JavaScript
+- added first JavaScript application environment (jsapp package)
+- added fully scripted HelloJS demo
+
+Database Layer
+- split tracking context into just the tracking context and the editing one
+- globalIDsForObjects in tracking context
+- better Boolean support in EOSQLExpression
+- a few null-ptr fixes
+- stub for FrontBase database adaptor
+- some work on storedValueForKey
+- added the EOGenerator tool
+
+ThirdParty
+- updated to current versions
+- added iText, JFreeChart, Rhino
+
+
+------------------------------------------------------------------------
+r1263 | helge | 2007-08-19 12:05:39 +0200 (Sun, 19 Aug 2007) | 2 lines
+Changed paths:
+   M /trunk/Core/version.properties
+
+bumped version after 1.3.7 tag
+
+------------------------------------------------------------------------
+r1264 | helge | 2007-08-19 15:10:38 +0200 (Sun, 19 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/foundation/UString.java
+
+added a componentsJoinedByString which works on arbitary collections
+------------------------------------------------------------------------
+r1265 | helge | 2007-08-19 15:39:23 +0200 (Sun, 19 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOMessage.java
+
+minor code cleanups
+------------------------------------------------------------------------
+r1266 | helge | 2007-08-19 15:53:16 +0200 (Sun, 19 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOCheckBox.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOFileUpload.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOGenericContainer.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOGenericElement.java
+   A /trunk/Core/org/opengroupware/jope/appserver/elements/WOHTMLElementAttributes.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOHiddenField.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOImageButton.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOInput.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOPasswordField.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOPopUpButton.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WORadioButton.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOResetButton.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOSubmitButton.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOText.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOTextField.java
+
+changed code to use the new WOHTMLAttributes element to generate style/class attributes in WOInput and WOGenericElement elements
+------------------------------------------------------------------------
+r1267 | helge | 2007-08-19 15:53:36 +0200 (Sun, 19 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/weprototype/WESubmitToRemote.java
+
+changed code to use the new WOHTMLAttributes element to generate style/class attributes in WOInput and WOGenericElement elements
+------------------------------------------------------------------------
+r1268 | helge | 2007-08-19 16:36:24 +0200 (Sun, 19 Aug 2007) | 1 line
+Changed paths:
+   A /trunk/Core/org/opengroupware/jope/appserver/associations/WODynamicKeyPathAssociation.java
+   M /trunk/Core/org/opengroupware/jope/appserver/associations/WOKeyPathAssociation.java
+   M /trunk/Core/org/opengroupware/jope/appserver/associations/WOQualifierAssociation.java
+
+added WODynamicKeyPathAssociation
+------------------------------------------------------------------------
+r1269 | helge | 2007-08-19 16:49:49 +0200 (Sun, 19 Aug 2007) | 3 lines
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/associations/WODynamicKeyPathAssociation.java
+   M /trunk/Core/org/opengroupware/jope/appserver/associations/WOQualifierAssociation.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOConditional.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOHTMLElementAttributes.java
+   M /trunk/Core/org/opengroupware/jope/appserver/templates/WOWrapperTemplateBuilder.java
+
+some support for <#if name1/value1 name2/value2> style checks,
+added 'q'/'qualifier' bindings to WOConditional (<#if q="name='Duck'>),
+mapped 'q:' prefix wo WOQualifierAssociation
+------------------------------------------------------------------------
+r1270 | helge | 2007-08-19 16:50:54 +0200 (Sun, 19 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOConditional.java
+
+added 'v' binding as a shortcut for 'value'
+------------------------------------------------------------------------
+r1271 | helge | 2007-08-19 16:57:38 +0200 (Sun, 19 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOHTMLElementAttributes.java
+
+properly remove consumed associations
+------------------------------------------------------------------------
+r1272 | helge | 2007-08-20 13:22:15 +0200 (Mon, 20 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/eocontrol/EOEditingContext.java
+
+added globalIDsForObjects(Collection)
+------------------------------------------------------------------------
+r1273 | helge | 2007-08-20 18:04:10 +0200 (Mon, 20 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/eoaccess/EOSQLExpression.java
+
+improved support for Boolean values (eg when used in INT columns)
+------------------------------------------------------------------------
+r1274 | helge | 2007-08-20 23:01:16 +0200 (Mon, 20 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/eoaccess/EOActiveRecord.java
+   M /trunk/Core/org/opengroupware/jope/eoaccess/EODatabaseChannel.java
+
+properly use object derived values for snapshot (instead of database row which does not contain coerced values)
+------------------------------------------------------------------------
+r1275 | helge | 2007-08-20 23:05:11 +0200 (Mon, 20 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/foundation/kvc/KVCWrapper.java
+
+
+------------------------------------------------------------------------
+r1276 | helge | 2007-08-22 10:40:09 +0200 (Wed, 22 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOHyperlink.java
+
+added support for .class/!style bindings
+------------------------------------------------------------------------
+r1277 | helge | 2007-08-22 15:16:02 +0200 (Wed, 22 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/eoaccess/EOAdaptorChannel.java
+
+log SQLState when insert fails
+------------------------------------------------------------------------
+r1278 | helge | 2007-08-22 15:43:43 +0200 (Wed, 22 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/eoaccess/EOSQLExpression.java
+
+fixed a null-ptr issue
+------------------------------------------------------------------------
+r1279 | helge | 2007-08-22 18:09:41 +0200 (Wed, 22 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/foundation/UString.java
+
+just added a few comments
+------------------------------------------------------------------------
+r1280 | helge | 2007-08-22 18:25:36 +0200 (Wed, 22 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/servlets/WOServletAdaptor.java
+   M /trunk/Core/org/opengroupware/jope/servlets/WOServletRequest.java
+
+just added a few comments
+------------------------------------------------------------------------
+r1281 | helge | 2007-08-23 17:49:40 +0200 (Thu, 23 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/eocontrol/EOEditingContext.java
+
+just added a comment
+------------------------------------------------------------------------
+r1282 | helge | 2007-08-23 19:20:52 +0200 (Thu, 23 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/samples/HelloWorld/Main.html
+   A /trunk/Core/org/opengroupware/jope/samples/HelloWorld/TestAction.html
+   A /trunk/Core/org/opengroupware/jope/samples/HelloWorld/TestAction.java
+
+added test for WO style actions
+------------------------------------------------------------------------
+r1283 | helge | 2007-08-24 12:12:44 +0200 (Fri, 24 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOApplication.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOComponentRequestHandler.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WODirectActionRequestHandler.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WORequest.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WORequestHandler.java
+
+minor cleanups in the request handling, added a few comments
+------------------------------------------------------------------------
+r1284 | helge | 2007-08-24 13:39:39 +0200 (Fri, 24 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOApplication.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOComponentFault.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOComponentRequestHandler.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOContext.java
+   A /trunk/Core/org/opengroupware/jope/appserver/core/WOPageSessionCache.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WORequestHandler.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOSession.java
+
+work on component actions
+------------------------------------------------------------------------
+r1285 | helge | 2007-08-24 13:47:03 +0200 (Fri, 24 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOApplication.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOComponentRequestHandler.java
+   M /trunk/Core/org/opengroupware/jope/appserver/templates/WOChildComponentReference.java
+
+work on component actions
+------------------------------------------------------------------------
+r1286 | helge | 2007-08-24 13:50:47 +0200 (Fri, 24 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/templates/WOWrapperTemplateBuilder.java
+
+added a special hack to turn <#a action=""> into a WOHyperlink
+------------------------------------------------------------------------
+r1287 | helge | 2007-08-24 13:54:33 +0200 (Fri, 24 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOComponentRequestHandler.java
+
+
+------------------------------------------------------------------------
+r1288 | helge | 2007-08-24 14:11:47 +0200 (Fri, 24 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOComponent.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOPageSessionCache.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOSession.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOCompoundElement.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOHyperlink.java
+   M /trunk/Core/org/opengroupware/jope/samples/HelloWorld/Frame.html
+
+based component actions should work now
+------------------------------------------------------------------------
+r1289 | helge | 2007-08-24 15:26:29 +0200 (Fri, 24 Aug 2007) | 3 lines
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOContext.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOCompoundElement.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOHyperlink.java
+   M /trunk/Core/org/opengroupware/jope/samples/HelloWorld/TestAction.html
+
+directly map 'id' of WOHyperlink to element-id (required to be unique in DOM anyways),
+rewrote element-id generation to use a StringBuilder
+
+------------------------------------------------------------------------
+r1290 | helge | 2007-08-24 16:04:32 +0200 (Fri, 24 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOApplication.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOComponent.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WODirectActionRequestHandler.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOLinkGenerator.java
+   M /trunk/Core/org/opengroupware/jope/samples/HelloWorld/TestAction.html
+   M /trunk/Core/org/opengroupware/jope/samples/HelloWorld/TestAction.java
+
+Added new @action actions. @action's are a mixture between direct actions and component actions. Like the former they do not require that the page is saved in the WOSession and the like the latter the invocation is bound using WOHyperlink and invoked using the links element-id.
+------------------------------------------------------------------------
+r1291 | helge | 2007-08-24 16:10:38 +0200 (Fri, 24 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WODirectActionRequestHandler.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOHyperlink.java
+   M /trunk/Core/org/opengroupware/jope/samples/HelloWorld/Frame.html
+   M /trunk/Core/org/opengroupware/jope/samples/HelloWorld/TestAction.html
+
+fixed a bug with @action and autogenerated IDs
+------------------------------------------------------------------------
+r1292 | helge | 2007-08-24 16:12:01 +0200 (Fri, 24 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/templates/WOWrapperTemplateBuilder.java
+   M /trunk/Core/org/opengroupware/jope/samples/HelloWorld/TestAction.html
+
+added @action support for <#a>
+------------------------------------------------------------------------
+r1293 | helge | 2007-08-24 17:50:29 +0200 (Fri, 24 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOConditional.java
+
+added invokeAction() support
+------------------------------------------------------------------------
+r1294 | znek | 2007-08-24 18:04:18 +0200 (Fri, 24 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/jetty/WOJettyRunner.java
+
+Added new WOAutoOpenInBrowser commandline parameter. Will open application in Browser if default is true. Fixed WOAppName parameter parsing.
+------------------------------------------------------------------------
+r1295 | helge | 2007-08-25 00:44:08 +0200 (Sat, 25 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOForm.java
+
+added support for core attributes and explicit element-ids
+------------------------------------------------------------------------
+r1296 | helge | 2007-08-25 00:51:24 +0200 (Sat, 25 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOContext.java
+
+just added a few comments
+------------------------------------------------------------------------
+r1297 | helge | 2007-08-25 00:53:21 +0200 (Sat, 25 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOContext.java
+
+just added a few comments
+------------------------------------------------------------------------
+r1298 | helge | 2007-08-25 01:06:52 +0200 (Sat, 25 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/foundation/NSObject.java
+
+added 'self' KVC key to all NSObject's
+------------------------------------------------------------------------
+r1299 | helge | 2007-08-25 01:32:34 +0200 (Sat, 25 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOContext.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOCheckBox.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOFileUpload.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOForm.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOHiddenField.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOImageButton.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOInput.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOPasswordField.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOPopUpButton.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WORadioButton.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOResetButton.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOSubmitButton.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOText.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOTextField.java
+   M /trunk/Core/org/opengroupware/jope/samples/HelloWorld/TestAction.html
+   M /trunk/Core/org/opengroupware/jope/weprototype/WESubmitToRemote.java
+
+added explicit 'id' binding to WOInput elements
+------------------------------------------------------------------------
+r1300 | helge | 2007-08-25 01:36:25 +0200 (Sat, 25 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/templates/WOWrapperTemplateBuilder.java
+
+mapped WOSubmitButton to #submit
+------------------------------------------------------------------------
+r1301 | helge | 2007-08-25 01:49:04 +0200 (Sat, 25 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/foundation/kvc/FieldAccessor.java
+
+improved field KVC error reporting
+------------------------------------------------------------------------
+r1302 | helge | 2007-08-25 02:01:53 +0200 (Sat, 25 Aug 2007) | 2 lines
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOForm.java
+
+take values if no link is specified and the method is POST,
+do not call template in invoke if the form is already known
+------------------------------------------------------------------------
+r1303 | helge | 2007-08-25 02:13:44 +0200 (Sat, 25 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOContext.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOForm.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOSubmitButton.java
+   M /trunk/Core/org/opengroupware/jope/samples/HelloWorld/TestAction.html
+   M /trunk/Core/org/opengroupware/jope/samples/HelloWorld/TestAction.java
+
+fixed WOForm actions
+------------------------------------------------------------------------
+r1304 | helge | 2007-08-25 02:21:58 +0200 (Sat, 25 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/samples/HelloWorld/TestAction.html
+
+
+------------------------------------------------------------------------
+r1305 | helge | 2007-08-25 02:43:14 +0200 (Sat, 25 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOContext.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOForm.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOInput.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOLinkGenerator.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOSubmitButton.java
+   M /trunk/Core/org/opengroupware/jope/samples/HelloWorld/TestAction.html
+
+added some support for @action's in WOForms
+------------------------------------------------------------------------
+r1306 | helge | 2007-08-25 02:47:14 +0200 (Sat, 25 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/samples/HelloWorld/TestAction.html
+
+
+------------------------------------------------------------------------
+r1307 | helge | 2007-08-25 13:20:25 +0200 (Sat, 25 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/jetty/WOJettyRunner.java
+
+
+------------------------------------------------------------------------
+r1308 | helge | 2007-08-25 14:29:40 +0200 (Sat, 25 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/weprototype/WEFormToRemote.java
+   M /trunk/Core/org/opengroupware/jope/weprototype/WEPrototypeElement.java
+
+added elementID 'id' binding
+------------------------------------------------------------------------
+r1309 | helge | 2007-08-25 14:42:31 +0200 (Sat, 25 Aug 2007) | 2 lines
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOActionURL.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOChangeQuerySession.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOForm.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOFrame.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOHyperlink.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOImage.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOImageButton.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOJavaScript.java
+   D /trunk/Core/org/opengroupware/jope/appserver/elements/WOLinkGenerator.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOResourceURL.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOStylesheet.java
+   A /trunk/Core/org/opengroupware/jope/appserver/elements/links
+   A /trunk/Core/org/opengroupware/jope/appserver/elements/links/WOActionLinkGenerator.java
+   A /trunk/Core/org/opengroupware/jope/appserver/elements/links/WOAtActionLinkGenerator.java
+   A /trunk/Core/org/opengroupware/jope/appserver/elements/links/WODirectActionLinkGenerator.java
+   A /trunk/Core/org/opengroupware/jope/appserver/elements/links/WOFileLinkGenerator.java
+   A /trunk/Core/org/opengroupware/jope/appserver/elements/links/WOHrefLinkGenerator.java
+   A /trunk/Core/org/opengroupware/jope/appserver/elements/links/WOLinkGenerator.java (from /trunk/Core/org/opengroupware/jope/appserver/elements/WOLinkGenerator.java:1306)
+   A /trunk/Core/org/opengroupware/jope/appserver/elements/links/WOPageNameLinkGenerator.java
+   A /trunk/Core/org/opengroupware/jope/appserver/elements/links/WOValueLinkGenerator.java
+   M /trunk/Core/org/opengroupware/jope/weprototype/WEFormToRemote.java
+   M /trunk/Core/org/opengroupware/jope/weprototype/WELinkToRemoteScript.java
+   M /trunk/Core/org/opengroupware/jope/weprototype/WEObserveField.java
+   M /trunk/Core/org/opengroupware/jope/woextensions/WOIFrame.java
+   M /trunk/Ext/org/opengroupware/jope/ext/dtree/WEDTree.java
+
+moved link generator classes to the elements/links subpackage,
+raised inner classes to package level
+------------------------------------------------------------------------
+r1310 | helge | 2007-08-25 15:36:51 +0200 (Sat, 25 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOForm.java
+   M /trunk/Core/org/opengroupware/jope/weprototype/WEFormToRemote.java
+   M /trunk/Core/org/opengroupware/jope/weprototype/WELinkToRemoteScript.java
+   M /trunk/Core/org/opengroupware/jope/weprototype/WEObserveField.java
+   M /trunk/Core/org/opengroupware/jope/weprototype/WESubmitToRemote.java
+
+changed WEFormToRemote to be a subclass of WOForm
+------------------------------------------------------------------------
+r1311 | helge | 2007-08-25 15:57:23 +0200 (Sat, 25 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/weprototype/WELinkToRemoteScript.java
+
+rewrote to add the fragment-id manually so that the URL of the element can point to the full response while the AJAX fragment query will just retrieve the frag
+------------------------------------------------------------------------
+r1312 | helge | 2007-08-28 13:30:59 +0200 (Tue, 28 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/foundation/NSPropertyListParser.java
+
+just added a few comments
+------------------------------------------------------------------------
+r1313 | helge | 2007-08-28 13:49:33 +0200 (Tue, 28 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOApplication.java
+
+add uppercase system properties to WOApplication defaults
+------------------------------------------------------------------------
+r1314 | znek | 2007-08-28 18:55:20 +0200 (Tue, 28 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/NOTES.txt
+   M /trunk/Core/org/opengroupware/jope/appserver/associations/WOOgnlAssociation.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WODirectActionRequestHandler.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOElement.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOClassFormatter.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOConditional.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOGenericContainer.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOGenericElement.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOObjectFormatter.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOSetHeader.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOString.java
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/IJoObject.java
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/IJoSecuredObject.java
+   M /trunk/Core/org/opengroupware/jope/eoaccess/EODatabaseChannel.java
+   M /trunk/Core/org/opengroupware/jope/eoaccess/postgresql/EOPostgreSQLChannel.java
+   M /trunk/Core/org/opengroupware/jope/eocontrol/EOArrayDataSource.java
+   M /trunk/Core/org/opengroupware/jope/eocontrol/EOFilterDataSource.java
+   M /trunk/Core/org/opengroupware/jope/eocontrol/EOKeyValueQualifier.java
+   M /trunk/Core/org/opengroupware/jope/eocontrol/EOQualifierParser.java
+   M /trunk/Core/org/opengroupware/jope/foundation/NSObject.java
+   M /trunk/Core/org/opengroupware/jope/foundation/UMap.java
+   M /trunk/Core/org/opengroupware/jope/foundation/UObject.java
+   M /trunk/Core/org/opengroupware/jope/jmi/JMIManageAddProduct.java
+   M /trunk/Core/org/opengroupware/jope/samples/HelloDB/Main.html
+
+Corrected Helge's favourite spelling mistake
+------------------------------------------------------------------------
+r1315 | helge | 2007-08-29 11:41:09 +0200 (Wed, 29 Aug 2007) | 1 line
+Changed paths:
+   A /trunk/Core/org/opengroupware/jope/appserver/core/WORedirect.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOResponse.java
+
+added WORedirect object
+------------------------------------------------------------------------
+r1316 | helge | 2007-08-29 11:44:14 +0200 (Wed, 29 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WORedirect.java
+
+
+------------------------------------------------------------------------
+r1317 | helge | 2007-08-29 12:11:47 +0200 (Wed, 29 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOMessage.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WORedirect.java
+
+prepared support for meta-refresh
+------------------------------------------------------------------------
+r1318 | helge | 2007-08-29 13:23:43 +0200 (Wed, 29 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/weprototype/WEFormToRemote.java
+
+
+------------------------------------------------------------------------
+r1319 | helge | 2007-08-29 13:31:42 +0200 (Wed, 29 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/weprototype/WEFormToRemote.java
+
+
+------------------------------------------------------------------------
+r1320 | helge | 2007-08-29 13:51:35 +0200 (Wed, 29 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOSession.java
+
+fixed a null-ptr issue with extravars
+------------------------------------------------------------------------
+r1321 | helge | 2007-08-29 14:27:52 +0200 (Wed, 29 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOComponent.java
+
+added F() convenience hack to retrieve form values F("q")
+------------------------------------------------------------------------
+r1322 | helge | 2007-08-29 14:48:59 +0200 (Wed, 29 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WORedirect.java
+
+some work on WORedirect
+------------------------------------------------------------------------
+r1323 | helge | 2007-08-29 14:54:36 +0200 (Wed, 29 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/weprototype/WEFormToRemote.java
+
+
+------------------------------------------------------------------------
+r1324 | znek | 2007-08-29 20:51:49 +0200 (Wed, 29 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/ognl/NSOgnlException.java
+
+prepend space, otherwise output is garbled
+------------------------------------------------------------------------
+r1325 | znek | 2007-08-29 20:52:43 +0200 (Wed, 29 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/jetty/WOJettyRunner.java
+
+lowered port and url mapping logging from info to debug as the application URL log already contains both
+------------------------------------------------------------------------
+r1326 | helge | 2007-08-31 12:02:13 +0200 (Fri, 31 Aug 2007) | 2 lines
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOApplication.java
+   A /trunk/Core/org/opengroupware/jope/appserver/core/WORequestJoPath.java
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/JoDefaultRenderer.java
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/JoTraversalPath.java
+
+cleaned up WORequest=>JoPath handling by moving the code to a new utility function class,
+added plenty of comments
+------------------------------------------------------------------------
+r1327 | helge | 2007-08-31 12:38:39 +0200 (Fri, 31 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/ofs/OFSApplication.java
+
+
+------------------------------------------------------------------------
+r1328 | helge | 2007-08-31 13:52:54 +0200 (Fri, 31 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/IJoSecuredObject.java
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/JoTraversalPath.java
+
+just added a few comments
+------------------------------------------------------------------------
+r1329 | helge | 2007-08-31 15:41:25 +0200 (Fri, 31 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOGenericContainer.java
+
+just fixed a log
+------------------------------------------------------------------------
+r1330 | helge | 2007-08-31 15:56:12 +0200 (Fri, 31 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/JoControlPanel.java
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/JoControlPanelProducts.java
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/JoJSONResult.java
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/JoJavaMethod.java
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/JoProductManager.java
+   M /trunk/Core/org/opengroupware/jope/jmi/JMIManageMenu.java
+
+register shortnames in product registry for ControlPanel resource lookups
+------------------------------------------------------------------------
+r1331 | helge | 2007-08-31 16:25:53 +0200 (Fri, 31 Aug 2007) | 1 line
+Changed paths:
+   A /trunk/Core/org/opengroupware/jope/appserver/templates/WOHTMLParseException.java
+   M /trunk/Core/org/opengroupware/jope/appserver/templates/WOHTMLParser.java
+
+added URL tracking to HTML parse errors
+------------------------------------------------------------------------
+r1332 | helge | 2007-08-31 16:29:42 +0200 (Fri, 31 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/templates/WOWrapperTemplateBuilder.java
+
+forbid instantiation of non-WOElement subclasses in templates
+------------------------------------------------------------------------
+r1333 | helge | 2007-08-31 16:32:04 +0200 (Fri, 31 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/jmi/JMIManageFolder.html
+
+fixed for <#WOChangeQuerySession/>
+------------------------------------------------------------------------
+r1334 | helge | 2007-08-31 18:24:59 +0200 (Fri, 31 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/ofs/fs/IOFSFileManager.java
+   M /trunk/Core/org/opengroupware/jope/ofs/fs/OFSHostFileManager.java
+
+added openFileOutputStream()
+------------------------------------------------------------------------
+r1335 | helge | 2007-09-03 13:27:17 +0200 (Mon, 03 Sep 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/foundation/UString.java
+
+moved in functions to read Strings from an InputStream
+------------------------------------------------------------------------
+r1336 | helge | 2007-09-03 13:27:49 +0200 (Mon, 03 Sep 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/jmi/JMIManageFile.java
+   M /trunk/Core/org/opengroupware/jope/ofs/OFSFile.java
+   M /trunk/Core/org/opengroupware/jope/ofs/OFSPlainTextFile.java
+   M /trunk/Core/org/opengroupware/jope/ofs/fs/IOFSFileManager.java
+   M /trunk/Core/org/opengroupware/jope/ofs/fs/OFSHostFileManager.java
+
+some support for writing OFS files
+------------------------------------------------------------------------
+r1337 | helge | 2007-09-03 16:01:56 +0200 (Mon, 03 Sep 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOListWalker.java
+
+changed code to hack constant (String) 'list' and 'item' associations. 'list' is turned into a plist Map or List if it starts with '(' or '{', and both are converted to WOKeyValueAssociations otherwise.
+------------------------------------------------------------------------
+r1338 | znek | 2007-09-03 16:11:10 +0200 (Mon, 03 Sep 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/eoaccess/EOAdaptor.java
+   A /trunk/Core/org/opengroupware/jope/eoaccess/frontbase
+   A /trunk/Core/org/opengroupware/jope/eoaccess/frontbase/EOFrontbaseAdaptor.java
+
+EOF adaptor stub for Frontbase (http://www.frontbase.com).
+------------------------------------------------------------------------
+r1339 | znek | 2007-09-04 11:07:10 +0200 (Tue, 04 Sep 2007) | 1 line
+Changed paths:
+   A /trunk/Core/org/opengroupware/jope/appserver/elements/WOSearchField.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOTextField.java
+
+Added WOSearchField, which is a specialized WOTextField. Currently only Safari supports it natively, but it does render as an ordinary textfield in other browsers, so no harm there.
+------------------------------------------------------------------------
+r1340 | helge | 2007-09-04 11:57:56 +0200 (Tue, 04 Sep 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOSearchField.java
+
+only generate attributes if they contain a value (!=null)
+------------------------------------------------------------------------
+r1341 | helge | 2007-09-05 11:38:01 +0200 (Wed, 05 Sep 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/IJoObjectRendererFactory.java
+
+just added a few comments
+------------------------------------------------------------------------
+r1342 | helge | 2007-09-05 11:57:33 +0200 (Wed, 05 Sep 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/JoTraversalPath.java
+
+added a few comments
+------------------------------------------------------------------------
+r1343 | helge | 2007-09-05 12:07:09 +0200 (Wed, 05 Sep 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/JoTraversalPath.java
+
+Major API change: the objectTraversalPath now includes the root object
+------------------------------------------------------------------------
+r1344 | helge | 2007-09-05 12:26:21 +0200 (Wed, 05 Sep 2007) | 4 lines
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/IJoObject.java
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/IJoSecuredObject.java
+
+added a few comments,
+added a secured lookupName method to IJoSecuredObject.Utility
+
+
+------------------------------------------------------------------------
+r1345 | helge | 2007-09-05 12:30:24 +0200 (Wed, 05 Sep 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/JoTraversalPath.java
+
+changed to use new IJoSecuredObject.Utility.lookupName() method
+------------------------------------------------------------------------
+r1346 | helge | 2007-09-05 13:42:27 +0200 (Wed, 05 Sep 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOResourceManager.java
+
+just added a few comments
+------------------------------------------------------------------------
+r1347 | helge | 2007-09-05 13:48:56 +0200 (Wed, 05 Sep 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOComponentDefinition.java
+
+just added a few comments
+------------------------------------------------------------------------
+r1348 | helge | 2007-09-05 14:41:41 +0200 (Wed, 05 Sep 2007) | 1 line
+Changed paths:
+   A /trunk/Core/org/opengroupware/jope/appserver/publisher/IJoComponentDefinition.java
+
+
+------------------------------------------------------------------------
+r1349 | helge | 2007-09-05 14:42:37 +0200 (Wed, 05 Sep 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/IJoClassValueFactory.java
+
+
+------------------------------------------------------------------------
+r1350 | helge | 2007-09-05 14:42:58 +0200 (Wed, 05 Sep 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/IJoClassValueFactory.java
+
+
+------------------------------------------------------------------------
+r1351 | helge | 2007-09-05 14:44:24 +0200 (Wed, 05 Sep 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/IJoCallable.java
+
+
+------------------------------------------------------------------------
+r1352 | helge | 2007-09-10 12:58:19 +0200 (Mon, 10 Sep 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOResourceManager.java
+
+just added a few comments
+------------------------------------------------------------------------
+r1353 | helge | 2007-09-11 14:59:04 +0200 (Tue, 11 Sep 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/associations/WOKeyPathAssociation.java
+   A /trunk/Core/org/opengroupware/jope/appserver/publisher/JoPathAssociation.java
+
+added JoPathAssociation to resolve Jo lookup pathes
+------------------------------------------------------------------------
+r1354 | helge | 2007-09-11 14:59:57 +0200 (Tue, 11 Sep 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/templates/WOWrapperTemplateBuilder.java
+
+Mapped JoPathAssociation to 'jo:' prefix
+------------------------------------------------------------------------
+r1355 | helge | 2007-09-11 15:01:49 +0200 (Tue, 11 Sep 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/product.plist
+
+allow public access to java.util.AbstractCollection objects
+------------------------------------------------------------------------
+r1356 | helge | 2007-09-11 15:02:29 +0200 (Tue, 11 Sep 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/IJoLocation.java
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/JoSecurityManager.java
+
+
+------------------------------------------------------------------------
+r1357 | helge | 2007-09-11 15:03:13 +0200 (Tue, 11 Sep 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/jmi/JMIManageAddProduct.java
+   M /trunk/Core/org/opengroupware/jope/jmi/JMIManageWorkspaceHeader.html
+   M /trunk/Core/org/opengroupware/jope/jmi/JMIManageWorkspaceHeader.java
+   M /trunk/Core/org/opengroupware/jope/jmi/JMITabs.java
+
+changed to use new jo: feature for slot discovery
+------------------------------------------------------------------------
+r1358 | helge | 2007-09-11 15:23:28 +0200 (Tue, 11 Sep 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/jmi/JMIManageAddProductFactory.java
+   M /trunk/Core/org/opengroupware/jope/jmi/product.plist
+
+
+------------------------------------------------------------------------
+r1359 | helge | 2007-09-24 12:42:43 +0200 (Mon, 24 Sep 2007) | 1 line
+Changed paths:
+   A /trunk/Core/org/opengroupware/jope/appserver/publisher/JoResourceManager.java
+
+
+------------------------------------------------------------------------
+r1360 | helge | 2007-09-27 19:27:10 +0200 (Thu, 27 Sep 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/eocontrol/EOFetchSpecification.java
+
+just fixed an incorrect id
+------------------------------------------------------------------------
+r1361 | helge | 2007-09-27 19:48:03 +0200 (Thu, 27 Sep 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/eoaccess/EODatabaseChannel.java
+   M /trunk/Core/org/opengroupware/jope/eoaccess/EODatabaseContext.java
+   M /trunk/Core/org/opengroupware/jope/eocontrol/EOEditingContext.java
+   M /trunk/Core/org/opengroupware/jope/eocontrol/EOObjectStore.java
+   A /trunk/Core/org/opengroupware/jope/eocontrol/EOObjectTrackingContext.java
+
+added new EOObjectTrackingContext class which is only for tracking objects (no handling of graph modifications)
+------------------------------------------------------------------------
+r1362 | znek | 2007-10-04 12:21:26 +0200 (Thu, 04 Oct 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOApplication.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOComponent.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WORequest.java
+   M /trunk/Core/org/opengroupware/jope/eocontrol/EOFetchSpecification.java
+   M /trunk/Core/org/opengroupware/jope/ofs/OFSApplication.java
+   M /trunk/Core/org/opengroupware/jope/weprototype/WEObserveField.java
+
+Added url() to WORequest, implemented relative URL support in redirectToLocation(). Fixed minor bugs and a few typos.
+------------------------------------------------------------------------
+r1363 | helge | 2007-10-05 17:38:15 +0200 (Fri, 05 Oct 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/IJoObject.java
+
+possibly fixed an issue with JoLookup on non-IJoObject objects
+------------------------------------------------------------------------
+r1364 | znek | 2007-10-08 15:30:54 +0200 (Mon, 08 Oct 2007) | 1 line
+Changed paths:
+   A /trunk/Core/org/opengroupware/jope/samples/HelloJo
+   A /trunk/Core/org/opengroupware/jope/samples/HelloJo/Context.java
+   A /trunk/Core/org/opengroupware/jope/samples/HelloJo/Defaults.properties
+   A /trunk/Core/org/opengroupware/jope/samples/HelloJo/HelloJo.java
+   A /trunk/Core/org/opengroupware/jope/samples/HelloJo/HelloJoPage.html
+   A /trunk/Core/org/opengroupware/jope/samples/HelloJo/HelloJoPage.java
+   A /trunk/Core/org/opengroupware/jope/samples/HelloJo/LanguageSelector.java
+   A /trunk/Core/org/opengroupware/jope/samples/HelloJo/PoJo.java
+   A /trunk/Core/org/opengroupware/jope/samples/HelloJo/PoJoViewer.html
+   A /trunk/Core/org/opengroupware/jope/samples/HelloJo/PoJoViewer.java
+   A /trunk/Core/org/opengroupware/jope/samples/HelloJo/WEB-INF
+   A /trunk/Core/org/opengroupware/jope/samples/HelloJo/WEB-INF/web.xml
+   A /trunk/Core/org/opengroupware/jope/samples/HelloJo/jopelink.txt
+   A /trunk/Core/org/opengroupware/jope/samples/HelloJo/product.plist
+
+Sample application used for providing a template to other Jo based applications
+------------------------------------------------------------------------
+r1365 | helge | 2007-10-08 15:56:00 +0200 (Mon, 08 Oct 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/IJoObject.java
+
+fixed a bug in the JoClass lookup on PoJo objects
+------------------------------------------------------------------------
+r1366 | helge | 2007-10-08 15:57:41 +0200 (Mon, 08 Oct 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/JoClass.java
+
+just changed a comment to JavaDoc format
+------------------------------------------------------------------------
+r1367 | znek | 2007-10-08 17:34:40 +0200 (Mon, 08 Oct 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOComponent.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WORedirect.java
+
+Refactored WOComponent's redirectToLocation() to WORedirect, enhanced and refactored WORedirect  
+------------------------------------------------------------------------
+r1368 | znek | 2007-10-08 17:37:46 +0200 (Mon, 08 Oct 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/samples/HelloJo/HelloJo.java
+   M /trunk/Core/org/opengroupware/jope/samples/HelloJo/HelloJoPage.html
+   M /trunk/Core/org/opengroupware/jope/samples/HelloJo/LanguageSelector.java
+   M /trunk/Core/org/opengroupware/jope/samples/HelloJo/PoJoViewer.html
+   M /trunk/Core/org/opengroupware/jope/samples/HelloJo/PoJoViewer.java
+
+Properly display PoJo's name by implementing pojo(), new minor features and code refactoring
+------------------------------------------------------------------------
+r1369 | znek | 2007-10-08 18:35:50 +0200 (Mon, 08 Oct 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/servlets/WOServletAdaptor.java
+
+Suppress No `content-type` set in response... warnings for 30x responses
+------------------------------------------------------------------------
+r1370 | helge | 2007-10-08 18:38:10 +0200 (Mon, 08 Oct 2007) | 1 line
+Changed paths:
+   M /trunk/Core/log4j.properties
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/IJoObject.java
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/JoClassRegistry.java
+
+fixed another joClass lookup issue
+------------------------------------------------------------------------
+r1371 | znek | 2007-10-09 15:07:10 +0200 (Tue, 09 Oct 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/samples/HelloJo/HelloJo.java
+   M /trunk/Core/org/opengroupware/jope/samples/HelloJo/HelloJoPage.html
+   M /trunk/Core/org/opengroupware/jope/samples/HelloJo/HelloJoPage.java
+   M /trunk/Core/org/opengroupware/jope/samples/HelloJo/LanguageSelector.java
+
+Enhanced the HelloJo example further
+------------------------------------------------------------------------
+r1372 | znek | 2007-10-12 14:47:30 +0200 (Fri, 12 Oct 2007) | 1 line
+Changed paths:
+   A /trunk/Core/org/opengroupware/jope/weprototype/www/LICENSE-cropper.txt
+   A /trunk/Core/org/opengroupware/jope/weprototype/www/cropper.js
+   M /trunk/Core/org/opengroupware/jope/weprototype/www/prototype.js
+
+Updated prototype to 1.5.1.1 (1.5 final), Added cropper.js from http://www.defusion.org.uk/code/javascript-image-cropper-ui-using-prototype-scriptaculous/
+------------------------------------------------------------------------
+r1373 | znek | 2007-10-16 11:35:32 +0200 (Tue, 16 Oct 2007) | 1 line
+Changed paths:
+   A /trunk/Core/org/opengroupware/jope/appserver/associations/WOLabelAssociation.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOResourceManager.java
+   M /trunk/Core/org/opengroupware/jope/appserver/templates/WOWrapperTemplateBuilder.java
+
+Implemented WOLabelAssociation, updated WOWrapperTemplateBuilder to recognize a "label:" prefix. Added a minor convenience method to WOResourceManager.
+------------------------------------------------------------------------
+r1374 | znek | 2007-10-16 11:36:54 +0200 (Tue, 16 Oct 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/samples/HelloJo/HelloJoPage.html
+   A /trunk/Core/org/opengroupware/jope/samples/HelloJo/LocalizableStrings.properties
+   A /trunk/Core/org/opengroupware/jope/samples/HelloJo/LocalizableStrings_de.properties
+
+Added example localization utilizing the new WOLabelAssociation
+------------------------------------------------------------------------
+r1375 | znek | 2007-10-17 15:08:24 +0200 (Wed, 17 Oct 2007) | 1 line
+Changed paths:
+   M /trunk/Core/.classpath
+   D /trunk/Core/ThirdParty/commons-fileupload-1.1.1.jar
+   A /trunk/Core/ThirdParty/commons-fileupload-1.2.jar
+   D /trunk/Core/ThirdParty/commons-io-1.2.jar
+   A /trunk/Core/ThirdParty/commons-io-1.3.2.jar
+   A /trunk/Core/ThirdParty/commons-logging-1.1.jar
+   D /trunk/Core/ThirdParty/commons-logging.jar
+   D /trunk/Core/ThirdParty/log4j-1.2.13.jar
+   A /trunk/Core/ThirdParty/log4j-1.2.15.jar
+   D /trunk/Core/ThirdParty/postgresql-8.1-405.jdbc3.jar
+   A /trunk/Core/ThirdParty/postgresql-8.2-506.jdbc3.jar
+
+Updated referenced ThirdParty libs to latest versions. If you experience problems after updating (I did using Eclipse-3.3 (Europa)), 1) clean the project without rebuilding 2) close the project 3) open again 4) build the project
+------------------------------------------------------------------------
+r1376 | znek | 2007-10-17 18:18:31 +0200 (Wed, 17 Oct 2007) | 1 line
+Changed paths:
+   M /trunk/Core/build.xml
+
+Added a new makejar.jope.fat target which produces a new JOPE jar containing ALL dependencies. Use this only in situations where you need something up and running quickly and where you don't want to fiddle with classpaths. Note that this target is not enabled by default.
+------------------------------------------------------------------------
+r1377 | znek | 2007-10-18 00:42:56 +0200 (Thu, 18 Oct 2007) | 1 line
+Changed paths:
+   M /trunk/Core/build.xml
+
+fixed OFS and JMI build rules - will now build the ofsd, properly
+------------------------------------------------------------------------
+r1378 | znek | 2007-10-18 14:54:51 +0200 (Thu, 18 Oct 2007) | 1 line
+Changed paths:
+   M /trunk/Core/build.xml
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WORequest.java
+   M /trunk/Core/org/opengroupware/jope/servlets/WOServletRequest.java
+
+Added new makejar.jope.eof target (not enabled by default), which builds just the EOF (database abstraction) part of JOPE. Properly refactored implementation of public String url() on WORequest and WOServletRequest.
+------------------------------------------------------------------------
+r1379 | znek | 2007-10-19 23:11:41 +0200 (Fri, 19 Oct 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/eoaccess/EOModelLoader.java
+   M /trunk/Core/org/opengroupware/jope/foundation/kvc/DynamicInvocationException.java
+
+EOModelLoader now logs a warning, if a primary key wasn't defined for an entity. Fixed a log output in DynamicInvocationException.
+------------------------------------------------------------------------
+r1380 | znek | 2007-10-20 21:26:31 +0200 (Sat, 20 Oct 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOMessage.java
+   M /trunk/Core/org/opengroupware/jope/weprototype/WELinkToRemote.java
+   M /trunk/Core/org/opengroupware/jope/weprototype/WEObserveField.java
+
+Added new appendContentScript() method to WORequest, which embeds script generated by WOJavaScriptWriter in a proper <script> tag. Updated WEObserveField to utilize this new method.
+------------------------------------------------------------------------
+r1381 | znek | 2007-10-20 21:29:08 +0200 (Sat, 20 Oct 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/templates/WOWrapperTemplateBuilder.java
+
+Added "disabled" assocication to the associations tested when deciding whether to turn a #a into a WOHyperlink instead of a WOGenericContainer. This test is probably obsolete anyways, thus added #a to the list of recognized aliases and updated documentation accordingly.
+------------------------------------------------------------------------
+r1382 | znek | 2007-10-20 21:31:32 +0200 (Sat, 20 Oct 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/eoaccess/EOActiveRecord.java
+
+Implemented storedValueForKey(), which will try to retrieve stored value from snapshot (if any) first before calling super's implementation.
+------------------------------------------------------------------------
+r1383 | znek | 2007-10-26 16:56:35 +0200 (Fri, 26 Oct 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/foundation/UString.java
+
+Corrected spelling in comment
+------------------------------------------------------------------------
+r1384 | znek | 2007-11-05 20:59:22 +0100 (Mon, 05 Nov 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOApplication.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOPackageLinker.java
+   A /trunk/Core/org/opengroupware/jope/appserver/core/WOProjectDirectoryResourceManager.java
+   M /trunk/Core/org/opengroupware/jope/jetty/WOJettyRunner.java
+
+Added new -WOProjectDirectory command line switch and user default. The argument of this switch will be used to load all templates and public resources from the directory specified as WOProjectDirectory. For public resources, a subdirectory named www will be searched inside WOProjectDirectory. If this switch is used, the WOPackageLinker links the application using the new WOProjectDirectoryResourceManager.
+------------------------------------------------------------------------
+r1385 | znek | 2007-11-08 03:35:14 +0100 (Thu, 08 Nov 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/templates/WOWrapperTemplateBuilder.java
+
+Always log an error, if an alias could not be resolved
+------------------------------------------------------------------------
+r1386 | znek | 2007-11-08 03:35:58 +0100 (Thu, 08 Nov 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/eoaccess/EODatabase.java
+
+Log an error if an exception occured during a fetch
+------------------------------------------------------------------------
+r1387 | znek | 2007-11-08 03:39:52 +0100 (Thu, 08 Nov 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/eoaccess/EOModelLoader.java
+   M /trunk/Core/org/opengroupware/jope/foundation/UObject.java
+
+Changed EOAttribute's former "notnull" attribute to "null" (which is used in OGoModel). Fixed boolean bugs with "null" and "autoincrement". Added polymorphic variants of is(Not)Empty to UObject for general speed increase (don't need runtime check in case caller correctly typed the object).
+------------------------------------------------------------------------
+r1388 | znek | 2007-11-08 03:45:08 +0100 (Thu, 08 Nov 2007) | 1 line
+Changed paths:
+   A /trunk/Core/org/opengroupware/jope/eogenerator
+   A /trunk/Core/org/opengroupware/jope/eogenerator/EOGenerator.java
+   A /trunk/Core/org/opengroupware/jope/eogenerator/EOGeneratorComponent.html
+   A /trunk/Core/org/opengroupware/jope/eogenerator/EOGeneratorComponent.java
+
+EOGenerator is a tool for automatically generating EO's from an EOModel. Use these EO's as templates from which you can subclass in order to implement business logic. In case your model changes (as happens often during prototyping), rerun EOGenerator to update all your EO's.
+------------------------------------------------------------------------
+r1389 | znek | 2007-11-08 15:55:25 +0100 (Thu, 08 Nov 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/eogenerator/EOGenerator.java
+   M /trunk/Core/org/opengroupware/jope/eogenerator/EOGeneratorComponent.html
+   M /trunk/Core/org/opengroupware/jope/eogenerator/EOGeneratorComponent.java
+
+Fixed minor bugs in EOGenerator, major improvements to EOGeneratorComponent - will now generate 1:1 relationship accessors and parameterized fetchSpecification accessors... nifty! ;-)
+------------------------------------------------------------------------
+r1390 | znek | 2007-11-08 16:14:45 +0100 (Thu, 08 Nov 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/eogenerator/EOGeneratorComponent.html
+
+fetchSpecs should be static methods
+------------------------------------------------------------------------
+r1391 | znek | 2007-11-08 18:53:04 +0100 (Thu, 08 Nov 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/eoaccess/EOModelLoader.java
+
+added "notnull" backwards compatibility
+------------------------------------------------------------------------
+r1392 | znek | 2007-11-08 18:55:26 +0100 (Thu, 08 Nov 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/eogenerator/EOGeneratorComponent.html
+   M /trunk/Core/org/opengroupware/jope/eogenerator/EOGeneratorComponent.java
+
+Properly cast fetchResults in cases, where this is possible to decide (rawrow fetches, single attribute). There's probably more space for improvement, but for now the generated results are pretty good already.
+------------------------------------------------------------------------
+r1393 | znek | 2007-11-14 16:39:48 +0100 (Wed, 14 Nov 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/eogenerator/EOGeneratorComponent.java
+
+improved javaTypeForAttribute()
+------------------------------------------------------------------------
+r1394 | helge | 2007-11-14 16:47:02 +0100 (Wed, 14 Nov 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/jmi/product.plist
+
+moved own class declarations to "classes" section
+------------------------------------------------------------------------
+r1395 | helge | 2007-11-14 17:01:14 +0100 (Wed, 14 Nov 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/JoClassSecurityInfo.java
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/JoProductInfo.java
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/JoRole.java
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/JoSecurityManager.java
+
+added a bit of documentation
+------------------------------------------------------------------------
+r1396 | helge | 2007-11-14 17:53:59 +0100 (Wed, 14 Nov 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/IJoSecuredObject.java
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/JoSecurityManager.java
+
+added a bit of documentation
+------------------------------------------------------------------------
+r1397 | helge | 2007-11-14 18:25:13 +0100 (Wed, 14 Nov 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/eoaccess/EOModelLoader.java
+
+added a bit of documentation
+------------------------------------------------------------------------
+r1398 | helge | 2007-11-14 18:32:07 +0100 (Wed, 14 Nov 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/JoProductInfo.java
+
+prepared for XML property lists
+------------------------------------------------------------------------
+r1399 | znek | 2007-11-15 17:05:49 +0100 (Thu, 15 Nov 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/eoaccess/EOModelLoader.java
+
+Fixed "prefetch" in fetchspec construction
+------------------------------------------------------------------------
+r1400 | helge | 2007-11-20 10:58:57 +0100 (Tue, 20 Nov 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOGenericContainer.java
+
+log associations in no-template warning
+------------------------------------------------------------------------
+r1401 | helge | 2007-11-20 11:02:44 +0100 (Tue, 20 Nov 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOGenericContainer.java
+
+
+------------------------------------------------------------------------
+r1402 | helge | 2007-11-30 10:42:48 +0100 (Fri, 30 Nov 2007) | 1 line
+Changed paths:
+   A /trunk/Core/ThirdParty/iText-2.0.7.jar
+   A /trunk/Core/ThirdParty/iText-MPL-1.1.txt
+
+added iText to ThirdParty
+------------------------------------------------------------------------
+r1403 | helge | 2007-11-30 10:50:45 +0100 (Fri, 30 Nov 2007) | 1 line
+Changed paths:
+   A /trunk/iText
+
+
+------------------------------------------------------------------------
+r1404 | helge | 2007-11-30 10:52:00 +0100 (Fri, 30 Nov 2007) | 1 line
+Changed paths:
+   A /trunk/iText/.classpath
+   A /trunk/iText/.project
+
+
+------------------------------------------------------------------------
+r1405 | helge | 2007-11-30 10:52:33 +0100 (Fri, 30 Nov 2007) | 1 line
+Changed paths:
+   A /trunk/iText/ThirdParty
+
+
+------------------------------------------------------------------------
+r1406 | helge | 2007-11-30 10:53:20 +0100 (Fri, 30 Nov 2007) | 1 line
+Changed paths:
+   A /trunk/iText/ThirdParty/iText-2.0.7.jar (from /trunk/Core/ThirdParty/iText-2.0.7.jar:1405)
+
+
+------------------------------------------------------------------------
+r1407 | helge | 2007-11-30 10:53:38 +0100 (Fri, 30 Nov 2007) | 1 line
+Changed paths:
+   A /trunk/iText/ThirdParty/iText-MPL-1.1.txt (from /trunk/Core/ThirdParty/iText-MPL-1.1.txt:1406)
+
+
+------------------------------------------------------------------------
+r1408 | helge | 2007-11-30 10:55:22 +0100 (Fri, 30 Nov 2007) | 1 line
+Changed paths:
+   D /trunk/Core/ThirdParty/iText-2.0.7.jar
+   D /trunk/Core/ThirdParty/iText-MPL-1.1.txt
+
+moved iText to an own root-project (trunk/iText)
+------------------------------------------------------------------------
+r1409 | helge | 2007-11-30 11:00:03 +0100 (Fri, 30 Nov 2007) | 1 line
+Changed paths:
+   M /trunk/iText/.classpath
+   M /trunk/iText/.project
+
+
+------------------------------------------------------------------------
+r1410 | helge | 2007-11-30 11:01:46 +0100 (Fri, 30 Nov 2007) | 1 line
+Changed paths:
+   A /trunk/iText/org
+   A /trunk/iText/org/opengroupware
+   A /trunk/iText/org/opengroupware/jope
+   A /trunk/iText/org/opengroupware/jope/itext
+   A /trunk/iText/org/opengroupware/jope/itext/elements
+   A /trunk/iText/org/opengroupware/jope/itext/elements/WOFramework.java
+
+
+------------------------------------------------------------------------
+r1411 | helge | 2007-11-30 11:03:31 +0100 (Fri, 30 Nov 2007) | 1 line
+Changed paths:
+   A /trunk/iText/org/opengroupware/jope/itext/samples
+   A /trunk/iText/org/opengroupware/jope/itext/samples/HelloPDF
+
+
+------------------------------------------------------------------------
+r1412 | helge | 2007-11-30 11:07:40 +0100 (Fri, 30 Nov 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/samples/HelloDB/HelloDB.java
+
+
+------------------------------------------------------------------------
+r1413 | helge | 2007-11-30 11:20:57 +0100 (Fri, 30 Nov 2007) | 1 line
+Changed paths:
+   A /trunk/iText/org/opengroupware/jope/itext/samples/HelloPDF/HelloPDF.java
+   A /trunk/iText/org/opengroupware/jope/itext/samples/HelloPDF/Main.html
+   A /trunk/iText/org/opengroupware/jope/itext/samples/HelloPDF/Main.java
+
+prepared demo package
+------------------------------------------------------------------------
+r1414 | helge | 2007-11-30 11:22:45 +0100 (Fri, 30 Nov 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/samples/HelloDB/Main.java
+
+
+------------------------------------------------------------------------
+r1415 | helge | 2007-11-30 11:52:24 +0100 (Fri, 30 Nov 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/IJoObjectRenderer.java
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/IJoObjectRendererFactory.java
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/JoDefaultRenderer.java
+
+added a bit of docs
+------------------------------------------------------------------------
+r1416 | helge | 2007-12-03 14:46:09 +0100 (Mon, 03 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/eoaccess/EOActiveRecord.java
+
+access 'values' ivar in storedValueForKey(), not the 'snapshot'
+------------------------------------------------------------------------
+r1417 | helge | 2007-12-03 15:59:34 +0100 (Mon, 03 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/foundation/NSKeyValueCoding.java
+   M /trunk/Core/org/opengroupware/jope/foundation/kvc/KVCWrapper.java
+
+removed superflous forInstance() KVC method (use forClass() instead)
+------------------------------------------------------------------------
+r1418 | helge | 2007-12-03 16:05:24 +0100 (Mon, 03 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/foundation/kvc/KVCWrapper.java
+
+
+------------------------------------------------------------------------
+r1419 | helge | 2007-12-03 16:07:06 +0100 (Mon, 03 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/foundation/NSKeyValueCoding.java
+
+properly catch MissingAccessorException as suggested by znek
+------------------------------------------------------------------------
+r1420 | helge | 2007-12-05 18:53:58 +0100 (Wed, 05 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOComponent.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WODirectAction.java
+
+added a bit of documentation
+------------------------------------------------------------------------
+r1421 | helge | 2007-12-05 19:05:27 +0100 (Wed, 05 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOComponent.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WODirectAction.java
+
+a bit more documentation
+------------------------------------------------------------------------
+r1422 | helge | 2007-12-05 19:37:06 +0100 (Wed, 05 Dec 2007) | 1 line
+Changed paths:
+   A /trunk/iText/org/opengroupware/jope/itext/samples/HelloPDF/PDFAction.java
+
+plain HelloWorld PDF
+------------------------------------------------------------------------
+r1423 | helge | 2007-12-05 19:58:49 +0100 (Wed, 05 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/iText/org/opengroupware/jope/itext/samples/HelloPDF/PDFAction.java
+
+
+------------------------------------------------------------------------
+r1424 | helge | 2007-12-05 20:14:09 +0100 (Wed, 05 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/iText/org/opengroupware/jope/itext/samples/HelloPDF/PDFAction.java
+
+
+------------------------------------------------------------------------
+r1425 | helge | 2007-12-07 00:36:21 +0100 (Fri, 07 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOResponse.java
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/JoDefaultRenderer.java
+
+added ability to render java.awt.BufferedImage objects
+------------------------------------------------------------------------
+r1426 | helge | 2007-12-07 00:48:36 +0100 (Fri, 07 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/samples/HelloWorld/UploadPage.java
+
+just added a few comments
+------------------------------------------------------------------------
+r1427 | helge | 2007-12-07 00:58:11 +0100 (Fri, 07 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOImage.java
+
+
+------------------------------------------------------------------------
+r1428 | helge | 2007-12-07 01:16:48 +0100 (Fri, 07 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOApplication.java
+
+improved handling of expired sessions
+------------------------------------------------------------------------
+r1429 | helge | 2007-12-07 01:29:01 +0100 (Fri, 07 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/JoDefaultRenderer.java
+
+added ability to render arbitary java.awt.Image objects
+------------------------------------------------------------------------
+r1430 | helge | 2007-12-07 01:32:53 +0100 (Fri, 07 Dec 2007) | 1 line
+Changed paths:
+   A /trunk/Core/org/opengroupware/jope/samples/HelloThumbnail
+   A /trunk/Core/org/opengroupware/jope/samples/HelloThumbnail/Defaults.properties
+   A /trunk/Core/org/opengroupware/jope/samples/HelloThumbnail/HelloThumbnail.java
+   A /trunk/Core/org/opengroupware/jope/samples/HelloThumbnail/Main.html
+   A /trunk/Core/org/opengroupware/jope/samples/HelloThumbnail/Main.java
+
+added simple webapp which creates thumbnails using BufferedImage
+------------------------------------------------------------------------
+r1431 | helge | 2007-12-07 01:35:50 +0100 (Fri, 07 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/JoDefaultRenderer.java
+
+
+------------------------------------------------------------------------
+r1432 | helge | 2007-12-07 02:05:37 +0100 (Fri, 07 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOServerSessionStore.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOSessionStore.java
+   M /trunk/Core/org/opengroupware/jope/samples/HelloThumbnail/Main.html
+
+Fixed some serious bugs in the session checkout handling. Now you can specify a 'session checkout timeout' which configures the milliseconds to wait until the checkout is consider failed. Defaults to 5000ms.
+------------------------------------------------------------------------
+r1433 | helge | 2007-12-07 02:10:44 +0100 (Fri, 07 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOSessionStore.java
+
+
+------------------------------------------------------------------------
+r1434 | helge | 2007-12-07 02:18:39 +0100 (Fri, 07 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/JoDefaultRenderer.java
+
+
+------------------------------------------------------------------------
+r1435 | helge | 2007-12-07 02:24:39 +0100 (Fri, 07 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/samples/HelloThumbnail/Main.html
+   M /trunk/Core/org/opengroupware/jope/samples/HelloThumbnail/Main.java
+
+added BufferedImage based scaling variant
+------------------------------------------------------------------------
+r1436 | helge | 2007-12-07 02:33:19 +0100 (Fri, 07 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/samples/HelloThumbnail/Main.html
+
+
+------------------------------------------------------------------------
+r1437 | helge | 2007-12-10 15:55:52 +0100 (Mon, 10 Dec 2007) | 3 lines
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOApplication.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOServerSessionStore.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOSession.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOSessionStore.java
+
+changed WOSessionStore superclass to NSObject,
+use a proper ConcurrentHashMap in WOServerSessionStore,
+added a few comments
+------------------------------------------------------------------------
+r1438 | helge | 2007-12-10 16:49:06 +0100 (Mon, 10 Dec 2007) | 2 lines
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOContext.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOHyperlink.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/links/WOActionLinkGenerator.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/links/WOAtActionLinkGenerator.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/links/WODirectActionLinkGenerator.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/links/WOHrefLinkGenerator.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/links/WOLinkGenerator.java
+
+reworked link generation to honour the storesIdsInLinks() setting of WOSession,
+added comments
+------------------------------------------------------------------------
+r1439 | helge | 2007-12-10 17:03:31 +0100 (Mon, 10 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOApplication.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOSession.java
+
+just added a few comments
+------------------------------------------------------------------------
+r1440 | helge | 2007-12-10 19:00:19 +0100 (Mon, 10 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOContext.java
+
+included WORequest.adaptorPrefix when generating URLs
+------------------------------------------------------------------------
+r1441 | helge | 2007-12-10 20:10:45 +0100 (Mon, 10 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOCookie.java
+
+added cookie timeout (max-age), a bunch of setters and plenty of docs
+------------------------------------------------------------------------
+r1442 | helge | 2007-12-10 20:11:36 +0100 (Mon, 10 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WORequest.java
+
+minor improvements to session-id retrieval
+------------------------------------------------------------------------
+r1443 | helge | 2007-12-10 20:29:35 +0100 (Mon, 10 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOApplication.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOCookie.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WORequest.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOSession.java
+
+fixes on session-ids in cookie
+------------------------------------------------------------------------
+r1444 | helge | 2007-12-10 22:49:47 +0100 (Mon, 10 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOCookie.java
+
+
+------------------------------------------------------------------------
+r1445 | helge | 2007-12-11 15:44:32 +0100 (Tue, 11 Dec 2007) | 3 lines
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOApplication.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOContext.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOSession.java
+
+added awake/sleep to WOContext,
+ensure that sleepComponents() is called,
+ensure that WOSession and WOApplication are put to sleep
+------------------------------------------------------------------------
+r1446 | helge | 2007-12-11 19:51:46 +0100 (Tue, 11 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/JoPageInvocation.java
+   M /trunk/Core/org/opengroupware/jope/foundation/NSPropertyListParser.java
+
+
+------------------------------------------------------------------------
+r1447 | znek | 2007-12-12 03:27:17 +0100 (Wed, 12 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/foundation/kvc/PropertyAccessor.java
+
+remove detailed target object description in exception message in order to avoid possible recursion 
+------------------------------------------------------------------------
+r1448 | znek | 2007-12-12 03:28:21 +0100 (Wed, 12 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/eogenerator/EOGeneratorComponent.html
+
+Remove default accessor generation for to-one relationships as this doesn't work out of the box currently
+------------------------------------------------------------------------
+r1449 | helge | 2007-12-12 14:52:39 +0100 (Wed, 12 Dec 2007) | 1 line
+Changed paths:
+   A /trunk/Core/ThirdParty/iText-2.0.7.jar
+   A /trunk/Core/ThirdParty/iText-MPL-1.1.txt
+   A /trunk/Core/ThirdParty/js-mozlicense.txt
+   A /trunk/Core/ThirdParty/js.jar
+
+added iText and Rhino to ThirdParty
+------------------------------------------------------------------------
+r1450 | helge | 2007-12-12 14:55:05 +0100 (Wed, 12 Dec 2007) | 1 line
+Changed paths:
+   A /trunk/Core/org/opengroupware/jope/samples/HelloPDF
+   A /trunk/Core/org/opengroupware/jope/samples/HelloPDF/HelloPDF.java
+   A /trunk/Core/org/opengroupware/jope/samples/HelloPDF/Main.html
+   A /trunk/Core/org/opengroupware/jope/samples/HelloPDF/Main.java
+   A /trunk/Core/org/opengroupware/jope/samples/HelloPDF/PDFAction.java
+   A /trunk/Core/org/opengroupware/jope/samples/HelloPDF/README.txt
+
+added a PDF generation example
+------------------------------------------------------------------------
+r1451 | helge | 2007-12-12 15:40:26 +0100 (Wed, 12 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/jetty/WOJettyRunner.java
+
+enhanced runner API
+------------------------------------------------------------------------
+r1452 | helge | 2007-12-12 15:58:35 +0100 (Wed, 12 Dec 2007) | 5 lines
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOApplication.java
+   M /trunk/Core/org/opengroupware/jope/servlets/WOServletAdaptor.java
+
+decoupled application name from application class,
+added "WOAppClass" servlet parameter,
+improved threading,
+properly marked the application object cache as static ...
+
+------------------------------------------------------------------------
+r1453 | helge | 2007-12-12 17:10:55 +0100 (Wed, 12 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOPackageLinker.java
+   M /trunk/Core/org/opengroupware/jope/jetty/WOJettyRunner.java
+
+
+------------------------------------------------------------------------
+r1454 | helge | 2007-12-12 20:00:38 +0100 (Wed, 12 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/.classpath
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WODirectActionRequestHandler.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WORequestHandler.java
+
+
+------------------------------------------------------------------------
+r1455 | helge | 2007-12-12 20:05:35 +0100 (Wed, 12 Dec 2007) | 1 line
+Changed paths:
+   A /trunk/Core/org/opengroupware/jope/samples/HelloPDF/Defaults.properties
+   M /trunk/Core/org/opengroupware/jope/samples/HelloPDF/Main.html
+
+added a link to the PDF on the Main page
+------------------------------------------------------------------------
+r1456 | helge | 2007-12-12 20:29:28 +0100 (Wed, 12 Dec 2007) | 3 lines
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOApplication.java
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/JoTraversalPath.java
+   M /trunk/Core/org/opengroupware/jope/jetty/WOJettyRunner.java
+   M /trunk/Core/org/opengroupware/jope/servlets/WOServletAdaptor.java
+
+added 'name' to WOApplication, the name is set by the ServletAdaptor,
+init() is now called by the ServletAdaptor (was: WOApp constructor)
+
+------------------------------------------------------------------------
+r1457 | helge | 2007-12-12 21:15:15 +0100 (Wed, 12 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOApplication.java
+
+fixed a minor logging bug
+------------------------------------------------------------------------
+r1458 | helge | 2007-12-12 23:09:07 +0100 (Wed, 12 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOComponent.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOElement.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOElementWalker.java
+   M /trunk/Core/org/opengroupware/jope/weextensions/WETableCell.java
+   M /trunk/Core/org/opengroupware/jope/weextensions/WETableData.java
+   M /trunk/Core/org/opengroupware/jope/weextensions/WETableView.java
+
+just added a few comments
+------------------------------------------------------------------------
+r1459 | helge | 2007-12-12 23:15:15 +0100 (Wed, 12 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOApplication.java
+
+just added a few comments
+------------------------------------------------------------------------
+r1460 | znek | 2007-12-13 02:15:57 +0100 (Thu, 13 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/eoaccess/EOAdaptor.java
+
+Convert frontbase URL prefixes to lowercase before comparing them
+------------------------------------------------------------------------
+r1461 | helge | 2007-12-13 02:18:33 +0100 (Thu, 13 Dec 2007) | 1 line
+Changed paths:
+   A /trunk/Core/org/opengroupware/jope/appserver/core/IWOExtraVariables.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOComponent.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOCoreContext.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOSession.java
+
+Added new IWOExtraVariables marker interface for objects which can store additional key/value slots in a Map (WOSession, WOComponent, WOContext).
+------------------------------------------------------------------------
+r1462 | helge | 2007-12-13 02:45:18 +0100 (Thu, 13 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WODirectActionRequestHandler.java
+
+refactored WODirectAction invocation
+------------------------------------------------------------------------
+r1463 | helge | 2007-12-13 03:10:26 +0100 (Thu, 13 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOAction.java
+
+
+------------------------------------------------------------------------
+r1464 | helge | 2007-12-13 03:46:40 +0100 (Thu, 13 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/.classpath
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOCompoundResourceManager.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOPackageLinker.java
+
+
+------------------------------------------------------------------------
+r1465 | helge | 2007-12-13 15:13:23 +0100 (Thu, 13 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/samples/HelloPDF/HelloPDF.java
+   M /trunk/Core/org/opengroupware/jope/samples/HelloPDF/PDFAction.java
+   M /trunk/Core/org/opengroupware/jope/samples/HelloThumbnail/HelloThumbnail.java
+   M /trunk/Core/org/opengroupware/jope/samples/HelloThumbnail/Main.java
+
+minor cleanups
+------------------------------------------------------------------------
+r1466 | helge | 2007-12-13 15:37:09 +0100 (Thu, 13 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOComponent.java
+
+added a F(field, default) method which allows a default value
+------------------------------------------------------------------------
+r1467 | helge | 2007-12-13 16:07:20 +0100 (Thu, 13 Dec 2007) | 1 line
+Changed paths:
+   A /trunk/Core/org/opengroupware/jope/samples/HelloChart
+   A /trunk/Core/org/opengroupware/jope/samples/HelloChart/Defaults.properties
+   A /trunk/Core/org/opengroupware/jope/samples/HelloChart/HelloChart.java
+   A /trunk/Core/org/opengroupware/jope/samples/HelloChart/Main.html
+   A /trunk/Core/org/opengroupware/jope/samples/HelloChart/Main.java
+   A /trunk/Core/org/opengroupware/jope/samples/HelloChart/README.txt
+   A /trunk/Core/org/opengroupware/jope/samples/HelloChart/UGoogleChart.java
+   A /trunk/Core/org/opengroupware/jope/samples/HelloThumbnail/README.txt
+
+added an example which shows how to use JFreeChart with JOPE
+------------------------------------------------------------------------
+r1468 | helge | 2007-12-13 16:08:28 +0100 (Thu, 13 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/.classpath
+   M /trunk/Core/.settings/org.eclipse.jdt.ui.prefs
+   A /trunk/Core/ThirdParty/jcommon-1.0.12.jar
+   A /trunk/Core/ThirdParty/jcommon-licence-LGPL.txt
+   A /trunk/Core/ThirdParty/jfreechart-1.0.8.jar
+   A /trunk/Core/ThirdParty/jfreechart-licence-LGPL.txt
+
+added jcommon-1.0.12.jar and jfreechart-1.0.8.jar to ThirdParty
+------------------------------------------------------------------------
+r1469 | helge | 2007-12-13 16:45:54 +0100 (Thu, 13 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/samples/HelloChart/Main.html
+   M /trunk/Core/org/opengroupware/jope/samples/HelloChart/Main.java
+
+added more charting examples
+------------------------------------------------------------------------
+r1470 | helge | 2007-12-13 18:18:36 +0100 (Thu, 13 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/samples/HelloChart/Main.html
+   M /trunk/Core/org/opengroupware/jope/samples/HelloChart/Main.java
+
+
+------------------------------------------------------------------------
+r1471 | helge | 2007-12-13 18:56:30 +0100 (Thu, 13 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/templates/WOChildComponentReference.java
+   M /trunk/Core/org/opengroupware/jope/appserver/templates/WODFileEntry.java
+   M /trunk/Core/org/opengroupware/jope/appserver/templates/WODParser.java
+   M /trunk/Core/org/opengroupware/jope/appserver/templates/WODParserHandler.java
+
+just added a few comments
+------------------------------------------------------------------------
+r1472 | helge | 2007-12-13 21:21:44 +0100 (Thu, 13 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/.classpath
+   M /trunk/Core/org/opengroupware/jope/appserver/templates/WODParser.java
+   M /trunk/Core/org/opengroupware/jope/appserver/templates/WODParserHandler.java
+   M /trunk/Core/org/opengroupware/jope/appserver/templates/WOWrapperTemplateBuilder.java
+
+just added a few comments
+------------------------------------------------------------------------
+r1473 | helge | 2007-12-13 21:41:23 +0100 (Thu, 13 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/templates/WODFileEntry.java
+   M /trunk/Core/org/opengroupware/jope/appserver/templates/WODParserHandler.java
+
+
+------------------------------------------------------------------------
+r1474 | helge | 2007-12-13 22:47:03 +0100 (Thu, 13 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOAssociation.java
+   M /trunk/Core/org/opengroupware/jope/appserver/templates/WOWrapperTemplateBuilder.java
+
+moved the 'association object for tag-prefix' factory function from WOWrapperTemplateBuilder to WOAssociation. Renamed to associationForPrefix().
+------------------------------------------------------------------------
+r1475 | helge | 2007-12-13 23:07:46 +0100 (Thu, 13 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOComponentDefinition.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOCompoundResourceManager.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOResourceManager.java
+   M /trunk/Core/org/opengroupware/jope/appserver/templates/WOTemplateBuilder.java
+   M /trunk/Core/org/opengroupware/jope/appserver/templates/WOWrapperTemplateBuilder.java
+   M /trunk/Core/org/opengroupware/jope/appserver/templates/WOxTemplateBuilder.java
+
+changed internal template parsing / resource management API to pass along the full WOResourceManager to the template parser (previously it was downcasted to NSClassLookupContext, but we want to know what kind of 'class' is being looked up to support interpreted components [component name != class name]).
+------------------------------------------------------------------------
+r1476 | helge | 2007-12-14 00:34:53 +0100 (Fri, 14 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOApplication.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOCompoundResourceManager.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WODirectActionRequestHandler.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOResourceManager.java
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/JoDirectActionInvocation.java
+   M /trunk/Core/org/opengroupware/jope/appserver/templates/WOWrapperTemplateBuilder.java
+
+use lookupComponentClass() when appropriate
+------------------------------------------------------------------------
+r1477 | helge | 2007-12-14 23:58:22 +0100 (Fri, 14 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOImage.java
+
+
+------------------------------------------------------------------------
+r1478 | helge | 2007-12-16 15:34:24 +0100 (Sun, 16 Dec 2007) | 2 lines
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOApplication.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOCompoundResourceManager.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WODirectActionRequestHandler.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOResourceManager.java
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/IJoCallable.java
+   M /trunk/Core/org/opengroupware/jope/appserver/publisher/JoDirectActionInvocation.java
+
+Added lookupDirectActionClass() for looking up DAs (WOComponent or WODirectAction).
+
+------------------------------------------------------------------------
+r1479 | helge | 2007-12-16 23:40:26 +0100 (Sun, 16 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOComponent.java
+
+log extravars in description
+------------------------------------------------------------------------
+r1480 | helge | 2007-12-16 23:41:50 +0100 (Sun, 16 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOComponent.java
+
+
+------------------------------------------------------------------------
+r1481 | helge | 2007-12-16 23:45:38 +0100 (Sun, 16 Dec 2007) | 1 line
+Changed paths:
+   A /trunk/Core/org/opengroupware/jope/jsapp
+   A /trunk/Core/org/opengroupware/jope/jsapp/JSApplication.java
+   A /trunk/Core/org/opengroupware/jope/jsapp/JSComponent.java
+   A /trunk/Core/org/opengroupware/jope/jsapp/JSComponentAdapter.java
+   A /trunk/Core/org/opengroupware/jope/jsapp/JSComponentDefinition.java
+   A /trunk/Core/org/opengroupware/jope/jsapp/JSContext.java
+   A /trunk/Core/org/opengroupware/jope/jsapp/JSDirectActionRequestHandler.java
+   A /trunk/Core/org/opengroupware/jope/jsapp/JSExtraVarAdapter.java
+   A /trunk/Core/org/opengroupware/jope/jsapp/JSResourceManager.java
+   A /trunk/Core/org/opengroupware/jope/jsapp/JSSession.java
+   A /trunk/Core/org/opengroupware/jope/jsapp/JSWrapFactory.java
+   A /trunk/Core/org/opengroupware/jope/jsapp/README.txt
+   A /trunk/Core/org/opengroupware/jope/jsapp/run.java
+   A /trunk/Core/org/opengroupware/jope/samples/HelloJS
+   A /trunk/Core/org/opengroupware/jope/samples/HelloJS/Application.js
+   A /trunk/Core/org/opengroupware/jope/samples/HelloJS/Defaults.properties
+   A /trunk/Core/org/opengroupware/jope/samples/HelloJS/DirectAction.js
+   A /trunk/Core/org/opengroupware/jope/samples/HelloJS/Frame.wo
+   A /trunk/Core/org/opengroupware/jope/samples/HelloJS/Frame.wo/Frame.html
+   A /trunk/Core/org/opengroupware/jope/samples/HelloJS/Main.wo
+   A /trunk/Core/org/opengroupware/jope/samples/HelloJS/Main.wo/Main.html
+   A /trunk/Core/org/opengroupware/jope/samples/HelloJS/Main.wo/Main.js
+   A /trunk/Core/org/opengroupware/jope/samples/HelloJS/README.txt
+   A /trunk/Core/org/opengroupware/jope/samples/HelloJS/Session.js
+   A /trunk/Core/org/opengroupware/jope/samples/HelloJS/www
+   A /trunk/Core/org/opengroupware/jope/samples/HelloJS/www/README.txt
+   A /trunk/Core/org/opengroupware/jope/samples/HelloJS/www/site.css
+
+initial work on JavaScript support
+------------------------------------------------------------------------
+r1482 | helge | 2007-12-17 01:19:49 +0100 (Mon, 17 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOComponent.java
+
+
+------------------------------------------------------------------------
+r1483 | helge | 2007-12-17 01:20:34 +0100 (Mon, 17 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSComponent.java
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSComponentDefinition.java
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSExtraVarAdapter.java
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSResourceManager.java
+   A /trunk/Core/org/opengroupware/jope/jsapp/JSScopeComponent.java
+   M /trunk/Core/org/opengroupware/jope/samples/HelloJS/Main.wo/Main.html
+
+
+------------------------------------------------------------------------
+r1484 | helge | 2007-12-17 01:22:30 +0100 (Mon, 17 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOComponent.java
+
+log component name in description
+------------------------------------------------------------------------
+r1485 | znek | 2007-12-17 08:19:41 +0100 (Mon, 17 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOApplication.java
+
+Spelling fixed
+------------------------------------------------------------------------
+r1486 | helge | 2007-12-17 19:26:30 +0100 (Mon, 17 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOApplication.java
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSApplication.java
+   M /trunk/Core/org/opengroupware/jope/samples/HelloJS/Main.wo/Main.html
+   M /trunk/Core/org/opengroupware/jope/samples/HelloJS/Main.wo/Main.js
+
+
+------------------------------------------------------------------------
+r1487 | helge | 2007-12-17 21:15:34 +0100 (Mon, 17 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOAssociation.java
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSApplication.java
+   A /trunk/Core/org/opengroupware/jope/jsapp/JSAssociation.java
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSComponent.java
+
+added JavaScript association
+------------------------------------------------------------------------
+r1488 | helge | 2007-12-18 03:06:33 +0100 (Tue, 18 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSComponent.java
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSDirectActionRequestHandler.java
+   A /trunk/Core/org/opengroupware/jope/jsapp/JSJoComponent.java
+   A /trunk/Core/org/opengroupware/jope/jsapp/JSJoComponentAction.java
+   A /trunk/Core/org/opengroupware/jope/jsapp/JSJoDirectAction.java
+   A /trunk/Core/org/opengroupware/jope/jsapp/JSJoObject.java
+   A /trunk/Core/org/opengroupware/jope/jsapp/jopelink.txt
+   A /trunk/Core/org/opengroupware/jope/jsapp/product.plist
+
+work on jsapp action invocation (via JoLookup)
+------------------------------------------------------------------------
+r1489 | helge | 2007-12-18 03:12:46 +0100 (Tue, 18 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSJoComponent.java
+   D /trunk/Core/org/opengroupware/jope/jsapp/JSJoComponentAction.java
+
+changed to use path-info for action invocation (instead of trampoline)
+------------------------------------------------------------------------
+r1490 | helge | 2007-12-18 03:14:18 +0100 (Tue, 18 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOComponent.java
+
+
+------------------------------------------------------------------------
+r1491 | helge | 2007-12-18 03:26:25 +0100 (Tue, 18 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WODirectActionRequestHandler.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WORequest.java
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSJoComponent.java
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSScopeComponent.java
+
+moved Zope style form parameter extraction to WORequest (from WODirectActionRequestHandler)
+------------------------------------------------------------------------
+r1492 | helge | 2007-12-18 03:41:34 +0100 (Tue, 18 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WODirectActionRequestHandler.java
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSDirectActionRequestHandler.java
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSJoComponent.java
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSScopeComponent.java
+   M /trunk/Core/org/opengroupware/jope/samples/HelloJS/Main.wo/Main.js
+
+work on JS component calls
+------------------------------------------------------------------------
+r1493 | helge | 2007-12-18 03:56:40 +0100 (Tue, 18 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOFormatter.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WONumberFormatter.java
+
+improved error handling in number formatter
+------------------------------------------------------------------------
+r1494 | helge | 2007-12-18 04:06:49 +0100 (Tue, 18 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOFormatter.java
+
+downsize small Long results to Integer
+------------------------------------------------------------------------
+r1495 | helge | 2007-12-18 04:21:23 +0100 (Tue, 18 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSApplication.java
+   M /trunk/Core/org/opengroupware/jope/samples/HelloJS/Main.wo/Main.html
+   M /trunk/Core/org/opengroupware/jope/samples/HelloJS/Main.wo/Main.js
+
+properly use TopLevelImporter for root scope
+------------------------------------------------------------------------
+r1496 | helge | 2007-12-18 14:16:16 +0100 (Tue, 18 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/samples/HelloJS/Main.wo/Main.html
+   M /trunk/Core/org/opengroupware/jope/samples/HelloJS/Main.wo/Main.js
+
+
+------------------------------------------------------------------------
+r1497 | helge | 2007-12-18 14:41:05 +0100 (Tue, 18 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSApplication.java
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSExtraVarAdapter.java
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSScopeComponent.java
+
+
+------------------------------------------------------------------------
+r1498 | helge | 2007-12-18 14:50:57 +0100 (Tue, 18 Dec 2007) | 2 lines
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSDirectActionRequestHandler.java
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSScopeComponent.java
+   M /trunk/Core/org/opengroupware/jope/samples/HelloJS/Main.wo/Main.js
+
+removed superflous code,
+use the native Java object as 'this' in component scripts
+------------------------------------------------------------------------
+r1499 | helge | 2007-12-18 15:06:01 +0100 (Tue, 18 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSExtraVarAdapter.java
+   A /trunk/Core/org/opengroupware/jope/jsapp/JSKeyValueCodingAdapter.java
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSScopeComponent.java
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSWrapFactory.java
+   M /trunk/Core/org/opengroupware/jope/samples/HelloJS/Main.wo/Main.js
+
+Work on component wrapping.
+------------------------------------------------------------------------
+r1500 | helge | 2007-12-18 16:28:54 +0100 (Tue, 18 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSComponent.java
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSComponentDefinition.java
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSExtraVarAdapter.java
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSResourceManager.java
+
+some work on scopeless components
+------------------------------------------------------------------------
+r1501 | helge | 2007-12-18 18:15:08 +0100 (Tue, 18 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/WOHyperlink.java
+   M /trunk/Core/org/opengroupware/jope/appserver/elements/links/WODirectActionLinkGenerator.java
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSComponent.java
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSExtraVarAdapter.java
+   M /trunk/Core/org/opengroupware/jope/jsapp/product.plist
+   A /trunk/Core/org/opengroupware/jope/samples/HelloJS/log4j.properties
+
+some work on scopeless components
+------------------------------------------------------------------------
+r1502 | helge | 2007-12-18 18:50:10 +0100 (Tue, 18 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOComponent.java
+
+log base extra vars in description
+------------------------------------------------------------------------
+r1503 | helge | 2007-12-18 18:52:16 +0100 (Tue, 18 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSJoObject.java
+   M /trunk/Core/org/opengroupware/jope/ofs/OFSBaseObject.java
+   M /trunk/Core/org/opengroupware/jope/samples/HelloJS/Main.wo/Main.html
+   M /trunk/Core/org/opengroupware/jope/samples/HelloJS/Main.wo/Main.js
+
+
+------------------------------------------------------------------------
+r1504 | helge | 2007-12-18 20:51:37 +0100 (Tue, 18 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOResourceManager.java
+
+use a ConcurrentHashMap instead of synchronized() for component definition cache
+------------------------------------------------------------------------
+r1505 | helge | 2007-12-18 21:29:58 +0100 (Tue, 18 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSComponent.java
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSComponentDefinition.java
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSResourceManager.java
+   M /trunk/Core/org/opengroupware/jope/samples/HelloJS/Main.wo/Main.js
+
+cleanups
+------------------------------------------------------------------------
+r1506 | helge | 2007-12-18 21:45:42 +0100 (Tue, 18 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSApplication.java
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSDirectActionRequestHandler.java
+
+work on OFS JS lookup
+------------------------------------------------------------------------
+r1507 | helge | 2007-12-18 21:47:17 +0100 (Tue, 18 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSApplication.java
+   D /trunk/Core/org/opengroupware/jope/jsapp/JSDirectActionRequestHandler.java
+   A /trunk/Core/org/opengroupware/jope/jsapp/JoCallDirectActionRequestHandler.java (from /trunk/Core/org/opengroupware/jope/jsapp/JSDirectActionRequestHandler.java:1506)
+
+renamed custom DA handler
+------------------------------------------------------------------------
+r1508 | helge | 2007-12-18 21:48:47 +0100 (Tue, 18 Dec 2007) | 2 lines
+Changed paths:
+   D /trunk/Core/org/opengroupware/jope/jsapp/JSKeyValueCodingAdapter.java
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSResourceManager.java
+   D /trunk/Core/org/opengroupware/jope/jsapp/JSScopeComponent.java
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSWrapFactory.java
+
+removed JSScopeComponent (this used a separate scope to store extvars and JS funcs)
+
+------------------------------------------------------------------------
+r1509 | helge | 2007-12-18 21:53:31 +0100 (Tue, 18 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSComponent.java
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSWrapFactory.java
+   M /trunk/Core/org/opengroupware/jope/samples/HelloJS/Main.wo/Main.html
+   M /trunk/Core/org/opengroupware/jope/samples/HelloJS/Main.wo/Main.js
+
+properly deal with JS 'Undefined' action results (replace result with context.page)
+------------------------------------------------------------------------
+r1510 | helge | 2007-12-18 22:33:48 +0100 (Tue, 18 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSComponent.java
+   M /trunk/Core/org/opengroupware/jope/samples/HelloJS/Main.wo/Main.js
+
+work on JSComponent subclassing API
+------------------------------------------------------------------------
+r1511 | helge | 2007-12-18 22:37:10 +0100 (Tue, 18 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/samples/HelloJS/Main.wo/Main.js
+
+
+------------------------------------------------------------------------
+r1512 | helge | 2007-12-18 22:49:16 +0100 (Tue, 18 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/samples/HelloJS/Frame.wo/Frame.html
+   M /trunk/Core/org/opengroupware/jope/samples/HelloJS/www/README.txt
+   A /trunk/Core/org/opengroupware/jope/samples/HelloJS/www/css
+   A /trunk/Core/org/opengroupware/jope/samples/HelloJS/www/css/site.css (from /trunk/Core/org/opengroupware/jope/samples/HelloJS/www/site.css:1485)
+   D /trunk/Core/org/opengroupware/jope/samples/HelloJS/www/site.css
+
+fixed static resources in JS example
+------------------------------------------------------------------------
+r1513 | helge | 2007-12-18 23:15:03 +0100 (Tue, 18 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSComponentAdapter.java
+   A /trunk/Core/org/opengroupware/jope/jsapp/JSContextAdapter.java
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSWrapFactory.java
+
+changed JS adapters to expose a few unary methods as properties
+------------------------------------------------------------------------
+r1514 | helge | 2007-12-19 01:36:55 +0100 (Wed, 19 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOApplication.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOComponent.java
+   M /trunk/Core/org/opengroupware/jope/appserver/core/WOCoreContext.java
+
+made WOApplication an IWOExtraVar object
+------------------------------------------------------------------------
+r1515 | helge | 2007-12-19 02:26:07 +0100 (Wed, 19 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSApplication.java
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSComponent.java
+   M /trunk/Core/org/opengroupware/jope/samples/HelloJS/Application.js
+   M /trunk/Core/org/opengroupware/jope/samples/HelloJS/Main.wo/Main.js
+
+added Application.js support
+------------------------------------------------------------------------
+r1516 | helge | 2007-12-19 02:44:14 +0100 (Wed, 19 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSApplication.java
+   M /trunk/Core/org/opengroupware/jope/jsapp/JSComponent.java
+   A /trunk/Core/org/opengroupware/jope/jsapp/JSUtil.java
+
+work on Application.js support
+------------------------------------------------------------------------
+r1517 | znek | 2007-12-19 13:54:12 +0100 (Wed, 19 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/version.properties
+
+bumped version
+------------------------------------------------------------------------
+r1518 | znek | 2007-12-19 13:54:47 +0100 (Wed, 19 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/org/opengroupware/jope/samples/HelloThumbnail/Main.java
+
+fixed typo in comment
+------------------------------------------------------------------------
+r1519 | znek | 2007-12-19 14:22:30 +0100 (Wed, 19 Dec 2007) | 1 line
+Changed paths:
+   M /trunk/Core/build.xml
+
+Updated build.xml for v1.3.9
+------------------------------------------------------------------------
+r1520 | helge | 2007-12-19 16:04:31 +0100 (Wed, 19 Dec 2007) | 2 lines
+Changed paths:
+   D /trunk/iText
+
+removed superflous iText Eclipse project (now in examples)
+
+------------------------------------------------------------------------

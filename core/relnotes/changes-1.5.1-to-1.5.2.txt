@@ -1,0 +1,255 @@
+2008-04-10 r39
+
+Generic
+- fixed pending JOPE=>Go renames
+- added NSKeyValueHolder (replacement for Map in binding setups)
+
+AppServer
+- distinct readValue/writeValue bindings in most WOInput subclasses
+- improved WOnder style shortnames
+- shortnames are now configured using a properties file
+- added 'readonly' binding to WOTextField
+- numberformat now produces BigDecimal, not Double
+
+JoObjects/OFS
+- added IOFSContextObject marker interface (controllers which need a JoContext)
+- added OFSDatabaseDataSourceFolder/OFSDatabaseObjectFolder to track a folder
+  local EOQualifier/EOEntity
+
+JavaScript
+- special handling of EOActiveRecord objects, 'classProperties' in the
+  EOEntity are exposed as JavaScript properties
+- added EOEntity/EOProperty API
+
+Database Layer
+- fixed a bug in EOQualifier OR parsing
+- fixed keypath handling in qualifier bindings
+- added support for simple boolean kv qualifiers (no need to use = true)
+- fixed channel pool maintenance timer to use a weak reference
+- fixed 'classProperties' to return relationships
+- added more support for BigDecimal and Double
+
+ThirdParty
+- updated to current versions
+- added FOP
+
+------------------------------------------------------------------------
+r11 | helge.hess | 2008-03-25 19:16:39 +0100 (Tue, 25 Mar 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/core/WOComponentDefinition.java
+   M /core/trunk/org/getobjects/appserver/core/product.plist
+   M /core/trunk/org/getobjects/appserver/templates/WODParser.java
+   M /core/trunk/org/getobjects/appserver/templates/WOxElemBuilder.java
+   M /core/trunk/org/getobjects/appserver/tests/TWOGenericElement.java
+   M /core/trunk/org/getobjects/appserver/tests/TWOString.java
+   M /core/trunk/org/getobjects/eogenerator/EOGeneratorComponent.html
+   M /core/trunk/org/getobjects/jaas/EODatabaseJaasConfig.java
+   M /core/trunk/org/getobjects/jmi/jopelink.txt
+   M /core/trunk/org/getobjects/jmi/product.plist
+   M /core/trunk/org/getobjects/jsapp/README.txt
+   M /core/trunk/org/getobjects/jsapp/jopelink.txt
+   M /core/trunk/org/getobjects/jsapp/product.plist
+   M /core/trunk/org/getobjects/jsapp/run.java
+   M /core/trunk/org/getobjects/jsapp/run.sh
+   M /core/trunk/org/getobjects/ofs/jopelink.txt
+   M /core/trunk/org/getobjects/ofs/product.plist
+   M /core/trunk/org/getobjects/ofs/runner/jopelink.txt
+   M /core/trunk/org/getobjects/ofs/runner/ofsd.java
+   M /core/trunk/org/getobjects/samples/HelloDB/WEB-INF/web.xml
+   M /core/trunk/org/getobjects/samples/HelloJS/README.txt
+   M /core/trunk/org/getobjects/samples/HelloJS/log4j.properties
+   M /core/trunk/org/getobjects/samples/HelloJS/run.sh
+   M /core/trunk/org/getobjects/samples/HelloJo/WEB-INF/web.xml
+   M /core/trunk/org/getobjects/samples/HelloJo/jopelink.txt
+   M /core/trunk/org/getobjects/samples/HelloJo/product.plist
+   M /core/trunk/org/getobjects/samples/HelloWorld/WEB-INF/web.xml
+   M /core/trunk/org/getobjects/samples/HelloWorld/jopelink.txt
+
+fixed some incorrect package names
+------------------------------------------------------------------------
+r13 | helge.hess | 2008-03-25 20:35:08 +0100 (Tue, 25 Mar 2008) | 2 lines
+Changed paths:
+   M /core/trunk
+
+fixed externals
+
+------------------------------------------------------------------------
+r14 | helge.hess | 2008-03-26 10:11:19 +0100 (Wed, 26 Mar 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/templates/WOHTMLParser.java
+
+use wo:password, not wo:passwordfield
+------------------------------------------------------------------------
+r16 | helge.hess | 2008-03-26 15:24:23 +0100 (Wed, 26 Mar 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eocontrol/EOQualifier.java
+
+fixed a small bug in and/or
+------------------------------------------------------------------------
+r17 | helge.hess | 2008-03-26 16:55:48 +0100 (Wed, 26 Mar 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eocontrol/EOKeyValueQualifier.java
+   M /core/trunk/org/getobjects/eocontrol/EOSQLQualifier.java
+
+fixed bug, when the qualifier-bindings object was a Map, keypathes would be resolved as simple keys
+------------------------------------------------------------------------
+r18 | helge.hess | 2008-03-26 17:08:22 +0100 (Wed, 26 Mar 2008) | 2 lines
+Changed paths:
+   A /core/trunk/org/getobjects/ofs/IOFSContextObject.java
+   M /core/trunk/org/getobjects/ofs/OFSDatabaseDataSourceFolder.java
+   M /core/trunk/org/getobjects/ofs/OFSDatabaseObjectFolder.java
+   M /core/trunk/org/getobjects/ofs/OFSRestorationFactory.java
+
+introduced IOFSContextObject marker interface,
+some work on EODatabaseObjectFolder
+------------------------------------------------------------------------
+r19 | helge.hess | 2008-03-27 12:34:43 +0100 (Thu, 27 Mar 2008) | 1 line
+Changed paths:
+   A /core/trunk/org/getobjects/foundation/NSKeyValueHolder.java
+
+added NSKeyValueHolder class, can be used to temporarily bind some KVC keys to some values
+------------------------------------------------------------------------
+r20 | helge.hess | 2008-03-27 12:41:39 +0100 (Thu, 27 Mar 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eocontrol/EOQualifier.java
+   M /core/trunk/org/getobjects/ofs/OFSDatabaseDataSourceFolder.java
+   M /core/trunk/org/getobjects/ofs/OFSDatabaseObjectFolder.java
+
+added convenience method to bind key/value pairs against a qualifier
+------------------------------------------------------------------------
+r21 | helge.hess | 2008-03-27 20:12:57 +0100 (Thu, 27 Mar 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/ofs/OFSDatabaseDataSourceFolder.java
+   M /core/trunk/org/getobjects/ofs/OFSDatabaseObjectFolder.java
+
+fixed a null-ptr exception
+------------------------------------------------------------------------
+r22 | helge.hess | 2008-03-27 21:33:38 +0100 (Thu, 27 Mar 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/templates/WOHTMLParser.java
+   A /core/trunk/org/getobjects/appserver/templates/WOShortNameAliases.plist
+
+moved shortname mappings to plist file
+------------------------------------------------------------------------
+r23 | helge.hess | 2008-03-28 00:55:54 +0100 (Fri, 28 Mar 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/elements/WOTextField.java
+
+added 'readonly' binding
+------------------------------------------------------------------------
+r24 | helge.hess | 2008-03-28 11:28:28 +0100 (Fri, 28 Mar 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eocontrol/EOQualifierParser.java
+   M /core/trunk/org/getobjects/eocontrol/tests/QualifierParser.java
+
+added support for simple boolean qualifiers ('isArchived' instead of 'isArchived=true')
+------------------------------------------------------------------------
+r25 | helge.hess | 2008-03-28 11:53:52 +0100 (Fri, 28 Mar 2008) | 1 line
+Changed paths:
+   M /core/trunk
+
+
+------------------------------------------------------------------------
+r26 | helge.hess | 2008-03-29 17:46:35 +0100 (Sat, 29 Mar 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eoaccess/EOAdaptor.java
+
+Maintenance timer now uses a WeakReference, so that EOAdaptor objects get properly deallocated. Added a few comments.
+------------------------------------------------------------------------
+r27 | helge.hess | 2008-03-29 18:02:35 +0100 (Sat, 29 Mar 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eoaccess/EOAccessDataSource.java
+
+a few code cleanups, added a few comments
+------------------------------------------------------------------------
+r28 | helge.hess | 2008-03-29 18:11:07 +0100 (Sat, 29 Mar 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eoaccess/EOActiveDataSource.java
+
+a few code cleanups, added a few comments
+------------------------------------------------------------------------
+r29 | helge.hess | 2008-03-31 16:24:37 +0200 (Mon, 31 Mar 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eoaccess/EOAccessDataSource.java
+
+
+------------------------------------------------------------------------
+r30 | helge.hess | 2008-04-01 13:36:23 +0200 (Tue, 01 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/.classpath
+   M /core/trunk/org/getobjects/appserver/publisher/JoDefaultRenderer.java
+   M /core/trunk/org/getobjects/eoaccess/EOSQLExpression.java
+
+just added a few comments
+------------------------------------------------------------------------
+r31 | helge.hess | 2008-04-07 22:54:06 +0200 (Mon, 07 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/elements/WOCheckBox.java
+   M /core/trunk/org/getobjects/appserver/elements/WOFileUpload.java
+   M /core/trunk/org/getobjects/appserver/elements/WOHiddenField.java
+   M /core/trunk/org/getobjects/appserver/elements/WOImageButton.java
+   M /core/trunk/org/getobjects/appserver/elements/WOInput.java
+   M /core/trunk/org/getobjects/appserver/elements/WOPasswordField.java
+   M /core/trunk/org/getobjects/appserver/elements/WOPopUpButton.java
+   M /core/trunk/org/getobjects/appserver/elements/WORadioButton.java
+   M /core/trunk/org/getobjects/appserver/elements/WOResetButton.java
+   M /core/trunk/org/getobjects/appserver/elements/WOSubmitButton.java
+   M /core/trunk/org/getobjects/appserver/elements/WOText.java
+   M /core/trunk/org/getobjects/appserver/elements/WOTextField.java
+   M /core/trunk/org/getobjects/weprototype/WESubmitToRemote.java
+
+added support for distinct read and write 'value' associations in form fields (readValue/writeValue in addition to 'value').
+------------------------------------------------------------------------
+r32 | helge.hess | 2008-04-08 12:45:07 +0200 (Tue, 08 Apr 2008) | 3 lines
+Changed paths:
+   M /core/trunk/org/getobjects/eoaccess/EOEntity.java
+
+Fixed class properties, now include the relationship names.
+Added classPropertyNamed().
+
+------------------------------------------------------------------------
+r33 | helge.hess | 2008-04-08 13:02:14 +0200 (Tue, 08 Apr 2008) | 2 lines
+Changed paths:
+   A /core/trunk/org/getobjects/jsapp/adapter/JSActiveRecordAdapter.java
+   A /core/trunk/org/getobjects/jsapp/adapter/JSEntityObjectAdapter.java
+   M /core/trunk/org/getobjects/jsapp/adapter/JSExtraVarAdapter.java
+   M /core/trunk/org/getobjects/jsapp/adapter/JSWrapFactory.java
+
+Special JavaScript exposure for EOActiveRecord objects. EO class properties are directly accessible as JS properties.
+(previously those got mapped as INSExtraVariables objects)
+------------------------------------------------------------------------
+r34 | helge.hess | 2008-04-08 13:27:23 +0200 (Tue, 08 Apr 2008) | 1 line
+Changed paths:
+   A /core/trunk/org/getobjects/jsapp/adapter/EOEntityAdapter.java
+   A /core/trunk/org/getobjects/jsapp/adapter/EOPropertyAdapter.java
+   M /core/trunk/org/getobjects/jsapp/adapter/JSComponentAdapter.java
+   M /core/trunk/org/getobjects/jsapp/adapter/JSEntityObjectAdapter.java
+   M /core/trunk/org/getobjects/jsapp/adapter/JSWrapFactory.java
+
+added JS wrappers to expose EOEntity/EOProperty in a specific API
+------------------------------------------------------------------------
+r35 | helge.hess | 2008-04-08 18:11:31 +0200 (Tue, 08 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eoaccess/postgresql/EOPostgreSQLChannel.java
+
+Minor code cleanups
+------------------------------------------------------------------------
+r36 | helge.hess | 2008-04-08 18:15:29 +0200 (Tue, 08 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eoaccess/EOAdaptorChannel.java
+
+added support for Double/BigDecimal in INSERTs
+------------------------------------------------------------------------
+r37 | helge.hess | 2008-04-08 21:40:42 +0200 (Tue, 08 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/elements/WONumberFormatter.java
+
+Changed numberformat to generate BigDecimal instead of Double
+------------------------------------------------------------------------
+r39 | helge.hess | 2008-04-10 11:01:43 +0200 (Thu, 10 Apr 2008) | 2 lines
+Changed paths:
+   M /core/trunk/version.properties
+
+bumped version
+
+------------------------------------------------------------------------
