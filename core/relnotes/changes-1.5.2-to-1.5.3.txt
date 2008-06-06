@@ -1,0 +1,563 @@
+2008-06-06 r116
+
+Generic
+- new: UString.addStringToStringArray()
+- new: UString.componentsSeparatedByString() (different to String.split())
+- new: UString.getURLProtocol()
+- new: UObject.dateValue()
+- fixed UObject.intValue to deal properly with decimal number String input
+
+AppServer
+- WORequestHandler's are now NSObject subclasses
+- do not log form parameters which look like passwords
+- added WOCheckRoleAssociation, mapped to role: prefix
+- added WOBrowser dynamic element (multi select form element)
+- fixed a bug in generating empty tags
+- changed WONumberFormat to return null for empty strings
+- accept percent/currency/integer as values for 'numberformat'
+- added 'currencyformat', 'percentformat' and 'intformat' WOFormatter bindings
+- added 'calformat' WOFormatter (like dateformat, but returns Calendar objs)
+- added support for WOFormatter bindings in WOPopUpButton
+- fixed negate binding in 'ifnot' attribute
+- WORadioButton: print a warning if the same binding is used for id and name
+- WOCheckBox: added support for 'selection' binding, fixed a bug in takeValues
+- WOString: added support for WOHTMLElementAttributes (.class style bindings)
+- WOHyperlink: allow 'value' in addition to 'string' binding
+
+GoObjects/OFS
+- no changes
+
+JavaScript
+- minor fixes
+
+Database Layer
+- added EORecordMap to speedup JDBC<->EOAdaptor mapping
+- EOAttribute and EORelationship now implement EOValueEvaluation
+- most EOQualifier's can now be used as EOValueEvaluation objects
+- output boolean values in EO description
+- fixed a bug in the pattern model resolution
+- introduced EOExpression as an arbitary-value superclass for EOQualifier
+- consolidated EOQualifier methods in EOExpression
+- added support for NSTimeRange based queries
+- EOExpression: fixed a major bug in relship query generation
+- improved aliases for relationship queries
+- Fixed EOSortOrdering.sortedList, which did not do anything.
+- added EOCSVKeyValueQualifier (with special PostgreSQL support)
+- EOKey: added dot() methods
+- added EOOverlapsQualifier
+- EOEntity.relationshipNamed() can now traverse keypathes
+
+ThirdParty
+- no changes
+
+
+------------------------------------------------------------------------
+r43 | helge.hess | 2008-04-10 11:24:34 +0200 (Thu, 10 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/version.properties
+
+bumped trunk version to 1.5.3
+------------------------------------------------------------------------
+r44 | helge.hess | 2008-04-10 15:02:15 +0200 (Thu, 10 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/core/WOApplication.java
+   M /core/trunk/org/getobjects/appserver/publisher/JoObjectRequestHandler.java
+
+minor code cleanups
+------------------------------------------------------------------------
+r45 | helge.hess | 2008-04-10 15:08:08 +0200 (Thu, 10 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/core/WORequestHandler.java
+
+request handlers are now NSObject subclasses (to improve KVC behaviour)
+------------------------------------------------------------------------
+r46 | helge.hess | 2008-04-10 16:03:00 +0200 (Thu, 10 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/core/WOApplication.java
+
+do not log form values which contain passwords
+------------------------------------------------------------------------
+r47 | helge.hess | 2008-04-13 13:47:49 +0200 (Sun, 13 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eoaccess/EODatabaseChannel.java
+   M /core/trunk/org/getobjects/eocontrol/EOCase.java
+
+code cleanups
+------------------------------------------------------------------------
+r48 | helge.hess | 2008-04-13 17:55:15 +0200 (Sun, 13 Apr 2008) | 1 line
+Changed paths:
+   A /core/trunk/org/getobjects/eocontrol/EORecordMap.java
+
+work on EORecordMap
+------------------------------------------------------------------------
+r49 | helge.hess | 2008-04-13 18:07:07 +0200 (Sun, 13 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/foundation/NSObject.java
+
+minor code cleanups
+------------------------------------------------------------------------
+r50 | helge.hess | 2008-04-13 18:19:30 +0200 (Sun, 13 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eoaccess/EOAdaptorChannel.java
+   M /core/trunk/org/getobjects/eocontrol/EORecordMap.java
+
+changed EOAdaptorChannel to use new EORecordMap object for fetch results
+------------------------------------------------------------------------
+r51 | helge.hess | 2008-04-13 18:37:10 +0200 (Sun, 13 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eoaccess/EOAdaptorChannel.java
+   M /core/trunk/org/getobjects/eocontrol/EORecordMap.java
+
+work on EORecordMap
+------------------------------------------------------------------------
+r52 | helge.hess | 2008-04-13 18:50:26 +0200 (Sun, 13 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eoaccess/EOAttribute.java
+   M /core/trunk/org/getobjects/eoaccess/EORelationship.java
+
+EOAttribute and EORelationship now implement EOValueEvaluation
+------------------------------------------------------------------------
+r53 | helge.hess | 2008-04-13 19:20:04 +0200 (Sun, 13 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eoaccess/EODatabaseChannel.java
+   M /core/trunk/org/getobjects/eoaccess/EOSQLExpression.java
+
+minor code cleanups
+------------------------------------------------------------------------
+r54 | helge.hess | 2008-04-13 19:27:44 +0200 (Sun, 13 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eocontrol/EOAndQualifier.java
+   M /core/trunk/org/getobjects/eocontrol/EOBooleanQualifier.java
+   M /core/trunk/org/getobjects/eocontrol/EOKeyComparisonQualifier.java
+   M /core/trunk/org/getobjects/eocontrol/EOKeyRegExQualifier.java
+   M /core/trunk/org/getobjects/eocontrol/EOKeyValueQualifier.java
+   M /core/trunk/org/getobjects/eocontrol/EONotQualifier.java
+   M /core/trunk/org/getobjects/eocontrol/EOOrQualifier.java
+   M /core/trunk/org/getobjects/eocontrol/EOValueEvaluation.java
+
+Most EOQualifier's not can be used as EOValueEvaluation objects
+------------------------------------------------------------------------
+r55 | helge.hess | 2008-04-14 11:26:14 +0200 (Mon, 14 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eoaccess/EOActiveRecord.java
+   M /core/trunk/org/getobjects/eoaccess/EOSQLExpression.java
+
+output boolean values in EO description
+------------------------------------------------------------------------
+r56 | helge.hess | 2008-04-15 20:49:39 +0200 (Tue, 15 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eoaccess/EOAttribute.java
+
+fixed a bug in the pattern model resolution (do not add attributes where the column name matches an existing attribute name [with a different column name])
+------------------------------------------------------------------------
+r57 | helge.hess | 2008-04-15 20:52:12 +0200 (Tue, 15 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eoaccess/EODatabaseChannel.java
+
+
+------------------------------------------------------------------------
+r58 | helge.hess | 2008-04-16 11:20:47 +0200 (Wed, 16 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eoaccess/mysql/EOMySQLAdaptor.java
+   M /core/trunk/org/getobjects/eoaccess/mysql/EOMySQLChannel.java
+   M /core/trunk/org/getobjects/eoaccess/mysql/EOMySQLExpression.java
+
+added @override's and final's
+------------------------------------------------------------------------
+r59 | helge.hess | 2008-04-16 11:25:11 +0200 (Wed, 16 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eoaccess/postgresql/EOPostgreSQLAdaptor.java
+   M /core/trunk/org/getobjects/eoaccess/postgresql/EOPostgreSQLChannel.java
+   M /core/trunk/org/getobjects/eoaccess/postgresql/EOPostgreSQLExpression.java
+
+added @override's and final's
+------------------------------------------------------------------------
+r60 | helge.hess | 2008-04-16 11:30:37 +0200 (Wed, 16 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eoaccess/EOAdaptor.java
+
+minor code cleanups
+------------------------------------------------------------------------
+r61 | helge.hess | 2008-04-16 11:57:06 +0200 (Wed, 16 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eoaccess/EOAdaptor.java
+
+Added more SQL fetch convenience functions
+------------------------------------------------------------------------
+r62 | helge.hess | 2008-04-16 12:04:48 +0200 (Wed, 16 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eoaccess/EOAdaptor.java
+   M /core/trunk/org/getobjects/eoaccess/EOSQLExpression.java
+
+Just added a few comments
+------------------------------------------------------------------------
+r63 | helge.hess | 2008-04-17 12:26:03 +0200 (Thu, 17 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/foundation/UString.java
+   M /core/trunk/org/getobjects/ofs/OFSFolder.java
+
+Moved addStringToStringArray() function to UString
+------------------------------------------------------------------------
+r64 | helge.hess | 2008-04-17 14:22:48 +0200 (Thu, 17 Apr 2008) | 1 line
+Changed paths:
+   A /core/trunk/org/getobjects/appserver/associations/WOCheckRoleAssociation.java
+   M /core/trunk/org/getobjects/appserver/core/WOAssociation.java
+
+added WOCheckRoleAssociation, mapped to role: prefix
+------------------------------------------------------------------------
+r65 | helge.hess | 2008-04-17 14:33:02 +0200 (Thu, 17 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/elements/WOConditional.java
+   M /core/trunk/org/getobjects/appserver/elements/WOString.java
+
+improved description
+------------------------------------------------------------------------
+r66 | helge.hess | 2008-04-18 23:42:31 +0200 (Fri, 18 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eoaccess/EOAttribute.java
+   M /core/trunk/org/getobjects/eoaccess/EORelationship.java
+   M /core/trunk/org/getobjects/eoaccess/EOSQLExpression.java
+   M /core/trunk/org/getobjects/eocontrol/EOAndQualifier.java
+   M /core/trunk/org/getobjects/eocontrol/EOCase.java
+   A /core/trunk/org/getobjects/eocontrol/EOExpression.java
+   A /core/trunk/org/getobjects/eocontrol/EOExpressionEvaluation.java (from /core/trunk/org/getobjects/eocontrol/EOValueEvaluation.java:63)
+   M /core/trunk/org/getobjects/eocontrol/EOGroupedList.java
+   M /core/trunk/org/getobjects/eocontrol/EOKey.java
+   M /core/trunk/org/getobjects/eocontrol/EOQualifier.java
+   D /core/trunk/org/getobjects/eocontrol/EOValueEvaluation.java
+
+introduced EOExpression as an arbitary-value superclass for EOQualifier
+------------------------------------------------------------------------
+r67 | helge.hess | 2008-04-18 23:53:10 +0200 (Fri, 18 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eocontrol/EOCompoundQualifier.java
+   M /core/trunk/org/getobjects/eocontrol/EOExpression.java
+   M /core/trunk/org/getobjects/eocontrol/EOKeyComparisonQualifier.java
+   M /core/trunk/org/getobjects/eocontrol/EOKeyRegExQualifier.java
+   M /core/trunk/org/getobjects/eocontrol/EOKeyValueQualifier.java
+   M /core/trunk/org/getobjects/eocontrol/EONotQualifier.java
+   M /core/trunk/org/getobjects/eocontrol/EOQualifier.java
+
+moved more common EOQualifier stuff to EOExpression
+------------------------------------------------------------------------
+r68 | helge.hess | 2008-04-19 00:04:28 +0200 (Sat, 19 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eocontrol/EOQualifierVariable.java
+
+minor code cleanups
+------------------------------------------------------------------------
+r69 | helge.hess | 2008-04-19 00:12:57 +0200 (Sat, 19 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eocontrol/EOCase.java
+
+allow calculated values in case
+------------------------------------------------------------------------
+r70 | helge.hess | 2008-04-19 00:23:30 +0200 (Sat, 19 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eoaccess/EOSQLExpression.java
+
+more work on EOExpression
+------------------------------------------------------------------------
+r71 | helge.hess | 2008-04-19 01:09:19 +0200 (Sat, 19 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eoaccess/EOSQLExpression.java
+
+minor code cleanups
+------------------------------------------------------------------------
+r72 | helge.hess | 2008-04-24 12:09:07 +0200 (Thu, 24 Apr 2008) | 1 line
+Changed paths:
+   A /core/trunk/org/getobjects/appserver/elements/WOBrowser.java
+   M /core/trunk/org/getobjects/appserver/templates/WOShortNameAliases.plist
+
+added WOBrowser dynamic element
+------------------------------------------------------------------------
+r73 | helge.hess | 2008-04-24 12:22:17 +0200 (Thu, 24 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/core/WOMessage.java
+
+fixed a bug in generating empty tags (eg disabled, multiple)
+------------------------------------------------------------------------
+r74 | helge.hess | 2008-04-24 12:50:30 +0200 (Thu, 24 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/core/WOApplication.java
+   M /core/trunk/org/getobjects/appserver/elements/WOBrowser.java
+
+fixed multiple selection handling of WOBrowser
+------------------------------------------------------------------------
+r75 | helge.hess | 2008-04-24 21:48:40 +0200 (Thu, 24 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/jsapp/adapter/EOPropertyAdapter.java
+
+just added a small comment
+------------------------------------------------------------------------
+r76 | helge.hess | 2008-04-25 02:04:16 +0200 (Fri, 25 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/elements/WONumberFormatter.java
+
+changed WONumberFormat to return null for empty strings
+------------------------------------------------------------------------
+r77 | helge.hess | 2008-04-25 02:07:51 +0200 (Fri, 25 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/elements/WONumberFormatter.java
+
+changed WONumberFormat to return null for empty strings
+------------------------------------------------------------------------
+r78 | helge.hess | 2008-04-28 15:10:01 +0200 (Mon, 28 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/jsapp/adapter/JSContextAdapter.java
+
+expose a few more values as plain properties
+------------------------------------------------------------------------
+r79 | helge.hess | 2008-04-28 17:03:09 +0200 (Mon, 28 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/elements/WODateFormatter.java
+   M /core/trunk/org/getobjects/appserver/elements/WOFormatter.java
+   M /core/trunk/org/getobjects/appserver/elements/WOString.java
+   M /core/trunk/org/getobjects/appserver/elements/WOTextField.java
+
+added 'calformat' WOFormatter, while 'dateformat' produces java.util.Date objects, 'calformat' create java.util.Calendar objects (using the locale of the WOContext)
+------------------------------------------------------------------------
+r80 | helge.hess | 2008-04-28 18:03:50 +0200 (Mon, 28 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eoaccess/EOSQLExpression.java
+
+added some support for NSTimeRange based queries [eg birthday IN %@, NSTimeRange.dayRange(date))]
+------------------------------------------------------------------------
+r81 | helge.hess | 2008-04-29 10:01:31 +0200 (Tue, 29 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/foundation/NSTimeRange.java
+
+added java.util.Date based methods
+------------------------------------------------------------------------
+r82 | helge.hess | 2008-04-29 11:47:13 +0200 (Tue, 29 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/elements/WOPopUpButton.java
+   M /core/trunk/org/getobjects/foundation/NSTimeRange.java
+
+added support for WOFormatter bindings in WOPopUpButton
+------------------------------------------------------------------------
+r83 | helge.hess | 2008-04-29 12:03:07 +0200 (Tue, 29 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eocontrol/EOBooleanQualifier.java
+
+added special and/or/not operations
+------------------------------------------------------------------------
+r84 | helge.hess | 2008-04-29 12:04:27 +0200 (Tue, 29 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/foundation/UObject.java
+
+fixed UObject.intValue to deal properly with decimal number String input like "10.0" (=>10)
+------------------------------------------------------------------------
+r85 | helge.hess | 2008-04-29 12:33:57 +0200 (Tue, 29 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/templates/WOWrapperTemplateBuilder.java
+
+fixed negate binding in 'ifnot' attribute
+------------------------------------------------------------------------
+r86 | helge.hess | 2008-04-29 18:43:53 +0200 (Tue, 29 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/elements/WORadioButton.java
+
+print a warning if the same binding is used for id and name (do not use idname with radio buttons!)
+------------------------------------------------------------------------
+r87 | helge.hess | 2008-04-29 22:52:06 +0200 (Tue, 29 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/elements/WOCheckBox.java
+
+added support for 'selection' binding (can be bound to plain values, or to Collection objects for checkbox sets)
+------------------------------------------------------------------------
+r88 | helge.hess | 2008-04-29 22:59:55 +0200 (Tue, 29 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/elements/WOCheckBox.java
+
+fixed a bug in selection takeValues processing
+------------------------------------------------------------------------
+r89 | helge.hess | 2008-04-30 02:07:12 +0200 (Wed, 30 Apr 2008) | 2 lines
+Changed paths:
+   M /core/trunk/org/getobjects/eoaccess/EOSQLExpression.java
+
+fixed a major bug in relationship query generation,
+improved aliases for relationship queries
+------------------------------------------------------------------------
+r90 | helge.hess | 2008-04-30 13:00:52 +0200 (Wed, 30 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/elements/WOFormatter.java
+   M /core/trunk/org/getobjects/appserver/elements/WONumberFormatter.java
+   M /core/trunk/org/getobjects/appserver/elements/WOString.java
+   M /core/trunk/org/getobjects/appserver/elements/WOTextField.java
+
+added 'currencyformat', 'percentformat' and 'intformat' WOFormatter bindings to address specific instances of java.util.NumberFormat
+------------------------------------------------------------------------
+r91 | helge.hess | 2008-04-30 13:02:59 +0200 (Wed, 30 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/elements/WONumberFormatter.java
+
+accept percent/currency/integer as values for 'numberformat'
+------------------------------------------------------------------------
+r92 | helge.hess | 2008-04-30 16:22:34 +0200 (Wed, 30 Apr 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eoaccess/EOAccessDataSource.java
+   M /core/trunk/org/getobjects/eoaccess/EODatabase.java
+
+minor code cleanups
+------------------------------------------------------------------------
+r93 | helge.hess | 2008-05-07 10:50:52 +0200 (Wed, 07 May 2008) | 2 lines
+Changed paths:
+   M /core/trunk/org/getobjects/eocontrol/EOSortOrdering.java
+
+Fixed EOSortOrdering.sortedList, which did not do anything.
+Added a new sortedList() instance method.
+------------------------------------------------------------------------
+r94 | helge.hess | 2008-05-07 13:58:06 +0200 (Wed, 07 May 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/foundation/UString.java
+
+added componentsSeparatedByString() which is different to String.split() (requires no escaping of separator)
+------------------------------------------------------------------------
+r95 | helge.hess | 2008-05-07 14:12:56 +0200 (Wed, 07 May 2008) | 1 line
+Changed paths:
+   A /core/trunk/org/getobjects/eocontrol/EOCSVKeyValueQualifier.java
+   M /core/trunk/org/getobjects/eocontrol/EOKeyValueQualifier.java
+
+added EOCSVKeyValueQualifier
+------------------------------------------------------------------------
+r96 | helge.hess | 2008-05-07 14:42:02 +0200 (Wed, 07 May 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eoaccess/EOSQLExpression.java
+   M /core/trunk/org/getobjects/eoaccess/postgresql/EOPostgreSQLExpression.java
+   M /core/trunk/org/getobjects/eocontrol/EOCSVKeyValueQualifier.java
+
+added PG specific SQL generation for EOCSVKeyValueQualifier
+------------------------------------------------------------------------
+r97 | helge.hess | 2008-05-07 15:16:42 +0200 (Wed, 07 May 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eoaccess/EOSQLExpression.java
+   M /core/trunk/org/getobjects/eoaccess/postgresql/EOPostgreSQLExpression.java
+   M /core/trunk/org/getobjects/eocontrol/EOCSVKeyValueQualifier.java
+
+misc fixes to new CSV qualifier
+------------------------------------------------------------------------
+r98 | helge.hess | 2008-05-09 18:22:13 +0200 (Fri, 09 May 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/elements/WOString.java
+
+added support for WOHTMLElementAttributes (.class style bindings)
+------------------------------------------------------------------------
+r99 | helge.hess | 2008-05-10 16:44:59 +0200 (Sat, 10 May 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eocontrol/EOKey.java
+
+added dot() methods ;-)
+------------------------------------------------------------------------
+r100 | helge.hess | 2008-05-10 18:20:17 +0200 (Sat, 10 May 2008) | 1 line
+Changed paths:
+   A /core/trunk/org/getobjects/eocontrol/EOConstant.java
+   M /core/trunk/org/getobjects/eocontrol/EOExpression.java
+   M /core/trunk/org/getobjects/eocontrol/EOKey.java
+   M /core/trunk/org/getobjects/eocontrol/EOKeyValueQualifier.java
+
+use EOExpression/EOKey in EOKeyValueQualifier
+------------------------------------------------------------------------
+r101 | helge.hess | 2008-05-10 18:31:12 +0200 (Sat, 10 May 2008) | 1 line
+Changed paths:
+   A /core/trunk/org/getobjects/eocontrol/EOOverlapsQualifier.java
+
+prepared EOOverlapsQualifier
+------------------------------------------------------------------------
+r102 | helge.hess | 2008-05-10 22:57:09 +0200 (Sat, 10 May 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eocontrol/EOKeyComparisonQualifier.java
+   M /core/trunk/org/getobjects/eocontrol/EOKeyValueQualifier.java
+
+changed to use EOExpression for left/right side
+------------------------------------------------------------------------
+r103 | helge.hess | 2008-05-10 22:57:43 +0200 (Sat, 10 May 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eocontrol/EOOverlapsQualifier.java
+
+added rewriteAsPlainQualifier() method
+------------------------------------------------------------------------
+r104 | helge.hess | 2008-05-10 23:07:02 +0200 (Sat, 10 May 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eoaccess/EOSQLExpression.java
+   M /core/trunk/org/getobjects/eoaccess/postgresql/EOPostgreSQLExpression.java
+
+rewrote some code to use EOKey, added support for EOOverlapsQualifier SQL generation
+------------------------------------------------------------------------
+r105 | helge.hess | 2008-05-11 23:56:07 +0200 (Sun, 11 May 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/jsapp/adapter/JSContextAdapter.java
+
+added docs
+------------------------------------------------------------------------
+r106 | helge.hess | 2008-05-12 00:11:53 +0200 (Mon, 12 May 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/elements/WOCheckBox.java
+
+added docs
+------------------------------------------------------------------------
+r107 | helge.hess | 2008-05-12 12:38:27 +0200 (Mon, 12 May 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/foundation/UString.java
+
+added getURLProtocol() which can be used to check whether a String is an absolute URL (ie whether it begins with a known protocol marker)
+------------------------------------------------------------------------
+r108 | helge.hess | 2008-05-12 12:47:41 +0200 (Mon, 12 May 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/elements/WOHyperlink.java
+
+allow 'value' in addition to 'string' binding
+------------------------------------------------------------------------
+r109 | helge.hess | 2008-05-13 21:31:02 +0200 (Tue, 13 May 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/jsapp/JSApplication.java
+   M /core/trunk/org/getobjects/jsapp/adapter/JSComponentAdapter.java
+   M /core/trunk/org/getobjects/jsapp/adapter/JSExtraVarAdapter.java
+
+some preliminary work on fixing JavaScript strings
+------------------------------------------------------------------------
+r110 | helge.hess | 2008-05-14 11:50:58 +0200 (Wed, 14 May 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/foundation/NSTimeRange.java
+   A /core/trunk/org/getobjects/foundation/tests/TNSTimeRange.java
+
+prepared unit tests for NSTimeRange
+------------------------------------------------------------------------
+r111 | helge.hess | 2008-05-19 13:57:33 +0200 (Mon, 19 May 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/jsapp/JSComponent.java
+   M /core/trunk/org/getobjects/jsapp/JSUtil.java
+
+minor code cleanups
+------------------------------------------------------------------------
+r112 | helge.hess | 2008-05-22 10:04:08 +0200 (Thu, 22 May 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eoaccess/EOEntity.java
+
+EOEntity.relationshipNamed() can now traverse keypathes
+------------------------------------------------------------------------
+r113 | helge.hess | 2008-05-22 11:31:08 +0200 (Thu, 22 May 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/foundation/UString.java
+
+added trim/no-empty options to componentsSeparatedByString()
+------------------------------------------------------------------------
+r114 | helge.hess | 2008-05-27 23:44:13 +0200 (Tue, 27 May 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/jsapp/JSComponentWrapper.java
+   M /core/trunk/org/getobjects/jsapp/JSUtil.java
+
+minor code cleanups
+------------------------------------------------------------------------
+r115 | znek666 | 2008-05-29 15:52:51 +0200 (Thu, 29 May 2008) | 1 line
+Changed paths:
+   M /core/trunk/build.xml
+
+Fixed getobjects-fat.jar build
+------------------------------------------------------------------------
+r116 | helge.hess | 2008-06-06 16:25:27 +0200 (Fri, 06 Jun 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/foundation/UObject.java
+
+added dateValue() method to coerce Calendar, long and Date values to a java.util.Date
+------------------------------------------------------------------------
