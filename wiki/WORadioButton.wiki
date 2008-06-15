@@ -15,7 +15,8 @@ Remember:
 = Tips =
 
 To generate a unique id in a repetition you can use varpat associations:
-
+{{{
   <wo:radio name="accountid"
             varpat:id="accountid_%(item.id)s"
             value="$item.id" />
+}}}
