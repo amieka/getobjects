@@ -2,4 +2,4 @@
 
 = Introduction =
 
-The [http://getobjects.org Go] Wiki.
+This is a Wiki for the [http://getobjects.org GETobjects] Java frameworks.
