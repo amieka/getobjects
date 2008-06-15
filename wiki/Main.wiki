@@ -2,4 +2,4 @@
 
 = Introduction =
 
-The Go[http://getobjects.org] Wiki.
+The [http://getobjects.org Go] Wiki.
