@@ -1,0 +1,13 @@
+#summary DynamicElements are stateless, reusable parts of a Go template
+
+= Introduction =
+
+Page to summarize information on Go dynamic elements.
+
+
+= Details =
+
+Elements:
+  * WORadioButton / <wo:radio    />
+  * WOCheckBox    / <wo:checkbox />
+  * WOConditional / <wo:if       />
