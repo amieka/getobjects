@@ -1,0 +1,66 @@
+{
+  factories = {
+  };
+  
+  renderers = {
+    org.getobjects.ofs.OFSResourceFileRenderer = {
+    };
+  };
+
+  classes = {
+  
+    org.getobjects.ofs.OFSBaseObject = {
+      protectedBy   = "View";
+      defaultAccess = "allow";
+      
+      defaultRoles = {
+        "View"                    = "Anonymous";
+        "WebDAV Access"           = "Authenticated";
+        "Change Images and Files" = "Owner";
+      };
+      
+      slots = {
+      };
+      
+      methods = {
+      };
+    };
+    
+    org.getobjects.ofs.OFSFolder = {
+      superclass = "org.getobjects.ofs.OFSBaseObject";
+    
+      slots = {
+      };
+      
+      methods = {
+      };
+    };
+    
+    org.getobjects.ofs.OFSComponentWrapper = {
+      superclass = "org.getobjects.ofs.OFSFolder";
+    
+      slots = {
+      };
+      
+      methods = {
+      };
+    };
+    org.getobjects.ofs.OFSComponentFile = {
+      superclass = "org.getobjects.ofs.OFSBaseObject";
+    
+      slots = {
+      };
+      
+      methods = {
+      };
+    };
+    
+    org.getobjects.ofs.OFSApplication = {
+      superclass = "org.getobjects.appserver.core.WOApplication";
+    };
+    
+  };
+  
+  categories = {
+  };
+}

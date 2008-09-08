@@ -1,0 +1,149 @@
+<html>
+  <head>
+    <title>Prototype Testpage</title>
+    
+    <wo:WOJavaScript filename="prototype.js" />
+    <wo:WOJavaScript filename="scriptaculous.js" />
+    
+    <style type="text/css">
+      div.autocomplete {
+        position:absolute;
+        width:250px;
+        background-color:white;
+        border:1px solid #888;
+        margin:0px;
+        padding:0px;
+      }
+      div.autocomplete ul {
+        list-style-type:none;
+        margin:0px;
+        padding:0px;
+      }
+      div.autocomplete ul li.selected {
+        background-color: #ffb;
+      }
+      div.autocomplete ul li {
+        list-style-type:none;
+        display:block;
+        margin:0;
+        padding:2px;
+        height:32px;
+        cursor:pointer;
+      }
+    </style>
+  </head>
+  
+  <body>
+    <h2>Prototype Testpage</h2>
+    
+    <hr />
+    
+    <h3>What time is it?</h3>
+    
+    <div id="time_div">
+      I don't have the time, but
+      <wo:WELinkToRemote action="sayWhen" update="time_div">click me</wo:WELinkToRemote>
+      and I will look it up.
+    </div>
+    
+    <!-- insertion -->
+    <p>
+      <wo:WELinkToRemote action="sayWhen" update="time_div" position="after"
+        >add time after</wo:WELinkToRemote>,
+      <wo:WELinkToRemote action="sayWhen" update="time_div" position="before"
+        >add time before</wo:WELinkToRemote>,
+      <wo:WELinkToRemote action="sayWhen" update="time_div" position="top"
+        >add time top</wo:WELinkToRemote>,
+      <wo:WELinkToRemote action="sayWhen" update="time_div" position="bottom"
+        >add time bottom</wo:WELinkToRemote>
+    </p>
+    
+    <!-- confirm -->
+    <p>
+      <wo:WELinkToRemote action="sayWhen" update="time_div" position="after"
+        confirm="should add time?">add after confirm</wo:WELinkToRemote>,
+        
+      <wo:WELinkToRemote action="sayWhen" update="time_div" position="after"
+        confirm="should add time?" condition="confirm('really ;-) ??')"
+        >add after confirm, then condition(confirm)</wo:WELinkToRemote>
+    </p>
+    
+    <hr />
+    <h3>Forms</h3>
+    
+    <!-- forms -->
+
+    <div>
+      <h4>WEFormToRemote</h4>
+      <wo:WEFormToRemote update="my_list" position="top" action="addItem">
+        New item text:
+        <wo:WOTextField name="newitem" var:value="title" />
+        <input type="submit" value="Add item with Ajax" />
+      </wo:WEFormToRemote>
+      <ul id="my_list">
+        <li>Original item... please add more!</li>
+      </ul>
+    </div>
+
+    <div>
+      <h4>SubmitToRemote</h4>
+      <form action="wo:">
+        New item text:
+        <wo:WOTextField name="newitem" var:value="title" />
+        
+        <wo:WESubmitToRemote name="submit" value="Add item with Ajax"
+                           update="my_list2" action="addItem" position="top"/>
+      </form>
+      <ul id="my_list2">
+        <li>Original item... please add more!</li>
+      </ul>
+    </div>
+    
+    <!-- observe -->
+    <div>
+      <label for="searchtext">Live Search:</label>
+      <wo:WOTextField id="searchtext" name="searchtext" var:value="searchText" />
+      <wo:WEObserveField name="searchtext" frequency="0.5"
+                       update="search_hits" action="liveSearch" />
+      <p>Search Results:</p>
+      <div id="search_hits"></div>
+    </div>
+    
+    <hr />
+    
+    <!-- complete -->
+    <div>
+      <label for="completetext">Live Completion:</label>
+      <wo:WOTextField id="completetext"
+                      name="searchtext"
+                      var:value="searchText"
+      />
+      <wo:WEAutocompleteField name="completetext"
+                              action="liveCompletion"
+                              var:list="completions"
+                              var:item="item"
+      ><wo:get var:value="item" /><span class="informal">
+       (<wo:get var:value="item.length" />)</span>
+      </wo:WEAutocompleteField>
+    </div>
+
+    <hr />
+
+    <!-- fragments -->
+    <div>
+      <h3>Fragments</h3>
+      
+      <wo:WOFragment name="timefrag" elementName="p">
+        The time is <wo:WOString var:value="now" />.
+      </wo:WOFragment>
+      
+      <wo:WELinkToRemote fragment="timefrag">Update Frag!</wo:WELinkToRemote>
+    </div>
+
+
+    <!-- link back to mainpage -->
+    <hr />
+    <wo:WOHyperlink directActionName="default" actionClass="Main"
+      >[main]</wo:WOHyperlink>
+  </body>
+</html>
