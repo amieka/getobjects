@@ -1,0 +1,1304 @@
+2008-09-08 r188
+
+Generic
+- misc code cleanups
+- enhanced array utilities
+- renamed 'Jo' prefixes to 'Go'
+- added 'not' KVC trampoline to NSObject (eg myAccount.not.isActive)
+
+AppServer
+- added WOErrorReport object for collecting validation errors in pages
+- added WONegateAssociation
+- fixed CSS class rendering bug (class and .class)
+- added <wo:if not=""> virtual binding (sets condition/negate)
+- optimized WOConditional (now a cluster)
+- WOCopyValue (<wo:put>): added support for if/ifnot/condition bindings
+- added exception handlers to properly maintain component stack
+- added 'volatile' properties
+- some cleanup work in Jetty runner
+- added WEAutocompleteField
+
+GoObjects/OFS
+- improved pathToClientObject() method
+
+JavaScript
+- added hack in UObject to support Rhino 'undefined' values
+- improved UObject.isEmpty functions
+
+Database Layer
+
+ThirdParty
+- Upgraded PostgreSQL JBDC3/4 adaptor from 8.2-506 to 8.3-603
+- Updated Prototype to 1.6.0.2 and Scriptaculous to 1.8.1.
+
+
+
+------------------------------------------------------------------------
+r119 | helge.hess | 2008-06-06 16:55:40 +0200 (Fri, 06 Jun 2008) | 1 line
+Changed paths:
+   M /core/trunk/version.properties
+
+bumped trunk version to 1.5.4
+------------------------------------------------------------------------
+r120 | helge.hess | 2008-06-10 13:39:11 +0200 (Tue, 10 Jun 2008) | 1 line
+Changed paths:
+   M /core/trunk/.classpath
+
+removed ant-obj directory as a source folder ...
+------------------------------------------------------------------------
+r121 | helge.hess | 2008-06-10 15:11:26 +0200 (Tue, 10 Jun 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/foundation/UObject.java
+
+added a hack to support Rhino 'undefined' values in dateValue
+------------------------------------------------------------------------
+r122 | helge.hess | 2008-06-12 11:22:28 +0200 (Thu, 12 Jun 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eoaccess/EOAdaptorChannel.java
+   M /core/trunk/org/getobjects/eoaccess/postgresql/EOPostgreSQLChannel.java
+
+just added a few comments
+------------------------------------------------------------------------
+r123 | helge.hess | 2008-06-12 11:28:26 +0200 (Thu, 12 Jun 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/elements/WOHyperlink.java
+
+minor code cleanups
+------------------------------------------------------------------------
+r124 | helge.hess | 2008-06-13 02:12:26 +0200 (Fri, 13 Jun 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/core/WOComponent.java
+   M /core/trunk/org/getobjects/appserver/core/WOContext.java
+   A /core/trunk/org/getobjects/appserver/core/WOErrorReport.java
+   M /core/trunk/org/getobjects/appserver/elements/WOForm.java
+   M /core/trunk/org/getobjects/appserver/elements/WOInput.java
+   M /core/trunk/org/getobjects/appserver/elements/WOTextField.java
+
+some work on WOErrorReport
+------------------------------------------------------------------------
+r125 | helge.hess | 2008-06-13 11:45:15 +0200 (Fri, 13 Jun 2008) | 2 lines
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/associations/WOAssociationFacade.java
+   A /core/trunk/org/getobjects/appserver/associations/WONegateAssociation.java
+   M /core/trunk/org/getobjects/appserver/core/WOAssociation.java
+
+added WONegateAssociation (bound to not: prefix),
+minor code cleanups in WOAssociation
+------------------------------------------------------------------------
+r126 | helge.hess | 2008-06-13 12:19:32 +0200 (Fri, 13 Jun 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/core/WOErrorReport.java
+   M /core/trunk/org/getobjects/appserver/elements/WOInput.java
+   M /core/trunk/org/getobjects/appserver/elements/WOTextField.java
+
+initial implementation of WOErrorReport facility
+------------------------------------------------------------------------
+r127 | helge.hess | 2008-06-13 12:53:33 +0200 (Fri, 13 Jun 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/core/WOErrorReport.java
+
+added convenience methods to WOErrorReport
+------------------------------------------------------------------------
+r128 | helge.hess | 2008-06-13 13:58:54 +0200 (Fri, 13 Jun 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/elements/WOHTMLElementAttributes.java
+
+fixed a bug in rendering CSS class when both, 'class' and '.class' bindings are used
+------------------------------------------------------------------------
+r129 | helge.hess | 2008-06-13 14:54:54 +0200 (Fri, 13 Jun 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/core/WOErrorReport.java
+
+fixed hasErrors(), added isEmpty()
+------------------------------------------------------------------------
+r130 | helge.hess | 2008-06-13 15:06:54 +0200 (Fri, 13 Jun 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/foundation/UList.java
+
+added lastIndexOfObjectIdentical|EqualTo()
+------------------------------------------------------------------------
+r131 | helge.hess | 2008-06-13 15:18:16 +0200 (Fri, 13 Jun 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/publisher/JoTraversalPath.java
+
+improved implementation of pathToClientObject(), it can now properly deal with pathes which have multiple path components (eg /clientobj/edit/save, where both edit/save are action path components)
+------------------------------------------------------------------------
+r132 | helge.hess | 2008-06-13 16:07:42 +0200 (Fri, 13 Jun 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/foundation/UObject.java
+
+removed overloaded isEmpty() functions to play well with Rhino
+------------------------------------------------------------------------
+r133 | helge.hess | 2008-06-13 18:30:27 +0200 (Fri, 13 Jun 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/elements/WOTextField.java
+
+format non-String error values
+------------------------------------------------------------------------
+r134 | helge.hess | 2008-06-14 10:59:50 +0200 (Sat, 14 Jun 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/elements/WOForm.java
+
+just added a few comments
+------------------------------------------------------------------------
+r135 | helge.hess | 2008-06-14 16:47:20 +0200 (Sat, 14 Jun 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/associations/WOOgnlAssociation.java
+   M /core/trunk/org/getobjects/appserver/associations/WORegExAssociation.java
+   M /core/trunk/org/getobjects/appserver/core/WOComponentDefinition.java
+   M /core/trunk/org/getobjects/appserver/core/WOContext.java
+   M /core/trunk/org/getobjects/appserver/core/WODirectAction.java
+   M /core/trunk/org/getobjects/appserver/core/WOElement.java
+   M /core/trunk/org/getobjects/appserver/core/WOMessage.java
+   M /core/trunk/org/getobjects/appserver/core/WORequestJoPath.java
+   M /core/trunk/org/getobjects/appserver/core/WOResourceManager.java
+   M /core/trunk/org/getobjects/appserver/core/WOSession.java
+   M /core/trunk/org/getobjects/appserver/elements/links/WOAtActionLinkGenerator.java
+   M /core/trunk/org/getobjects/appserver/publisher/IJoComponentDefinition.java
+   M /core/trunk/org/getobjects/appserver/publisher/IJoLocation.java
+   M /core/trunk/org/getobjects/appserver/publisher/IJoSecuredObject.java
+   M /core/trunk/org/getobjects/appserver/publisher/JoDefaultRenderer.java
+   M /core/trunk/org/getobjects/appserver/publisher/JoHTTPAuthenticator.java
+   M /core/trunk/org/getobjects/appserver/publisher/JoObjectRequestHandler.java
+   M /core/trunk/org/getobjects/appserver/publisher/JoPathAssociation.java
+   M /core/trunk/org/getobjects/appserver/templates/WOHTMLParser.java
+   M /core/trunk/org/getobjects/appserver/templates/WOWrapperTemplateBuilder.java
+   M /core/trunk/org/getobjects/eoaccess/EOAccessDataSource.java
+   M /core/trunk/org/getobjects/eoaccess/EOAdaptor.java
+   M /core/trunk/org/getobjects/eoaccess/EOAdaptorChannel.java
+   M /core/trunk/org/getobjects/eoaccess/EODatabaseChannel.java
+   M /core/trunk/org/getobjects/eocontrol/EOExpression.java
+   M /core/trunk/org/getobjects/eocontrol/EOFetchSpecification.java
+   M /core/trunk/org/getobjects/eocontrol/EOGroupedList.java
+   M /core/trunk/org/getobjects/eocontrol/EOQualifier.java
+   M /core/trunk/org/getobjects/foundation/NSJavaRuntime.java
+   M /core/trunk/org/getobjects/foundation/NSPropertyListParser.java
+   M /core/trunk/org/getobjects/foundation/UList.java
+   M /core/trunk/org/getobjects/foundation/UMap.java
+   M /core/trunk/org/getobjects/foundation/UString.java
+   M /core/trunk/org/getobjects/jetty/WOJettyRunner.java
+   M /core/trunk/org/getobjects/ofs/OFSFolder.java
+   M /core/trunk/org/getobjects/ofs/OFSHtAccessFile.java
+   M /core/trunk/org/getobjects/ofs/htaccess/HtConfigBuilder.java
+   M /core/trunk/org/getobjects/rules/Rule.java
+   M /core/trunk/org/getobjects/rules/RuleContext.java
+   M /core/trunk/org/getobjects/weextensions/WETableData.java
+   M /core/trunk/org/getobjects/weextensions/WETableView.java
+
+plenty but minor code cleanups, fixed some javadocs
+------------------------------------------------------------------------
+r136 | helge.hess | 2008-06-14 17:08:23 +0200 (Sat, 14 Jun 2008) | 2 lines
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/associations/WOAssociationFacade.java
+   M /core/trunk/org/getobjects/appserver/associations/WOCheckRoleAssociation.java
+   M /core/trunk/org/getobjects/appserver/associations/WODynamicKeyPathAssociation.java
+   M /core/trunk/org/getobjects/appserver/associations/WOKeyAssociation.java
+   M /core/trunk/org/getobjects/appserver/associations/WOKeyPathAssociation.java
+   M /core/trunk/org/getobjects/appserver/associations/WOKeyPathPatternAssociation.java
+   M /core/trunk/org/getobjects/appserver/associations/WOLabelAssociation.java
+   M /core/trunk/org/getobjects/appserver/associations/WONegateAssociation.java
+   M /core/trunk/org/getobjects/appserver/associations/WOOgnlAssociation.java
+   M /core/trunk/org/getobjects/appserver/associations/WOQualifierAssociation.java
+   M /core/trunk/org/getobjects/appserver/associations/WORegExAssociation.java
+   M /core/trunk/org/getobjects/appserver/associations/WOValueAssociation.java
+   M /core/trunk/org/getobjects/appserver/core/IWOComponentDefinition.java
+   M /core/trunk/org/getobjects/appserver/core/WEClientCapabilities.java
+   M /core/trunk/org/getobjects/appserver/core/WOAction.java
+   M /core/trunk/org/getobjects/appserver/core/WOActionResults.java
+   M /core/trunk/org/getobjects/appserver/core/WOApplication.java
+   M /core/trunk/org/getobjects/appserver/core/WOAssociation.java
+   M /core/trunk/org/getobjects/appserver/core/WOClassResourceManager.java
+   M /core/trunk/org/getobjects/appserver/core/WOComponent.java
+   M /core/trunk/org/getobjects/appserver/core/WOComponentDefinition.java
+   M /core/trunk/org/getobjects/appserver/core/WOComponentFault.java
+   M /core/trunk/org/getobjects/appserver/core/WOComponentRequestHandler.java
+   M /core/trunk/org/getobjects/appserver/core/WOComponentStringTable.java
+   M /core/trunk/org/getobjects/appserver/core/WOCompoundResourceManager.java
+   M /core/trunk/org/getobjects/appserver/core/WOContext.java
+   M /core/trunk/org/getobjects/appserver/core/WOCookie.java
+   M /core/trunk/org/getobjects/appserver/core/WOCoreContext.java
+   M /core/trunk/org/getobjects/appserver/core/WODirectAction.java
+   M /core/trunk/org/getobjects/appserver/core/WODirectActionRequestHandler.java
+   M /core/trunk/org/getobjects/appserver/core/WODisplayGroup.java
+   M /core/trunk/org/getobjects/appserver/core/WODynamicElement.java
+   M /core/trunk/org/getobjects/appserver/core/WOElement.java
+   M /core/trunk/org/getobjects/appserver/core/WOErrorReport.java
+   M /core/trunk/org/getobjects/appserver/core/WOExternalResourceManager.java
+   M /core/trunk/org/getobjects/appserver/core/WOFramework.java
+   M /core/trunk/org/getobjects/appserver/core/WOMessage.java
+   M /core/trunk/org/getobjects/appserver/core/WOPageSessionCache.java
+   M /core/trunk/org/getobjects/appserver/core/WOQuerySession.java
+   M /core/trunk/org/getobjects/appserver/core/WORedirect.java
+   M /core/trunk/org/getobjects/appserver/core/WORequest.java
+   M /core/trunk/org/getobjects/appserver/core/WORequestHandler.java
+   M /core/trunk/org/getobjects/appserver/core/WORequestJoPath.java
+   M /core/trunk/org/getobjects/appserver/core/WOResourceManager.java
+   M /core/trunk/org/getobjects/appserver/core/WOResourceRequestHandler.java
+   M /core/trunk/org/getobjects/appserver/core/WOResourceURLAssociation.java
+   M /core/trunk/org/getobjects/appserver/core/WOResponse.java
+   M /core/trunk/org/getobjects/appserver/core/WOServerSessionStore.java
+   M /core/trunk/org/getobjects/appserver/core/WOSession.java
+   M /core/trunk/org/getobjects/appserver/core/WOSessionStore.java
+   M /core/trunk/org/getobjects/appserver/core/WOStatisticsStore.java
+   M /core/trunk/org/getobjects/appserver/elements/WOActionURL.java
+   M /core/trunk/org/getobjects/appserver/elements/WOAppendListWalkerOperation.java
+   M /core/trunk/org/getobjects/appserver/elements/WOAppendWithAddOnsListWalkerOperation.java
+   M /core/trunk/org/getobjects/appserver/elements/WOBody.java
+   M /core/trunk/org/getobjects/appserver/elements/WOBrowser.java
+   M /core/trunk/org/getobjects/appserver/elements/WOCaptureTemplate.java
+   M /core/trunk/org/getobjects/appserver/elements/WOChangeQuerySession.java
+   M /core/trunk/org/getobjects/appserver/elements/WOCheckBox.java
+   M /core/trunk/org/getobjects/appserver/elements/WOClassFormatter.java
+   M /core/trunk/org/getobjects/appserver/elements/WOComponentContent.java
+   M /core/trunk/org/getobjects/appserver/elements/WOCompoundElement.java
+   M /core/trunk/org/getobjects/appserver/elements/WOConditional.java
+   M /core/trunk/org/getobjects/appserver/elements/WOConditionalComment.java
+   M /core/trunk/org/getobjects/appserver/elements/WOCopyValue.java
+   M /core/trunk/org/getobjects/appserver/elements/WODateFormatter.java
+   M /core/trunk/org/getobjects/appserver/elements/WOEntity.java
+   M /core/trunk/org/getobjects/appserver/elements/WOFileUpload.java
+   M /core/trunk/org/getobjects/appserver/elements/WOForm.java
+   M /core/trunk/org/getobjects/appserver/elements/WOFormatter.java
+   M /core/trunk/org/getobjects/appserver/elements/WOFragment.java
+   M /core/trunk/org/getobjects/appserver/elements/WOFrame.java
+   M /core/trunk/org/getobjects/appserver/elements/WOFramework.java
+   M /core/trunk/org/getobjects/appserver/elements/WOGenericContainer.java
+   M /core/trunk/org/getobjects/appserver/elements/WOGenericElement.java
+   M /core/trunk/org/getobjects/appserver/elements/WOGenericListWalkerOperation.java
+   M /core/trunk/org/getobjects/appserver/elements/WOHTMLDynamicElement.java
+   M /core/trunk/org/getobjects/appserver/elements/WOHTMLElementAttributes.java
+   M /core/trunk/org/getobjects/appserver/elements/WOHiddenField.java
+   M /core/trunk/org/getobjects/appserver/elements/WOHtml.java
+   M /core/trunk/org/getobjects/appserver/elements/WOHyperlink.java
+   M /core/trunk/org/getobjects/appserver/elements/WOIFrame.java
+   M /core/trunk/org/getobjects/appserver/elements/WOImage.java
+   M /core/trunk/org/getobjects/appserver/elements/WOImageButton.java
+   M /core/trunk/org/getobjects/appserver/elements/WOInput.java
+   M /core/trunk/org/getobjects/appserver/elements/WOJavaScript.java
+   M /core/trunk/org/getobjects/appserver/elements/WOListWalker.java
+   M /core/trunk/org/getobjects/appserver/elements/WOListWalkerOperation.java
+   M /core/trunk/org/getobjects/appserver/elements/WONumberFormatter.java
+   M /core/trunk/org/getobjects/appserver/elements/WOObjectFormatter.java
+   M /core/trunk/org/getobjects/appserver/elements/WOPasswordField.java
+   M /core/trunk/org/getobjects/appserver/elements/WOPopUpButton.java
+   M /core/trunk/org/getobjects/appserver/elements/WORadioButton.java
+   M /core/trunk/org/getobjects/appserver/elements/WORenderControl.java
+   M /core/trunk/org/getobjects/appserver/elements/WORepetition.java
+   M /core/trunk/org/getobjects/appserver/elements/WOResetButton.java
+   M /core/trunk/org/getobjects/appserver/elements/WOResourceURL.java
+   M /core/trunk/org/getobjects/appserver/elements/WOSearchField.java
+   M /core/trunk/org/getobjects/appserver/elements/WOSetHeader.java
+   M /core/trunk/org/getobjects/appserver/elements/WOStaticHTMLElement.java
+   M /core/trunk/org/getobjects/appserver/elements/WOString.java
+   M /core/trunk/org/getobjects/appserver/elements/WOStylesheet.java
+   M /core/trunk/org/getobjects/appserver/elements/WOSubmitButton.java
+   M /core/trunk/org/getobjects/appserver/elements/WOSwitchComponent.java
+   M /core/trunk/org/getobjects/appserver/elements/WOTableRepetition.java
+   M /core/trunk/org/getobjects/appserver/elements/WOText.java
+   M /core/trunk/org/getobjects/appserver/elements/WOTextField.java
+   M /core/trunk/org/getobjects/appserver/elements/links/WOActionLinkGenerator.java
+   M /core/trunk/org/getobjects/appserver/elements/links/WOAtActionLinkGenerator.java
+   M /core/trunk/org/getobjects/appserver/elements/links/WODirectActionLinkGenerator.java
+   M /core/trunk/org/getobjects/appserver/elements/links/WOFileLinkGenerator.java
+   M /core/trunk/org/getobjects/appserver/elements/links/WOHrefLinkGenerator.java
+   M /core/trunk/org/getobjects/appserver/elements/links/WOLinkGenerator.java
+   M /core/trunk/org/getobjects/appserver/elements/links/WOPageNameLinkGenerator.java
+   M /core/trunk/org/getobjects/appserver/elements/links/WOValueLinkGenerator.java
+   M /core/trunk/org/getobjects/appserver/products/JoControlPanelProducts.java
+   M /core/trunk/org/getobjects/appserver/products/JoProduct.java
+   M /core/trunk/org/getobjects/appserver/products/JoProductInfo.java
+   M /core/trunk/org/getobjects/appserver/products/JoProductLinker.java
+   M /core/trunk/org/getobjects/appserver/products/JoProductManager.java
+   M /core/trunk/org/getobjects/appserver/products/JoProductResourceManager.java
+   M /core/trunk/org/getobjects/appserver/products/JoProductsResourceManager.java
+   M /core/trunk/org/getobjects/appserver/products/WOPackageLinker.java
+   M /core/trunk/org/getobjects/appserver/publisher/IJoAuthenticator.java
+   M /core/trunk/org/getobjects/appserver/publisher/IJoAuthenticatorContainer.java
+   M /core/trunk/org/getobjects/appserver/publisher/IJoCallable.java
+   M /core/trunk/org/getobjects/appserver/publisher/IJoClassValueFactory.java
+   M /core/trunk/org/getobjects/appserver/publisher/IJoComponentDefinition.java
+   M /core/trunk/org/getobjects/appserver/publisher/IJoContext.java
+   M /core/trunk/org/getobjects/appserver/publisher/IJoLocation.java
+   M /core/trunk/org/getobjects/appserver/publisher/IJoObject.java
+   M /core/trunk/org/getobjects/appserver/publisher/IJoObjectRenderer.java
+   M /core/trunk/org/getobjects/appserver/publisher/IJoObjectRendererFactory.java
+   M /core/trunk/org/getobjects/appserver/publisher/IJoSecuredObject.java
+   M /core/trunk/org/getobjects/appserver/publisher/IJoUser.java
+   M /core/trunk/org/getobjects/appserver/publisher/JoAccessDeniedException.java
+   M /core/trunk/org/getobjects/appserver/publisher/JoActivePageActionInvocation.java
+   M /core/trunk/org/getobjects/appserver/publisher/JoAuthRequiredException.java
+   M /core/trunk/org/getobjects/appserver/publisher/JoCallDirectActionRequestHandler.java
+   M /core/trunk/org/getobjects/appserver/publisher/JoClass.java
+   M /core/trunk/org/getobjects/appserver/publisher/JoClassRegistry.java
+   M /core/trunk/org/getobjects/appserver/publisher/JoContainerResourceManager.java
+   M /core/trunk/org/getobjects/appserver/publisher/JoControlPanel.java
+   M /core/trunk/org/getobjects/appserver/publisher/JoDefaultRenderer.java
+   M /core/trunk/org/getobjects/appserver/publisher/JoDirectActionInvocation.java
+   M /core/trunk/org/getobjects/appserver/publisher/JoException.java
+   M /core/trunk/org/getobjects/appserver/publisher/JoHTTPAuthenticator.java
+   M /core/trunk/org/getobjects/appserver/publisher/JoInternalErrorException.java
+   M /core/trunk/org/getobjects/appserver/publisher/JoJSONResult.java
+   M /core/trunk/org/getobjects/appserver/publisher/JoJavaClass.java
+   M /core/trunk/org/getobjects/appserver/publisher/JoJavaMethod.java
+   M /core/trunk/org/getobjects/appserver/publisher/JoNotFoundException.java
+   M /core/trunk/org/getobjects/appserver/publisher/JoObjectRequestHandler.java
+   M /core/trunk/org/getobjects/appserver/publisher/JoPageInvocation.java
+   M /core/trunk/org/getobjects/appserver/publisher/JoPathAssociation.java
+   M /core/trunk/org/getobjects/appserver/publisher/JoPermission.java
+   M /core/trunk/org/getobjects/appserver/publisher/JoResource.java
+   M /core/trunk/org/getobjects/appserver/publisher/JoRole.java
+   M /core/trunk/org/getobjects/appserver/publisher/JoSecurityException.java
+   M /core/trunk/org/getobjects/appserver/publisher/JoSecurityInfo.java
+   M /core/trunk/org/getobjects/appserver/publisher/JoSessionAuthenticator.java
+   M /core/trunk/org/getobjects/appserver/publisher/JoSimpleJSONRenderer.java
+   M /core/trunk/org/getobjects/appserver/publisher/JoSimpleNamePasswordLogin.java
+   M /core/trunk/org/getobjects/appserver/publisher/JoTraversalPath.java
+   M /core/trunk/org/getobjects/appserver/publisher/JoUser.java
+   M /core/trunk/org/getobjects/appserver/templates/WOChildComponentReference.java
+   M /core/trunk/org/getobjects/appserver/templates/WODFileEntry.java
+   M /core/trunk/org/getobjects/appserver/templates/WODParser.java
+   M /core/trunk/org/getobjects/appserver/templates/WODParserHandler.java
+   M /core/trunk/org/getobjects/appserver/templates/WOHTMLParseException.java
+   M /core/trunk/org/getobjects/appserver/templates/WOHTMLParser.java
+   M /core/trunk/org/getobjects/appserver/templates/WOSubcomponentInfo.java
+   M /core/trunk/org/getobjects/appserver/templates/WOTemplate.java
+   M /core/trunk/org/getobjects/appserver/templates/WOTemplateBuilder.java
+   M /core/trunk/org/getobjects/appserver/templates/WOTemplateParserHandler.java
+   M /core/trunk/org/getobjects/appserver/templates/WOWrapperTemplateBuilder.java
+   M /core/trunk/org/getobjects/appserver/templates/WOxElemBuilder.java
+   M /core/trunk/org/getobjects/appserver/templates/WOxTagClassElemBuilder.java
+   M /core/trunk/org/getobjects/appserver/templates/WOxTemplateBuilder.java
+   M /core/trunk/org/getobjects/appserver/tests/TJoTraversalPath.java
+   M /core/trunk/org/getobjects/appserver/tests/TWODParser.java
+   M /core/trunk/org/getobjects/appserver/tests/TWODateFormatter.java
+   M /core/trunk/org/getobjects/appserver/tests/TWOGenericElement.java
+   M /core/trunk/org/getobjects/appserver/tests/TWOResponse.java
+   M /core/trunk/org/getobjects/appserver/tests/TWOString.java
+   M /core/trunk/org/getobjects/appserver/tests/TWOxParser.java
+   M /core/trunk/org/getobjects/appserver/tests/WOElementTest.java
+   M /core/trunk/org/getobjects/appserver/tests/WOTestWithFullEnvironment.java
+   M /core/trunk/org/getobjects/eoaccess/EOAccessDataSource.java
+   M /core/trunk/org/getobjects/eoaccess/EOActiveDataSource.java
+   M /core/trunk/org/getobjects/eoaccess/EOActiveRecord.java
+   M /core/trunk/org/getobjects/eoaccess/EOAdaptor.java
+   M /core/trunk/org/getobjects/eoaccess/EOAdaptorChannel.java
+   M /core/trunk/org/getobjects/eoaccess/EOAdaptorDataSource.java
+   M /core/trunk/org/getobjects/eoaccess/EOAdaptorOperation.java
+   M /core/trunk/org/getobjects/eoaccess/EOAttribute.java
+   M /core/trunk/org/getobjects/eoaccess/EOCustomObject.java
+   M /core/trunk/org/getobjects/eoaccess/EODatabase.java
+   M /core/trunk/org/getobjects/eoaccess/EODatabaseChannel.java
+   M /core/trunk/org/getobjects/eoaccess/EODatabaseContext.java
+   M /core/trunk/org/getobjects/eoaccess/EODatabaseDataSource.java
+   M /core/trunk/org/getobjects/eoaccess/EODatabaseOperation.java
+   M /core/trunk/org/getobjects/eoaccess/EOEnterpriseObject.java
+   M /core/trunk/org/getobjects/eoaccess/EOEntity.java
+   M /core/trunk/org/getobjects/eoaccess/EOJoin.java
+   M /core/trunk/org/getobjects/eoaccess/EOModel.java
+   M /core/trunk/org/getobjects/eoaccess/EOModelLoader.java
+   M /core/trunk/org/getobjects/eoaccess/EOProperty.java
+   M /core/trunk/org/getobjects/eoaccess/EOQualifierSQLGeneration.java
+   M /core/trunk/org/getobjects/eoaccess/EORawSQLValue.java
+   M /core/trunk/org/getobjects/eoaccess/EORelationship.java
+   M /core/trunk/org/getobjects/eoaccess/EORelationshipManipulation.java
+   M /core/trunk/org/getobjects/eoaccess/EOSQLExpression.java
+   M /core/trunk/org/getobjects/eoaccess/EOSQLExpressionFactory.java
+   M /core/trunk/org/getobjects/eoaccess/EOSQLResultIterator.java
+   M /core/trunk/org/getobjects/eoaccess/EOSchemaGeneration.java
+   M /core/trunk/org/getobjects/eoaccess/EOSchemaSynchronization.java
+   M /core/trunk/org/getobjects/eoaccess/EOSynchronizationFactory.java
+   M /core/trunk/org/getobjects/eoaccess/EOValidation.java
+   M /core/trunk/org/getobjects/eoaccess/WOFramework.java
+   M /core/trunk/org/getobjects/eoaccess/derby/EODerbyAdaptor.java
+   M /core/trunk/org/getobjects/eoaccess/mysql/EOMySQLAdaptor.java
+   M /core/trunk/org/getobjects/eoaccess/mysql/EOMySQLChannel.java
+   M /core/trunk/org/getobjects/eoaccess/mysql/EOMySQLExpression.java
+   M /core/trunk/org/getobjects/eoaccess/postgresql/EOPostgreSQLAdaptor.java
+   M /core/trunk/org/getobjects/eoaccess/postgresql/EOPostgreSQLChannel.java
+   M /core/trunk/org/getobjects/eoaccess/postgresql/EOPostgreSQLExpression.java
+   M /core/trunk/org/getobjects/eoaccess/tests/EOAccessTest.java
+   M /core/trunk/org/getobjects/eoaccess/tests/TActiveRecord.java
+   M /core/trunk/org/getobjects/eoaccess/tests/TDatabaseDataSource.java
+   M /core/trunk/org/getobjects/eoaccess/tests/TDerbyAdaptor.java
+   M /core/trunk/org/getobjects/eoaccess/tests/TModelLoading.java
+   M /core/trunk/org/getobjects/eoaccess/tests/TSQLUmlauts.java
+   M /core/trunk/org/getobjects/eoaccess/tests/TSchemaReflection.java
+   M /core/trunk/org/getobjects/eocontrol/EOAndQualifier.java
+   M /core/trunk/org/getobjects/eocontrol/EOArrayDataSource.java
+   M /core/trunk/org/getobjects/eocontrol/EOBooleanQualifier.java
+   M /core/trunk/org/getobjects/eocontrol/EOCSVKeyValueQualifier.java
+   M /core/trunk/org/getobjects/eocontrol/EOCase.java
+   M /core/trunk/org/getobjects/eocontrol/EOCompoundQualifier.java
+   M /core/trunk/org/getobjects/eocontrol/EOConstant.java
+   M /core/trunk/org/getobjects/eocontrol/EODataSource.java
+   M /core/trunk/org/getobjects/eocontrol/EODetailDataSource.java
+   M /core/trunk/org/getobjects/eocontrol/EOEditingContext.java
+   M /core/trunk/org/getobjects/eocontrol/EOExpression.java
+   M /core/trunk/org/getobjects/eocontrol/EOExpressionEvaluation.java
+   M /core/trunk/org/getobjects/eocontrol/EOFetchSpecification.java
+   M /core/trunk/org/getobjects/eocontrol/EOFilterDataSource.java
+   M /core/trunk/org/getobjects/eocontrol/EOGenericRecord.java
+   M /core/trunk/org/getobjects/eocontrol/EOGlobalID.java
+   M /core/trunk/org/getobjects/eocontrol/EOGroupedList.java
+   M /core/trunk/org/getobjects/eocontrol/EOKey.java
+   M /core/trunk/org/getobjects/eocontrol/EOKeyComparisonQualifier.java
+   M /core/trunk/org/getobjects/eocontrol/EOKeyGlobalID.java
+   M /core/trunk/org/getobjects/eocontrol/EOKeyRegExQualifier.java
+   M /core/trunk/org/getobjects/eocontrol/EOKeyValueCoding.java
+   M /core/trunk/org/getobjects/eocontrol/EOKeyValueCodingAdditions.java
+   M /core/trunk/org/getobjects/eocontrol/EOKeyValueQualifier.java
+   M /core/trunk/org/getobjects/eocontrol/EONestedDataSource.java
+   M /core/trunk/org/getobjects/eocontrol/EONotQualifier.java
+   M /core/trunk/org/getobjects/eocontrol/EOObjectStore.java
+   M /core/trunk/org/getobjects/eocontrol/EOObjectTrackingContext.java
+   M /core/trunk/org/getobjects/eocontrol/EOObserving.java
+   M /core/trunk/org/getobjects/eocontrol/EOOrQualifier.java
+   M /core/trunk/org/getobjects/eocontrol/EOOverlapsQualifier.java
+   M /core/trunk/org/getobjects/eocontrol/EOQualifier.java
+   M /core/trunk/org/getobjects/eocontrol/EOQualifierBindingNotFoundException.java
+   M /core/trunk/org/getobjects/eocontrol/EOQualifierEvaluation.java
+   M /core/trunk/org/getobjects/eocontrol/EOQualifierParser.java
+   M /core/trunk/org/getobjects/eocontrol/EOQualifierVariable.java
+   M /core/trunk/org/getobjects/eocontrol/EOSQLQualifier.java
+   M /core/trunk/org/getobjects/eocontrol/EOSortOrdering.java
+   M /core/trunk/org/getobjects/eocontrol/EOSortOrderingComparator.java
+   M /core/trunk/org/getobjects/eocontrol/WOFramework.java
+   M /core/trunk/org/getobjects/eocontrol/tests/EOQualifierEvaluationTests.java
+   M /core/trunk/org/getobjects/eocontrol/tests/EOQualifierGeneration.java
+   M /core/trunk/org/getobjects/eocontrol/tests/FetchSpecification.java
+   M /core/trunk/org/getobjects/eocontrol/tests/QualifierParser.java
+   M /core/trunk/org/getobjects/foundation/INSExtraVariables.java
+   M /core/trunk/org/getobjects/foundation/NSClassLookupContext.java
+   M /core/trunk/org/getobjects/foundation/NSCompoundException.java
+   M /core/trunk/org/getobjects/foundation/NSDisposable.java
+   M /core/trunk/org/getobjects/foundation/NSException.java
+   M /core/trunk/org/getobjects/foundation/NSJavaRuntime.java
+   M /core/trunk/org/getobjects/foundation/NSKeyValueCoding.java
+   M /core/trunk/org/getobjects/foundation/NSKeyValueCodingAdditions.java
+   M /core/trunk/org/getobjects/foundation/NSKeyValueHolder.java
+   M /core/trunk/org/getobjects/foundation/NSKeyValueStringFormat.java
+   M /core/trunk/org/getobjects/foundation/NSKeyValueStringFormatter.java
+   M /core/trunk/org/getobjects/foundation/NSLocking.java
+   M /core/trunk/org/getobjects/foundation/NSNotification.java
+   M /core/trunk/org/getobjects/foundation/NSNotificationCenter.java
+   M /core/trunk/org/getobjects/foundation/NSNotificationObserver.java
+   M /core/trunk/org/getobjects/foundation/NSNull.java
+   M /core/trunk/org/getobjects/foundation/NSObject.java
+   M /core/trunk/org/getobjects/foundation/NSPropertyListGenerator.java
+   M /core/trunk/org/getobjects/foundation/NSPropertyListParser.java
+   M /core/trunk/org/getobjects/foundation/NSPropertyListSerialization.java
+   M /core/trunk/org/getobjects/foundation/NSPropertyListSyntaxException.java
+   M /core/trunk/org/getobjects/foundation/NSSelector.java
+   M /core/trunk/org/getobjects/foundation/NSTimeRange.java
+   M /core/trunk/org/getobjects/foundation/NSValidation.java
+   M /core/trunk/org/getobjects/foundation/UData.java
+   M /core/trunk/org/getobjects/foundation/UDate.java
+   M /core/trunk/org/getobjects/foundation/UList.java
+   M /core/trunk/org/getobjects/foundation/UMap.java
+   M /core/trunk/org/getobjects/foundation/UObject.java
+   M /core/trunk/org/getobjects/foundation/UString.java
+   M /core/trunk/org/getobjects/foundation/XMLNS.java
+   M /core/trunk/org/getobjects/foundation/csv/README.txt
+   M /core/trunk/org/getobjects/foundation/kvc/KVCWrapper.java
+   M /core/trunk/org/getobjects/foundation/tests/KVC.java
+   M /core/trunk/org/getobjects/foundation/tests/TNSTimeRange.java
+   M /core/trunk/org/getobjects/foundation/tests/TPropertyListParser.java
+   M /core/trunk/org/getobjects/foundation/tests/TUString.java
+   M /core/trunk/org/getobjects/jaas/EODatabaseJaasConfig.java
+   M /core/trunk/org/getobjects/jaas/EODatabaseLoginModule.java
+   M /core/trunk/org/getobjects/jaas/EODatabasePrincipal.java
+   M /core/trunk/org/getobjects/jaas/README.txt
+   M /core/trunk/org/getobjects/jmi/JMIBatchPager.java
+   M /core/trunk/org/getobjects/jmi/JMIBatchPositionFormat.java
+   M /core/trunk/org/getobjects/jmi/JMIComponent.java
+   M /core/trunk/org/getobjects/jmi/JMIDocTitleFormat.java
+   M /core/trunk/org/getobjects/jmi/JMIExposeClientObjectToJS.java
+   M /core/trunk/org/getobjects/jmi/JMIManage.java
+   M /core/trunk/org/getobjects/jmi/JMIManageAddProduct.java
+   M /core/trunk/org/getobjects/jmi/JMIManageAddProductFactory.java
+   M /core/trunk/org/getobjects/jmi/JMIManageFile.java
+   M /core/trunk/org/getobjects/jmi/JMIManageFolder.java
+   M /core/trunk/org/getobjects/jmi/JMIManageFrame.java
+   M /core/trunk/org/getobjects/jmi/JMIManageImage.java
+   M /core/trunk/org/getobjects/jmi/JMIManageMenu.java
+   M /core/trunk/org/getobjects/jmi/JMIManageProperties.java
+   M /core/trunk/org/getobjects/jmi/JMIManageSelect.java
+   M /core/trunk/org/getobjects/jmi/JMIManageTopFrame.java
+   M /core/trunk/org/getobjects/jmi/JMIManageTopLeftEdge.java
+   M /core/trunk/org/getobjects/jmi/JMIManageWorkspaceHeader.java
+   M /core/trunk/org/getobjects/jmi/JMIPasteboard.java
+   M /core/trunk/org/getobjects/jmi/JMIPasteboardContents.java
+   M /core/trunk/org/getobjects/jmi/JMITabs.java
+   M /core/trunk/org/getobjects/jmi/JMITreeLabelFormat.java
+   M /core/trunk/org/getobjects/jmi/README.txt
+   M /core/trunk/org/getobjects/jmi/WOFramework.java
+   M /core/trunk/org/getobjects/jsapp/JSApplication.java
+   M /core/trunk/org/getobjects/jsapp/JSAssociation.java
+   M /core/trunk/org/getobjects/jsapp/JSCachedKVCScriptScope.java
+   M /core/trunk/org/getobjects/jsapp/JSCachedObjectFile.java
+   M /core/trunk/org/getobjects/jsapp/JSCachedScriptFile.java
+   M /core/trunk/org/getobjects/jsapp/JSCachedScriptScope.java
+   M /core/trunk/org/getobjects/jsapp/JSComponent.java
+   M /core/trunk/org/getobjects/jsapp/JSComponentWrapper.java
+   M /core/trunk/org/getobjects/jsapp/JSContext.java
+   M /core/trunk/org/getobjects/jsapp/JSDynamicScopeContextFactory.java
+   M /core/trunk/org/getobjects/jsapp/JSFormat.java
+   M /core/trunk/org/getobjects/jsapp/JSKeyValueCodingScope.java
+   M /core/trunk/org/getobjects/jsapp/JSNativeArrayList.java
+   M /core/trunk/org/getobjects/jsapp/JSRestorationFactory.java
+   M /core/trunk/org/getobjects/jsapp/JSScopeComponent.java
+   M /core/trunk/org/getobjects/jsapp/JSSession.java
+   M /core/trunk/org/getobjects/jsapp/JSUtil.java
+   M /core/trunk/org/getobjects/jsapp/README.txt
+   M /core/trunk/org/getobjects/jsapp/adapter/EOEntityAdapter.java
+   M /core/trunk/org/getobjects/jsapp/adapter/EOPropertyAdapter.java
+   M /core/trunk/org/getobjects/jsapp/adapter/JSActiveRecordAdapter.java
+   M /core/trunk/org/getobjects/jsapp/adapter/JSApplicationAdapter.java
+   M /core/trunk/org/getobjects/jsapp/adapter/JSArrayListAdapter.java
+   M /core/trunk/org/getobjects/jsapp/adapter/JSBoundFunction.java
+   M /core/trunk/org/getobjects/jsapp/adapter/JSCollectionAdapter.java
+   M /core/trunk/org/getobjects/jsapp/adapter/JSComponentAdapter.java
+   M /core/trunk/org/getobjects/jsapp/adapter/JSComponentWrapper.java
+   M /core/trunk/org/getobjects/jsapp/adapter/JSContextAdapter.java
+   M /core/trunk/org/getobjects/jsapp/adapter/JSEntityObjectAdapter.java
+   M /core/trunk/org/getobjects/jsapp/adapter/JSExtraVarAdapter.java
+   M /core/trunk/org/getobjects/jsapp/adapter/JSMapAdapter.java
+   M /core/trunk/org/getobjects/jsapp/adapter/JSRequestAdapter.java
+   M /core/trunk/org/getobjects/jsapp/adapter/JSWrapFactory.java
+   M /core/trunk/org/getobjects/jsapp/adapter/WOMessageAdapter.java
+   M /core/trunk/org/getobjects/jsapp/run.java
+   M /core/trunk/org/getobjects/jsapp/run.sh
+   M /core/trunk/org/getobjects/ofs/IJoFolderish.java
+   M /core/trunk/org/getobjects/ofs/IOFSContextObject.java
+   M /core/trunk/org/getobjects/ofs/IOFSLifecycleObject.java
+   M /core/trunk/org/getobjects/ofs/OFSApplication.java
+   M /core/trunk/org/getobjects/ofs/OFSBaseObject.java
+   M /core/trunk/org/getobjects/ofs/OFSComponentFile.java
+   M /core/trunk/org/getobjects/ofs/OFSComponentWrapper.java
+   M /core/trunk/org/getobjects/ofs/OFSDatabaseDataSourceFolder.java
+   M /core/trunk/org/getobjects/ofs/OFSDatabaseObjectFolder.java
+   M /core/trunk/org/getobjects/ofs/OFSFileContainerChildInfo.java
+   M /core/trunk/org/getobjects/ofs/OFSFolder.java
+   M /core/trunk/org/getobjects/ofs/OFSHtAccessFile.java
+   M /core/trunk/org/getobjects/ofs/OFSHtmlFile.java
+   M /core/trunk/org/getobjects/ofs/OFSImageFile.java
+   M /core/trunk/org/getobjects/ofs/OFSJavaObject.java
+   M /core/trunk/org/getobjects/ofs/OFSJavaScriptFile.java
+   M /core/trunk/org/getobjects/ofs/OFSPdfFile.java
+   M /core/trunk/org/getobjects/ofs/OFSPlainTextFile.java
+   M /core/trunk/org/getobjects/ofs/OFSPropertiesFile.java
+   M /core/trunk/org/getobjects/ofs/OFSResourceFile.java
+   M /core/trunk/org/getobjects/ofs/OFSResourceFileRenderer.java
+   M /core/trunk/org/getobjects/ofs/OFSRestorationFactory.java
+   M /core/trunk/org/getobjects/ofs/OFSSelect.java
+   M /core/trunk/org/getobjects/ofs/OFSStylesheetFile.java
+   M /core/trunk/org/getobjects/ofs/OFSXHtmlFile.java
+   M /core/trunk/org/getobjects/ofs/OFSXmlFile.java
+   M /core/trunk/org/getobjects/ofs/WOFramework.java
+   M /core/trunk/org/getobjects/ofs/config/IJoConfigurationProvider.java
+   M /core/trunk/org/getobjects/ofs/config/JoConfigContext.java
+   M /core/trunk/org/getobjects/ofs/config/JoConfigKeys.java
+   M /core/trunk/org/getobjects/ofs/config/JoConfigProcessor.java
+   M /core/trunk/org/getobjects/ofs/fs/IOFSFileInfo.java
+   M /core/trunk/org/getobjects/ofs/fs/IOFSFileManager.java
+   M /core/trunk/org/getobjects/ofs/fs/OFSFileManager.java
+   M /core/trunk/org/getobjects/ofs/fs/OFSHostFileInfo.java
+   M /core/trunk/org/getobjects/ofs/fs/OFSHostFileManager.java
+   M /core/trunk/org/getobjects/ofs/fs/README.txt
+   M /core/trunk/org/getobjects/ofs/htaccess/HtConfigBuilder.java
+   M /core/trunk/org/getobjects/ofs/htaccess/HtConfigComment.java
+   M /core/trunk/org/getobjects/ofs/htaccess/HtConfigDirective.java
+   M /core/trunk/org/getobjects/ofs/htaccess/HtConfigEmptyLine.java
+   M /core/trunk/org/getobjects/ofs/htaccess/HtConfigFile.java
+   M /core/trunk/org/getobjects/ofs/htaccess/HtConfigParser.java
+   M /core/trunk/org/getobjects/ofs/htaccess/HtConfigSection.java
+   M /core/trunk/org/getobjects/ofs/htaccess/IHtConfigContainer.java
+   M /core/trunk/org/getobjects/ofs/htaccess/IHtConfigEvaluation.java
+   M /core/trunk/org/getobjects/ofs/htaccess/eval/AccessFileName.java
+   M /core/trunk/org/getobjects/ofs/htaccess/eval/AddBinding.java
+   M /core/trunk/org/getobjects/ofs/htaccess/eval/AliasMatchName.java
+   M /core/trunk/org/getobjects/ofs/htaccess/eval/AllowOverride.java
+   M /core/trunk/org/getobjects/ofs/htaccess/eval/Directory.java
+   M /core/trunk/org/getobjects/ofs/htaccess/eval/DirectoryMatch.java
+   M /core/trunk/org/getobjects/ofs/htaccess/eval/FilesMatch.java
+   M /core/trunk/org/getobjects/ofs/htaccess/eval/KeyMatchEvaluation.java
+   M /core/trunk/org/getobjects/ofs/htaccess/eval/Limit.java
+   M /core/trunk/org/getobjects/ofs/htaccess/eval/LimitExcept.java
+   M /core/trunk/org/getobjects/ofs/htaccess/eval/LocationMatch.java
+   M /core/trunk/org/getobjects/ofs/htaccess/eval/Options.java
+   M /core/trunk/org/getobjects/ofs/htaccess/eval/RemoveBinding.java
+   M /core/trunk/org/getobjects/ofs/htaccess/eval/Require.java
+   M /core/trunk/org/getobjects/ofs/htaccess/eval/ResetBindings.java
+   M /core/trunk/org/getobjects/ofs/htaccess/eval/SetEOQualifier.java
+   M /core/trunk/org/getobjects/ofs/htaccess/eval/SetEOSortOrdering.java
+   M /core/trunk/org/getobjects/ofs/htaccess/eval/SetEnv.java
+   M /core/trunk/org/getobjects/ofs/htaccess/eval/SimpleKeyValueDirective.java
+   M /core/trunk/org/getobjects/ofs/htaccess/eval/UnsetEnv.java
+   M /core/trunk/org/getobjects/ofs/runner/ofsd.java
+   M /core/trunk/org/getobjects/ognl/NSKeyValueCodingPropertyAccessor.java
+   M /core/trunk/org/getobjects/ognl/NSObjectPropertyAccessor.java
+   M /core/trunk/org/getobjects/ognl/WOFramework.java
+   M /core/trunk/org/getobjects/rules/CompoundRuleAction.java
+   M /core/trunk/org/getobjects/rules/Rule.java
+   M /core/trunk/org/getobjects/rules/RuleAction.java
+   M /core/trunk/org/getobjects/rules/RuleAssignment.java
+   M /core/trunk/org/getobjects/rules/RuleCandidate.java
+   M /core/trunk/org/getobjects/rules/RuleContext.java
+   M /core/trunk/org/getobjects/rules/RuleKeyAssignment.java
+   M /core/trunk/org/getobjects/rules/RuleModel.java
+   M /core/trunk/org/getobjects/rules/RuleModelLoader.java
+   M /core/trunk/org/getobjects/rules/RuleParser.java
+   M /core/trunk/org/getobjects/rules/RuleSelfAssignment.java
+   M /core/trunk/org/getobjects/rules/tests/TRuleContext.java
+   M /core/trunk/org/getobjects/rules/tests/TRuleModelLoader.java
+   M /core/trunk/org/getobjects/rules/tests/TRuleParser.java
+   M /core/trunk/org/getobjects/samples/HelloCSV/HelloCSV.java
+   M /core/trunk/org/getobjects/samples/HelloCSV/Main.java
+   M /core/trunk/org/getobjects/samples/HelloChart/HelloChart.java
+   M /core/trunk/org/getobjects/samples/HelloChart/Main.java
+   M /core/trunk/org/getobjects/samples/HelloDB/HelloDB.java
+   M /core/trunk/org/getobjects/samples/HelloDB/Main.java
+   M /core/trunk/org/getobjects/samples/HelloDB/README.txt
+   M /core/trunk/org/getobjects/samples/HelloJS/log4j.properties
+   M /core/trunk/org/getobjects/samples/HelloJS/run.sh
+   M /core/trunk/org/getobjects/samples/HelloPDF/HelloPDF.java
+   M /core/trunk/org/getobjects/samples/HelloPDF/Main.java
+   M /core/trunk/org/getobjects/samples/HelloPDF/PDFAction.java
+   M /core/trunk/org/getobjects/samples/HelloThumbnail/HelloThumbnail.java
+   M /core/trunk/org/getobjects/samples/HelloThumbnail/Main.java
+   M /core/trunk/org/getobjects/samples/HelloWorld/DirectAction.java
+   M /core/trunk/org/getobjects/samples/HelloWorld/FormPage.java
+   M /core/trunk/org/getobjects/samples/HelloWorld/Frame.java
+   M /core/trunk/org/getobjects/samples/HelloWorld/HelloEmbed.java
+   M /core/trunk/org/getobjects/samples/HelloWorld/HelloWorld.java
+   M /core/trunk/org/getobjects/samples/HelloWorld/Main.java
+   M /core/trunk/org/getobjects/samples/HelloWorld/PrototypeTestPage.java
+   M /core/trunk/org/getobjects/samples/HelloWorld/UploadPage.java
+   M /core/trunk/org/getobjects/servlets/WOServletAdaptor.java
+   M /core/trunk/org/getobjects/servlets/WOServletRequest.java
+   M /core/trunk/org/getobjects/weextensions/WEBatchLink.java
+   M /core/trunk/org/getobjects/weextensions/WEBatchPager.java
+   M /core/trunk/org/getobjects/weextensions/WEBindDisplayGroup.java
+   M /core/trunk/org/getobjects/weextensions/WEContextConditional.java
+   M /core/trunk/org/getobjects/weextensions/WEContextKey.java
+   M /core/trunk/org/getobjects/weextensions/WEDatabaseDisplayGroup.java
+   M /core/trunk/org/getobjects/weextensions/WEDisplayGroupLink.java
+   M /core/trunk/org/getobjects/weextensions/WETableCell.java
+   M /core/trunk/org/getobjects/weextensions/WETableData.java
+   M /core/trunk/org/getobjects/weextensions/WETableHeader.java
+   M /core/trunk/org/getobjects/weextensions/WETableView.java
+   M /core/trunk/org/getobjects/weextensions/WETableViewContext.java
+   M /core/trunk/org/getobjects/weextensions/WOFramework.java
+   M /core/trunk/org/getobjects/weprototype/JSONCoder.java
+   M /core/trunk/org/getobjects/weprototype/WEFormToRemote.java
+   M /core/trunk/org/getobjects/weprototype/WELinkToRemote.java
+   M /core/trunk/org/getobjects/weprototype/WELinkToRemoteScript.java
+   M /core/trunk/org/getobjects/weprototype/WEObserveField.java
+   M /core/trunk/org/getobjects/weprototype/WEPrototypeElement.java
+   M /core/trunk/org/getobjects/weprototype/WESubmitToRemote.java
+   M /core/trunk/org/getobjects/weprototype/WOFramework.java
+   M /core/trunk/org/getobjects/woextensions/WOFramework.java
+   M /core/trunk/org/getobjects/woextensions/WOMethodInvocation.java
+
+just replaced JOPE with Go
+
+------------------------------------------------------------------------
+r137 | helge.hess | 2008-06-14 18:47:49 +0200 (Sat, 14 Jun 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/associations/WOCheckRoleAssociation.java
+   M /core/trunk/org/getobjects/appserver/core/WOApplication.java
+   M /core/trunk/org/getobjects/appserver/core/WOAssociation.java
+   M /core/trunk/org/getobjects/appserver/core/WOComponent.java
+   M /core/trunk/org/getobjects/appserver/core/WOComponentRequestHandler.java
+   M /core/trunk/org/getobjects/appserver/core/WOContext.java
+   M /core/trunk/org/getobjects/appserver/core/WODirectActionRequestHandler.java
+   M /core/trunk/org/getobjects/appserver/core/WORequestHandler.java
+   M /core/trunk/org/getobjects/appserver/core/WOResourceRequestHandler.java
+   M /core/trunk/org/getobjects/appserver/core/WOSessionStore.java
+   A /core/trunk/org/getobjects/appserver/products/GoControlPanelProducts.java (from /core/trunk/org/getobjects/appserver/products/JoControlPanelProducts.java:136)
+   A /core/trunk/org/getobjects/appserver/products/GoProduct.java (from /core/trunk/org/getobjects/appserver/products/JoProduct.java:136)
+   A /core/trunk/org/getobjects/appserver/products/GoProductInfo.java (from /core/trunk/org/getobjects/appserver/products/JoProductInfo.java:136)
+   A /core/trunk/org/getobjects/appserver/products/GoProductLinker.java (from /core/trunk/org/getobjects/appserver/products/JoProductLinker.java:136)
+   A /core/trunk/org/getobjects/appserver/products/GoProductManager.java (from /core/trunk/org/getobjects/appserver/products/JoProductManager.java:136)
+   A /core/trunk/org/getobjects/appserver/products/GoProductResourceManager.java (from /core/trunk/org/getobjects/appserver/products/JoProductResourceManager.java:136)
+   A /core/trunk/org/getobjects/appserver/products/GoProductsResourceManager.java (from /core/trunk/org/getobjects/appserver/products/JoProductsResourceManager.java:136)
+   D /core/trunk/org/getobjects/appserver/products/JoControlPanelProducts.java
+   D /core/trunk/org/getobjects/appserver/products/JoProduct.java
+   D /core/trunk/org/getobjects/appserver/products/JoProductInfo.java
+   D /core/trunk/org/getobjects/appserver/products/JoProductLinker.java
+   D /core/trunk/org/getobjects/appserver/products/JoProductManager.java
+   D /core/trunk/org/getobjects/appserver/products/JoProductResourceManager.java
+   D /core/trunk/org/getobjects/appserver/products/JoProductsResourceManager.java
+   M /core/trunk/org/getobjects/appserver/products/WOPackageLinker.java
+   A /core/trunk/org/getobjects/appserver/publisher/GoAccessDeniedException.java (from /core/trunk/org/getobjects/appserver/publisher/JoAccessDeniedException.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/GoActivePageActionInvocation.java (from /core/trunk/org/getobjects/appserver/publisher/JoActivePageActionInvocation.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/GoAuthRequiredException.java (from /core/trunk/org/getobjects/appserver/publisher/JoAuthRequiredException.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/GoCallDirectActionRequestHandler.java (from /core/trunk/org/getobjects/appserver/publisher/JoCallDirectActionRequestHandler.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/GoClass.java (from /core/trunk/org/getobjects/appserver/publisher/JoClass.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/GoClassRegistry.java (from /core/trunk/org/getobjects/appserver/publisher/JoClassRegistry.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/GoContainerResourceManager.java (from /core/trunk/org/getobjects/appserver/publisher/JoContainerResourceManager.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/GoControlPanel.java (from /core/trunk/org/getobjects/appserver/publisher/JoControlPanel.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/GoDefaultRenderer.java (from /core/trunk/org/getobjects/appserver/publisher/JoDefaultRenderer.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/GoDirectActionInvocation.java (from /core/trunk/org/getobjects/appserver/publisher/JoDirectActionInvocation.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/GoException.java (from /core/trunk/org/getobjects/appserver/publisher/JoException.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/GoHTTPAuthenticator.java (from /core/trunk/org/getobjects/appserver/publisher/JoHTTPAuthenticator.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/GoInternalErrorException.java (from /core/trunk/org/getobjects/appserver/publisher/JoInternalErrorException.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/GoJSONResult.java (from /core/trunk/org/getobjects/appserver/publisher/JoJSONResult.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/GoJavaClass.java (from /core/trunk/org/getobjects/appserver/publisher/JoJavaClass.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/GoJavaMethod.java (from /core/trunk/org/getobjects/appserver/publisher/JoJavaMethod.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/GoNotFoundException.java (from /core/trunk/org/getobjects/appserver/publisher/JoNotFoundException.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/GoObjectRequestHandler.java (from /core/trunk/org/getobjects/appserver/publisher/JoObjectRequestHandler.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/GoPageInvocation.java (from /core/trunk/org/getobjects/appserver/publisher/JoPageInvocation.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/GoPathAssociation.java (from /core/trunk/org/getobjects/appserver/publisher/JoPathAssociation.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/GoPermission.java (from /core/trunk/org/getobjects/appserver/publisher/JoPermission.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/GoResource.java (from /core/trunk/org/getobjects/appserver/publisher/JoResource.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/GoRole.java (from /core/trunk/org/getobjects/appserver/publisher/JoRole.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/GoSecurityException.java (from /core/trunk/org/getobjects/appserver/publisher/JoSecurityException.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/GoSecurityInfo.java (from /core/trunk/org/getobjects/appserver/publisher/JoSecurityInfo.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/GoSessionAuthenticator.java (from /core/trunk/org/getobjects/appserver/publisher/JoSessionAuthenticator.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/GoSimpleJSONRenderer.java (from /core/trunk/org/getobjects/appserver/publisher/JoSimpleJSONRenderer.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/GoSimpleNamePasswordLogin.java (from /core/trunk/org/getobjects/appserver/publisher/JoSimpleNamePasswordLogin.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/GoTraversalPath.java (from /core/trunk/org/getobjects/appserver/publisher/JoTraversalPath.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/GoUser.java (from /core/trunk/org/getobjects/appserver/publisher/JoUser.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/IGoAuthenticator.java (from /core/trunk/org/getobjects/appserver/publisher/IJoAuthenticator.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/IGoAuthenticatorContainer.java (from /core/trunk/org/getobjects/appserver/publisher/IJoAuthenticatorContainer.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/IGoCallable.java (from /core/trunk/org/getobjects/appserver/publisher/IJoCallable.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/IGoClassValueFactory.java (from /core/trunk/org/getobjects/appserver/publisher/IJoClassValueFactory.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/IGoComponentDefinition.java (from /core/trunk/org/getobjects/appserver/publisher/IJoComponentDefinition.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/IGoContext.java (from /core/trunk/org/getobjects/appserver/publisher/IJoContext.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/IGoLocation.java (from /core/trunk/org/getobjects/appserver/publisher/IJoLocation.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/IGoObject.java (from /core/trunk/org/getobjects/appserver/publisher/IJoObject.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/IGoObjectRenderer.java (from /core/trunk/org/getobjects/appserver/publisher/IJoObjectRenderer.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/IGoObjectRendererFactory.java (from /core/trunk/org/getobjects/appserver/publisher/IJoObjectRendererFactory.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/IGoSecuredObject.java (from /core/trunk/org/getobjects/appserver/publisher/IJoSecuredObject.java:136)
+   A /core/trunk/org/getobjects/appserver/publisher/IGoUser.java (from /core/trunk/org/getobjects/appserver/publisher/IJoUser.java:136)
+   D /core/trunk/org/getobjects/appserver/publisher/IJoAuthenticator.java
+   D /core/trunk/org/getobjects/appserver/publisher/IJoAuthenticatorContainer.java
+   D /core/trunk/org/getobjects/appserver/publisher/IJoCallable.java
+   D /core/trunk/org/getobjects/appserver/publisher/IJoClassValueFactory.java
+   D /core/trunk/org/getobjects/appserver/publisher/IJoComponentDefinition.java
+   D /core/trunk/org/getobjects/appserver/publisher/IJoContext.java
+   D /core/trunk/org/getobjects/appserver/publisher/IJoLocation.java
+   D /core/trunk/org/getobjects/appserver/publisher/IJoObject.java
+   D /core/trunk/org/getobjects/appserver/publisher/IJoObjectRenderer.java
+   D /core/trunk/org/getobjects/appserver/publisher/IJoObjectRendererFactory.java
+   D /core/trunk/org/getobjects/appserver/publisher/IJoSecuredObject.java
+   D /core/trunk/org/getobjects/appserver/publisher/IJoUser.java
+   D /core/trunk/org/getobjects/appserver/publisher/JoAccessDeniedException.java
+   D /core/trunk/org/getobjects/appserver/publisher/JoActivePageActionInvocation.java
+   D /core/trunk/org/getobjects/appserver/publisher/JoAuthRequiredException.java
+   D /core/trunk/org/getobjects/appserver/publisher/JoCallDirectActionRequestHandler.java
+   D /core/trunk/org/getobjects/appserver/publisher/JoClass.java
+   D /core/trunk/org/getobjects/appserver/publisher/JoClassRegistry.java
+   D /core/trunk/org/getobjects/appserver/publisher/JoContainerResourceManager.java
+   D /core/trunk/org/getobjects/appserver/publisher/JoControlPanel.java
+   D /core/trunk/org/getobjects/appserver/publisher/JoDefaultRenderer.java
+   D /core/trunk/org/getobjects/appserver/publisher/JoDirectActionInvocation.java
+   D /core/trunk/org/getobjects/appserver/publisher/JoException.java
+   D /core/trunk/org/getobjects/appserver/publisher/JoHTTPAuthenticator.java
+   D /core/trunk/org/getobjects/appserver/publisher/JoInternalErrorException.java
+   D /core/trunk/org/getobjects/appserver/publisher/JoJSONResult.java
+   D /core/trunk/org/getobjects/appserver/publisher/JoJavaClass.java
+   D /core/trunk/org/getobjects/appserver/publisher/JoJavaMethod.java
+   D /core/trunk/org/getobjects/appserver/publisher/JoNotFoundException.java
+   D /core/trunk/org/getobjects/appserver/publisher/JoObjectRequestHandler.java
+   D /core/trunk/org/getobjects/appserver/publisher/JoPageInvocation.java
+   D /core/trunk/org/getobjects/appserver/publisher/JoPathAssociation.java
+   D /core/trunk/org/getobjects/appserver/publisher/JoPermission.java
+   D /core/trunk/org/getobjects/appserver/publisher/JoResource.java
+   D /core/trunk/org/getobjects/appserver/publisher/JoRole.java
+   D /core/trunk/org/getobjects/appserver/publisher/JoSecurityException.java
+   D /core/trunk/org/getobjects/appserver/publisher/JoSecurityInfo.java
+   D /core/trunk/org/getobjects/appserver/publisher/JoSessionAuthenticator.java
+   D /core/trunk/org/getobjects/appserver/publisher/JoSimpleJSONRenderer.java
+   D /core/trunk/org/getobjects/appserver/publisher/JoSimpleNamePasswordLogin.java
+   D /core/trunk/org/getobjects/appserver/publisher/JoTraversalPath.java
+   D /core/trunk/org/getobjects/appserver/publisher/JoUser.java
+   A /core/trunk/org/getobjects/appserver/tests/TGoTraversalPath.java (from /core/trunk/org/getobjects/appserver/tests/TJoTraversalPath.java:136)
+   D /core/trunk/org/getobjects/appserver/tests/TJoTraversalPath.java
+   M /core/trunk/org/getobjects/jmi/JMIComponent.java
+   M /core/trunk/org/getobjects/jmi/JMIDocTitleFormat.java
+   M /core/trunk/org/getobjects/jmi/JMIExposeClientObjectToJS.java
+   M /core/trunk/org/getobjects/jmi/JMIManageAddProduct.java
+   M /core/trunk/org/getobjects/jmi/JMIManageAddProductFactory.java
+   M /core/trunk/org/getobjects/jmi/JMIManageFolder.java
+   M /core/trunk/org/getobjects/jmi/JMIManageFrame.java
+   M /core/trunk/org/getobjects/jmi/JMIManageMenu.java
+   M /core/trunk/org/getobjects/jmi/JMITreeLabelFormat.java
+   M /core/trunk/org/getobjects/jmi/WOFramework.java
+   M /core/trunk/org/getobjects/jsapp/JSApplication.java
+   M /core/trunk/org/getobjects/jsapp/JSComponent.java
+   M /core/trunk/org/getobjects/jsapp/JSComponentWrapper.java
+   M /core/trunk/org/getobjects/jsapp/JSRestorationFactory.java
+   M /core/trunk/org/getobjects/jsapp/JSUtil.java
+   A /core/trunk/org/getobjects/ofs/IGoFolderish.java (from /core/trunk/org/getobjects/ofs/IJoFolderish.java:136)
+   D /core/trunk/org/getobjects/ofs/IJoFolderish.java
+   M /core/trunk/org/getobjects/ofs/IOFSContextObject.java
+   M /core/trunk/org/getobjects/ofs/IOFSLifecycleObject.java
+   M /core/trunk/org/getobjects/ofs/OFSApplication.java
+   M /core/trunk/org/getobjects/ofs/OFSBaseObject.java
+   M /core/trunk/org/getobjects/ofs/OFSComponentFile.java
+   M /core/trunk/org/getobjects/ofs/OFSComponentWrapper.java
+   M /core/trunk/org/getobjects/ofs/OFSDatabaseDataSourceFolder.java
+   M /core/trunk/org/getobjects/ofs/OFSDatabaseObjectFolder.java
+   M /core/trunk/org/getobjects/ofs/OFSFileContainerChildInfo.java
+   M /core/trunk/org/getobjects/ofs/OFSFolder.java
+   M /core/trunk/org/getobjects/ofs/OFSFolderDataSource.java
+   M /core/trunk/org/getobjects/ofs/OFSResourceFileRenderer.java
+   M /core/trunk/org/getobjects/ofs/OFSRestorationFactory.java
+   M /core/trunk/org/getobjects/ofs/OFSSelect.java
+   M /core/trunk/org/getobjects/ofs/WOFramework.java
+   M /core/trunk/org/getobjects/ofs/config/JoConfigContext.java
+   M /core/trunk/org/getobjects/ofs/config/JoConfigProcessor.java
+   A /core/trunk/org/getobjects/samples/HelloGo
+   A /core/trunk/org/getobjects/samples/HelloGo/Context.java (from /core/trunk/org/getobjects/samples/HelloJo/Context.java:136)
+   A /core/trunk/org/getobjects/samples/HelloGo/Defaults.properties (from /core/trunk/org/getobjects/samples/HelloJo/Defaults.properties:136)
+   A /core/trunk/org/getobjects/samples/HelloGo/HelloJo.java (from /core/trunk/org/getobjects/samples/HelloJo/HelloJo.java:136)
+   A /core/trunk/org/getobjects/samples/HelloGo/HelloJoPage.html (from /core/trunk/org/getobjects/samples/HelloJo/HelloJoPage.html:136)
+   A /core/trunk/org/getobjects/samples/HelloGo/HelloJoPage.java (from /core/trunk/org/getobjects/samples/HelloJo/HelloJoPage.java:136)
+   A /core/trunk/org/getobjects/samples/HelloGo/LanguageSelector.java (from /core/trunk/org/getobjects/samples/HelloJo/LanguageSelector.java:136)
+   A /core/trunk/org/getobjects/samples/HelloGo/LocalizableStrings.properties (from /core/trunk/org/getobjects/samples/HelloJo/LocalizableStrings.properties:136)
+   A /core/trunk/org/getobjects/samples/HelloGo/LocalizableStrings_de.properties (from /core/trunk/org/getobjects/samples/HelloJo/LocalizableStrings_de.properties:136)
+   A /core/trunk/org/getobjects/samples/HelloGo/PoJo.java (from /core/trunk/org/getobjects/samples/HelloJo/PoJo.java:136)
+   A /core/trunk/org/getobjects/samples/HelloGo/PoJoViewer.html (from /core/trunk/org/getobjects/samples/HelloJo/PoJoViewer.html:136)
+   A /core/trunk/org/getobjects/samples/HelloGo/PoJoViewer.java (from /core/trunk/org/getobjects/samples/HelloJo/PoJoViewer.java:136)
+   A /core/trunk/org/getobjects/samples/HelloGo/WEB-INF (from /core/trunk/org/getobjects/samples/HelloJo/WEB-INF:136)
+   A /core/trunk/org/getobjects/samples/HelloGo/jopelink.txt (from /core/trunk/org/getobjects/samples/HelloJo/jopelink.txt:136)
+   A /core/trunk/org/getobjects/samples/HelloGo/product.plist (from /core/trunk/org/getobjects/samples/HelloJo/product.plist:136)
+   D /core/trunk/org/getobjects/samples/HelloJo/Context.java
+   D /core/trunk/org/getobjects/samples/HelloJo/Defaults.properties
+   D /core/trunk/org/getobjects/samples/HelloJo/HelloJo.java
+   D /core/trunk/org/getobjects/samples/HelloJo/HelloJoPage.html
+   D /core/trunk/org/getobjects/samples/HelloJo/HelloJoPage.java
+   D /core/trunk/org/getobjects/samples/HelloJo/LanguageSelector.java
+   D /core/trunk/org/getobjects/samples/HelloJo/LocalizableStrings.properties
+   D /core/trunk/org/getobjects/samples/HelloJo/LocalizableStrings_de.properties
+   D /core/trunk/org/getobjects/samples/HelloJo/PoJo.java
+   D /core/trunk/org/getobjects/samples/HelloJo/PoJoViewer.html
+   D /core/trunk/org/getobjects/samples/HelloJo/PoJoViewer.java
+   D /core/trunk/org/getobjects/samples/HelloJo/WEB-INF
+   D /core/trunk/org/getobjects/samples/HelloJo/jopelink.txt
+   D /core/trunk/org/getobjects/samples/HelloJo/product.plist
+   M /core/trunk/org/getobjects/weextensions/WOFramework.java
+   M /core/trunk/org/getobjects/weprototype/WOFramework.java
+
+renamed plenty of 'Jo' class and method names to 'Go'
+------------------------------------------------------------------------
+r138 | helge.hess | 2008-06-14 19:54:19 +0200 (Sat, 14 Jun 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/core/WOApplication.java
+   M /core/trunk/org/getobjects/appserver/core/WOAssociation.java
+   M /core/trunk/org/getobjects/appserver/core/WOComponent.java
+   M /core/trunk/org/getobjects/appserver/core/WOComponentRequestHandler.java
+   M /core/trunk/org/getobjects/appserver/core/WOContext.java
+   M /core/trunk/org/getobjects/appserver/core/WODirectActionRequestHandler.java
+   M /core/trunk/org/getobjects/appserver/core/WOQuerySession.java
+   M /core/trunk/org/getobjects/appserver/core/WORequest.java
+   M /core/trunk/org/getobjects/appserver/core/WORequestHandler.java
+   M /core/trunk/org/getobjects/appserver/core/WOResourceRequestHandler.java
+   M /core/trunk/org/getobjects/appserver/core/WOSession.java
+   M /core/trunk/org/getobjects/appserver/core/WOSessionStore.java
+   M /core/trunk/org/getobjects/appserver/core/product.plist
+   M /core/trunk/org/getobjects/appserver/products/GoControlPanelProducts.java
+   M /core/trunk/org/getobjects/appserver/products/GoProductInfo.java
+   M /core/trunk/org/getobjects/appserver/products/GoProductLinker.java
+   M /core/trunk/org/getobjects/appserver/products/GoProductManager.java
+   M /core/trunk/org/getobjects/appserver/products/GoProductResourceManager.java
+   M /core/trunk/org/getobjects/appserver/products/WOPackageLinker.java
+   M /core/trunk/org/getobjects/appserver/publisher/GoAccessDeniedException.java
+   M /core/trunk/org/getobjects/appserver/publisher/GoActivePageActionInvocation.java
+   M /core/trunk/org/getobjects/appserver/publisher/GoCallDirectActionRequestHandler.java
+   M /core/trunk/org/getobjects/appserver/publisher/GoClass.java
+   M /core/trunk/org/getobjects/appserver/publisher/GoClassRegistry.java
+   M /core/trunk/org/getobjects/appserver/publisher/GoContainerResourceManager.java
+   M /core/trunk/org/getobjects/appserver/publisher/GoControlPanel.java
+   M /core/trunk/org/getobjects/appserver/publisher/GoDefaultRenderer.java
+   M /core/trunk/org/getobjects/appserver/publisher/GoDirectActionInvocation.java
+   M /core/trunk/org/getobjects/appserver/publisher/GoHTTPAuthenticator.java
+   M /core/trunk/org/getobjects/appserver/publisher/GoJavaMethod.java
+   M /core/trunk/org/getobjects/appserver/publisher/GoObjectRequestHandler.java
+   M /core/trunk/org/getobjects/appserver/publisher/GoPageInvocation.java
+   M /core/trunk/org/getobjects/appserver/publisher/GoPathAssociation.java
+   M /core/trunk/org/getobjects/appserver/publisher/GoResource.java
+   M /core/trunk/org/getobjects/appserver/publisher/GoSecurityException.java
+   M /core/trunk/org/getobjects/appserver/publisher/GoSecurityInfo.java
+   M /core/trunk/org/getobjects/appserver/publisher/GoSessionAuthenticator.java
+   M /core/trunk/org/getobjects/appserver/publisher/GoSimpleJSONRenderer.java
+   M /core/trunk/org/getobjects/appserver/publisher/GoSimpleNamePasswordLogin.java
+   M /core/trunk/org/getobjects/appserver/publisher/GoTraversalPath.java
+   M /core/trunk/org/getobjects/appserver/publisher/GoUser.java
+   M /core/trunk/org/getobjects/appserver/publisher/IGoAuthenticator.java
+   M /core/trunk/org/getobjects/appserver/publisher/IGoComponentDefinition.java
+   M /core/trunk/org/getobjects/appserver/publisher/IGoLocation.java
+   M /core/trunk/org/getobjects/appserver/publisher/IGoObject.java
+   M /core/trunk/org/getobjects/appserver/publisher/IGoObjectRenderer.java
+   M /core/trunk/org/getobjects/appserver/publisher/IGoObjectRendererFactory.java
+   M /core/trunk/org/getobjects/appserver/publisher/IGoSecuredObject.java
+   M /core/trunk/org/getobjects/appserver/publisher/IGoUser.java
+   M /core/trunk/org/getobjects/jaas/EODatabaseJaasConfig.java
+   M /core/trunk/org/getobjects/jaas/EODatabaseLoginModule.java
+   M /core/trunk/org/getobjects/jaas/README.txt
+   M /core/trunk/org/getobjects/jmi/JMIManageAddProduct.java
+   M /core/trunk/org/getobjects/jsapp/JSComponent.java
+   M /core/trunk/org/getobjects/jsapp/JSComponentWrapper.java
+   M /core/trunk/org/getobjects/jsapp/JSUtil.java
+   M /core/trunk/org/getobjects/ofs/IOFSContextObject.java
+   M /core/trunk/org/getobjects/ofs/OFSApplication.java
+   M /core/trunk/org/getobjects/ofs/OFSBaseObject.java
+   M /core/trunk/org/getobjects/ofs/OFSComponentFile.java
+   M /core/trunk/org/getobjects/ofs/OFSComponentWrapper.java
+   M /core/trunk/org/getobjects/ofs/OFSFileContainerChildInfo.java
+   M /core/trunk/org/getobjects/ofs/OFSFolder.java
+   M /core/trunk/org/getobjects/ofs/OFSFolderDataSource.java
+   M /core/trunk/org/getobjects/ofs/OFSHtAccessFile.java
+   M /core/trunk/org/getobjects/ofs/OFSHtmlFile.java
+   M /core/trunk/org/getobjects/ofs/OFSImageFile.java
+   M /core/trunk/org/getobjects/ofs/OFSJavaScriptFile.java
+   M /core/trunk/org/getobjects/ofs/OFSPdfFile.java
+   M /core/trunk/org/getobjects/ofs/OFSResourceFileRenderer.java
+   M /core/trunk/org/getobjects/ofs/OFSRestorationFactory.java
+   M /core/trunk/org/getobjects/ofs/OFSSelect.java
+   M /core/trunk/org/getobjects/rules/Rule.java
+   M /core/trunk/org/getobjects/rules/RuleAssignment.java
+   M /core/trunk/org/getobjects/rules/RuleContext.java
+   M /core/trunk/org/getobjects/rules/RuleModel.java
+   M /core/trunk/org/getobjects/rules/RuleModelLoader.java
+   M /core/trunk/org/getobjects/rules/RuleParser.java
+   M /core/trunk/org/getobjects/samples/HelloChart/Main.java
+   M /core/trunk/org/getobjects/samples/HelloJS/log4j.properties
+   M /core/trunk/org/getobjects/samples/HelloWorld/TestOGNL.html
+
+replaced more Jo's with Go's
+------------------------------------------------------------------------
+r139 | helge.hess | 2008-06-14 20:08:27 +0200 (Sat, 14 Jun 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/core/WOApplication.java
+   M /core/trunk/org/getobjects/appserver/core/WOContext.java
+   M /core/trunk/org/getobjects/appserver/core/WODirectActionRequestHandler.java
+   A /core/trunk/org/getobjects/appserver/core/WORequestGoPath.java (from /core/trunk/org/getobjects/appserver/core/WORequestJoPath.java:136)
+   D /core/trunk/org/getobjects/appserver/core/WORequestJoPath.java
+   M /core/trunk/org/getobjects/appserver/publisher/GoControlPanel.java
+   M /core/trunk/org/getobjects/appserver/publisher/GoDefaultRenderer.java
+   M /core/trunk/org/getobjects/appserver/publisher/GoObjectRequestHandler.java
+   M /core/trunk/org/getobjects/appserver/publisher/GoPageInvocation.java
+   M /core/trunk/org/getobjects/appserver/publisher/GoPathAssociation.java
+   M /core/trunk/org/getobjects/appserver/publisher/GoTraversalPath.java
+   M /core/trunk/org/getobjects/appserver/publisher/IGoContext.java
+   M /core/trunk/org/getobjects/appserver/publisher/IGoLocation.java
+   M /core/trunk/org/getobjects/appserver/publisher/IGoObject.java
+   M /core/trunk/org/getobjects/appserver/publisher/IGoObjectRendererFactory.java
+   M /core/trunk/org/getobjects/appserver/publisher/IGoSecuredObject.java
+   M /core/trunk/org/getobjects/appserver/templates/WOTemplateBuilder.java
+   M /core/trunk/org/getobjects/appserver/templates/WOWrapperTemplateBuilder.java
+   M /core/trunk/org/getobjects/eoaccess/tests/EOAccessTest.java
+   M /core/trunk/org/getobjects/eoaccess/tests/TActiveRecord.java
+   M /core/trunk/org/getobjects/eoaccess/tests/TDatabaseDataSource.java
+   M /core/trunk/org/getobjects/eoaccess/tests/TSchemaReflection.java
+   M /core/trunk/org/getobjects/jmi/JMIComponent.java
+   M /core/trunk/org/getobjects/jmi/JMIExposeClientObjectToJS.java
+   M /core/trunk/org/getobjects/jmi/JMIManageAddFrame.java
+   M /core/trunk/org/getobjects/jmi/JMIManageFile.java
+   M /core/trunk/org/getobjects/jmi/product.plist
+   M /core/trunk/org/getobjects/jsapp/adapter/JSContextAdapter.java
+   M /core/trunk/org/getobjects/ofs/OFSApplication.java
+   M /core/trunk/org/getobjects/ofs/OFSBaseObject.java
+   M /core/trunk/org/getobjects/ofs/OFSComponentWrapper.java
+   M /core/trunk/org/getobjects/ofs/OFSFolder.java
+   M /core/trunk/org/getobjects/ofs/OFSRestorationFactory.java
+   M /core/trunk/org/getobjects/ofs/config/JoConfigContext.java
+   M /core/trunk/org/getobjects/ofs/htaccess/HtConfigBuilder.java
+   M /core/trunk/org/getobjects/ofs/htaccess/eval/KeyMatchEvaluation.java
+   M /core/trunk/org/getobjects/ofs/htaccess/eval/Limit.java
+   M /core/trunk/org/getobjects/ofs/htaccess/eval/LimitExcept.java
+   M /core/trunk/org/getobjects/ofs/htaccess/eval/Require.java
+   M /core/trunk/org/getobjects/samples/HelloGo/WEB-INF/web.xml
+   M /core/trunk/org/getobjects/samples/HelloGo/product.plist
+   M /core/trunk/org/getobjects/samples/HelloThumbnail/Main.java
+
+replaced more Jo's with Go's
+------------------------------------------------------------------------
+r140 | helge.hess | 2008-06-15 12:36:29 +0200 (Sun, 15 Jun 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/elements/WOConditional.java
+
+added <wo:if not=""> virtual binding (sets condition/negate)
+------------------------------------------------------------------------
+r141 | helge.hess | 2008-06-15 13:02:36 +0200 (Sun, 15 Jun 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/core/WODynamicElement.java
+
+improved methods to render association descriptions
+------------------------------------------------------------------------
+r142 | helge.hess | 2008-06-15 13:06:57 +0200 (Sun, 15 Jun 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/core/WODynamicElement.java
+
+just added a few comments
+------------------------------------------------------------------------
+r143 | helge.hess | 2008-06-15 13:18:38 +0200 (Sun, 15 Jun 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/elements/WOConditional.java
+
+optimized WOConditional, the condition is now handled by binding-specific WOCondition objects
+------------------------------------------------------------------------
+r144 | helge.hess | 2008-06-15 13:29:12 +0200 (Sun, 15 Jun 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/elements/WOCopyValue.java
+
+minor code cleanups
+------------------------------------------------------------------------
+r145 | helge.hess | 2008-06-15 13:38:12 +0200 (Sun, 15 Jun 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/elements/WOCopyValue.java
+
+added support for if/ifnot/condition binding
+------------------------------------------------------------------------
+r155 | helge.hess | 2008-07-04 11:49:40 +0200 (Fri, 04 Jul 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eoaccess/EOEntity.java
+   M /core/trunk/org/getobjects/eoaccess/EOModel.java
+
+just added a few comments
+------------------------------------------------------------------------
+r156 | helge.hess | 2008-07-04 15:55:05 +0200 (Fri, 04 Jul 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eocontrol/EOGroupedList.java
+   M /core/trunk/org/getobjects/foundation/UList.java
+
+minor code cleanups
+------------------------------------------------------------------------
+r157 | helge.hess | 2008-07-04 16:27:36 +0200 (Fri, 04 Jul 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/eoaccess/EOActiveRecord.java
+   M /core/trunk/org/getobjects/eocontrol/EOGroupedList.java
+
+minor code cleanups
+------------------------------------------------------------------------
+r158 | helge.hess | 2008-07-04 16:53:25 +0200 (Fri, 04 Jul 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/elements/WOString.java
+
+cleaned up source code, now uses UString.stringValue() to generate the String representation of an object
+------------------------------------------------------------------------
+r159 | helge.hess | 2008-07-04 16:54:22 +0200 (Fri, 04 Jul 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/foundation/UObject.java
+
+changed UObject.stringValue() function to return a better representation of plain Java arrays
+------------------------------------------------------------------------
+r160 | helge.hess | 2008-07-06 17:14:11 +0200 (Sun, 06 Jul 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/jsapp/JSCachedObjectFile.java
+   M /core/trunk/org/getobjects/jsapp/JSCachedScriptFile.java
+   M /core/trunk/org/getobjects/jsapp/JSCachedScriptScope.java
+
+just added a few comments
+------------------------------------------------------------------------
+r161 | helge.hess | 2008-07-06 18:07:10 +0200 (Sun, 06 Jul 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/jsapp/JSApplication.java
+   M /core/trunk/org/getobjects/jsapp/JSAssociation.java
+   M /core/trunk/org/getobjects/jsapp/JSCachedDirectory.java
+   M /core/trunk/org/getobjects/jsapp/JSCachedKVCScriptScope.java
+   M /core/trunk/org/getobjects/jsapp/JSCachedScriptScope.java
+   M /core/trunk/org/getobjects/jsapp/JSComponent.java
+   M /core/trunk/org/getobjects/jsapp/JSContext.java
+   M /core/trunk/org/getobjects/jsapp/JSKeyValueCodingScope.java
+   M /core/trunk/org/getobjects/jsapp/JSSession.java
+   M /core/trunk/org/getobjects/jsapp/JSUtil.java
+
+minor code cleanups
+------------------------------------------------------------------------
+r162 | helge.hess | 2008-07-06 18:47:27 +0200 (Sun, 06 Jul 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/jsapp/JSComponentWrapper.java
+   M /core/trunk/org/getobjects/jsapp/README.txt
+
+just added a few comments
+------------------------------------------------------------------------
+r163 | helge.hess | 2008-07-06 18:57:00 +0200 (Sun, 06 Jul 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/ofs/OFSComponentWrapper.java
+
+minor code cleanups
+------------------------------------------------------------------------
+r164 | helge.hess | 2008-07-09 20:47:36 +0200 (Wed, 09 Jul 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/foundation/UString.java
+   A /core/trunk/org/getobjects/samples/HelloGo/HelloGo.java (from /core/trunk/org/getobjects/samples/HelloGo/HelloJo.java:137)
+   D /core/trunk/org/getobjects/samples/HelloGo/HelloJo.java
+
+improved URL encoding methods in UString
+------------------------------------------------------------------------
+r165 | helge.hess | 2008-07-17 12:33:59 +0200 (Thu, 17 Jul 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/elements/WORadioButton.java
+
+fixed handling of empty-attrs configuration for 'checked' attributes
+------------------------------------------------------------------------
+r166 | helge.hess | 2008-07-17 12:55:24 +0200 (Thu, 17 Jul 2008) | 2 lines
+Changed paths:
+   M /core/trunk/org/getobjects/foundation/NSObject.java
+
+added 'not' KVC trampoline to NSObject (eg myAccount.not.isActive)
+
+------------------------------------------------------------------------
+r167 | helge.hess | 2008-07-17 14:34:35 +0200 (Thu, 17 Jul 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/core/WOApplication.java
+   M /core/trunk/org/getobjects/appserver/core/WOComponent.java
+   M /core/trunk/org/getobjects/appserver/core/WOSession.java
+   M /core/trunk/org/getobjects/appserver/templates/WOChildComponentReference.java
+
+ensure that the component stack is kept in line when exceptions are thrown
+------------------------------------------------------------------------
+r168 | helge.hess | 2008-07-18 12:02:21 +0200 (Fri, 18 Jul 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/jsapp/README.txt
+
+
+------------------------------------------------------------------------
+r169 | znek666 | 2008-08-04 19:53:55 +0200 (Mon, 04 Aug 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/core/WOApplication.java
+   M /core/trunk/org/getobjects/jetty/WOJettyRunner.java
+   M /core/trunk/org/getobjects/servlets/WOServletAdaptor.java
+
+Added "volatile" properties support. Volatile properties are usually provided via the command line as system properties and thus currently lost in JettyRunner, as system properties get cleared. The initial support does preserve "WOProjectDirectory" only but can be extended to support all command line args once we have a decent command line argument parser.
+------------------------------------------------------------------------
+r170 | znek666 | 2008-08-04 21:14:26 +0200 (Mon, 04 Aug 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/jetty/WOJettyRunner.java
+   M /core/trunk/org/getobjects/servlets/WOServletAdaptor.java
+
+All definitions ("-D" values) passed on the command line are now broken down into properties and ultimately passed on to the application object. This makes providing your application with custom arguments (i.e. -DOFSROOT=/path/to/ofs) a snap. :-)
+------------------------------------------------------------------------
+r171 | helge.hess | 2008-08-05 11:40:34 +0200 (Tue, 05 Aug 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/jetty/WOJettyRunner.java
+   M /core/trunk/org/getobjects/servlets/WOServletAdaptor.java
+
+minor fixes, removed an unused ctor
+------------------------------------------------------------------------
+r172 | helge.hess | 2008-08-05 12:03:38 +0200 (Tue, 05 Aug 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/core/WOApplication.java
+   M /core/trunk/org/getobjects/servlets/WOServletAdaptor.java
+
+minor code cleanups
+------------------------------------------------------------------------
+r173 | znek666 | 2008-08-05 13:24:36 +0200 (Tue, 05 Aug 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/jetty/WOJettyRunner.java
+   M /core/trunk/org/getobjects/jsapp/run.java
+   M /core/trunk/org/getobjects/servlets/WOServletAdaptor.java
+
+Reworked the initialization of WOJettyRunner and unified the inner workings to deal with properties alone. This directly simplifies (and extends) subclassers like run.java. Extended WOServletAdaptor to extract ServletContext init parameters and attributes as properties.
+------------------------------------------------------------------------
+r174 | znek666 | 2008-08-05 13:32:16 +0200 (Tue, 05 Aug 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/jetty/WOJettyRunner.java
+
+Set WOAutoOpenInBrowser default to "false"
+------------------------------------------------------------------------
+r175 | znek666 | 2008-08-05 13:48:04 +0200 (Tue, 05 Aug 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/jetty/WOJettyRunner.java
+
+Fixed WOAppClass vs. WOAppName bug.
+------------------------------------------------------------------------
+r176 | znek666 | 2008-08-05 15:29:59 +0200 (Tue, 05 Aug 2008) | 1 line
+Changed paths:
+   M /core/trunk/build.xml
+
+Minor reorganization of build.xml. It's now possible to have something like version.name=${version.major}.${version.minor}-${DSTAMP} in your local .ant.properties file in order to i.e. automatize fat builds for further inclusion etc.
+------------------------------------------------------------------------
+r177 | znek666 | 2008-08-05 17:19:20 +0200 (Tue, 05 Aug 2008) | 1 line
+Changed paths:
+   M /core/trunk/build.xml
+
+Remove _any_ documentation from resources
+------------------------------------------------------------------------
+r178 | helge.hess | 2008-08-06 10:18:33 +0200 (Wed, 06 Aug 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/jsapp/run.java
+
+minor code cleanups
+------------------------------------------------------------------------
+r179 | helge.hess | 2008-08-06 11:35:03 +0200 (Wed, 06 Aug 2008) | 1 line
+Changed paths:
+   M /core/trunk/.classpath
+
+fixed buildpath to pick up new Jetty
+------------------------------------------------------------------------
+r180 | helge.hess | 2008-08-06 12:24:33 +0200 (Wed, 06 Aug 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/elements/WOFragment.java
+
+minor code cleanups
+------------------------------------------------------------------------
+r181 | znek666 | 2008-08-06 14:53:59 +0200 (Wed, 06 Aug 2008) | 1 line
+Changed paths:
+   A /core/trunk/org/getobjects/weprototype/WEAutocompleteField.java
+
+Added a new dynamic element used for autocompleting input fields. Note that this element needs Scriptaculous in order to function.
+------------------------------------------------------------------------
+r182 | helge.hess | 2008-08-08 15:40:45 +0200 (Fri, 08 Aug 2008) | 2 lines
+Changed paths:
+   M /core/trunk/org/getobjects/appserver/templates/WOWrapperTemplateBuilder.java
+
+Fixed a bug with extra attributes of wrapped elements (if/ifnot/foreach hack attrs). The extra attrs got applied on the wrapper, not on the original element.
+
+------------------------------------------------------------------------
+r183 | znek666 | 2008-08-09 13:59:41 +0200 (Sat, 09 Aug 2008) | 1 line
+Changed paths:
+   M /core/trunk/build.xml
+
+Adjusted build.xml to updated 3rd party dependencies
+------------------------------------------------------------------------
+r184 | znek666 | 2008-08-09 14:30:29 +0200 (Sat, 09 Aug 2008) | 1 line
+Changed paths:
+   M /core/trunk
+   M /core/trunk/.classpath
+   M /core/trunk/build.xml
+
+Upgraded PostgreSQL JBDC3/4 adaptor from 8.2-506 to 8.3-603
+------------------------------------------------------------------------
+r185 | znek666 | 2008-09-04 18:24:30 +0200 (Thu, 04 Sep 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/weprototype/WEAutocompleteField.java
+
+WEAutocompleteField accepts WOListWalker bindings now, as it implements all necessary repetition steps. The template of a WEAutocompleteField is supposed to be the content of a single completion item. All necessary wrapping (i.e. <ul><li>item1...</li>...) is done by WEAutocompleteField now. The previously optional fragment binding has been removed, as it is implicitly required now.
+------------------------------------------------------------------------
+r186 | znek666 | 2008-09-05 16:53:04 +0200 (Fri, 05 Sep 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/weprototype/www/builder.js
+   M /core/trunk/org/getobjects/weprototype/www/controls.js
+   M /core/trunk/org/getobjects/weprototype/www/dragdrop.js
+   M /core/trunk/org/getobjects/weprototype/www/effects.js
+   M /core/trunk/org/getobjects/weprototype/www/prototype.js
+   M /core/trunk/org/getobjects/weprototype/www/scriptaculous.js
+   M /core/trunk/org/getobjects/weprototype/www/slider.js
+   A /core/trunk/org/getobjects/weprototype/www/sound.js
+   M /core/trunk/org/getobjects/weprototype/www/unittest.js
+
+Updated Prototype to 1.6.0.2 and Scriptaculous to 1.8.1.
+------------------------------------------------------------------------
+r187 | znek666 | 2008-09-05 17:02:31 +0200 (Fri, 05 Sep 2008) | 1 line
+Changed paths:
+   A /core/trunk/log4j.properties
+   A /core/trunk/org/getobjects/samples/HelloGo/HelloGoPage.html (from /core/trunk/org/getobjects/samples/HelloGo/HelloJoPage.html:184)
+   A /core/trunk/org/getobjects/samples/HelloGo/HelloGoPage.java (from /core/trunk/org/getobjects/samples/HelloGo/HelloJoPage.java:184)
+   D /core/trunk/org/getobjects/samples/HelloGo/HelloJoPage.html
+   D /core/trunk/org/getobjects/samples/HelloGo/HelloJoPage.java
+   R /core/trunk/org/getobjects/samples/HelloGo/PoJoViewer.html (from /core/trunk/org/getobjects/samples/HelloGo/PoJoViewer.html:184)
+   M /core/trunk/org/getobjects/samples/HelloWorld/PrototypeTestPage.java
+
+Added a log4j.properties file for correctly initializing the log4j logging system. Renamed HelloJoPage to HelloGoPage in the HelloGo sample. Added a WEAutocompleteField sample to the PrototypeTestPage in the HelloWorld sample.
+------------------------------------------------------------------------
+r188 | znek666 | 2008-09-05 17:03:21 +0200 (Fri, 05 Sep 2008) | 1 line
+Changed paths:
+   M /core/trunk/org/getobjects/samples/HelloWorld/PrototypeTestPage.html
+
+Added a log4j.properties file for correctly initializing the log4j logging system. Renamed HelloJoPage to HelloGoPage in the HelloGo sample. Added a WEAutocompleteField sample to the PrototypeTestPage in the HelloWorld sample.
+------------------------------------------------------------------------
