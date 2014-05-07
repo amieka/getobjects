@@ -1,0 +1,113 @@
+{
+  factories = {
+  };
+  
+  renderers = {
+  };
+
+  classes = {
+    java.util.AbstractCollection = {
+      /* per default we allow access to collections. The objects inside the
+         collection need to be properly protected though ... */
+      protectedBy   = "<public>";
+      defaultAccess = "allow";
+    };
+  	
+    org.getobjects.appserver.core.WOApplication = {
+      protectedBy   = "<public>";
+      defaultAccess = "allow";
+      
+      slots = {
+        "-ControlPanel" = {
+          protectedBy = "<public>";
+          valueClass  =
+            "org.getobjects.appserver.publisher.GoControlPanel";
+        };
+      };
+      
+      methods = {
+      };
+    };
+    
+    org.getobjects.appserver.products.GoProduct = {
+      protectedBy   = "<public>";
+      defaultAccess = "allow";
+    };
+    org.getobjects.appserver.publisher.GoResource = {
+      protectedBy   = "<public>";
+      defaultAccess = "allow";
+    };
+    
+    org.getobjects.appserver.core.WOComponent = {
+      /* per default we expose all WOComponent objects to the web, including
+         all names */
+      protectedBy   = "<public>";
+      defaultAccess = "allow";
+    };
+    org.getobjects.appserver.publisher.GoPageInvocation = {
+      /* per default we expose all WOComponent objects to the web, including
+         all names */
+      protectedBy   = "<public>";
+      defaultAccess = "allow";
+    };
+    org.getobjects.appserver.publisher.GoDirectActionInvocation = {
+      /* per default we expose all DirectAction objects to the web, including
+         all names */
+      protectedBy   = "<public>";
+      defaultAccess = "allow";
+    };
+    
+    org.getobjects.appserver.core.WODirectActionRequestHandler = {
+      protectedBy   = "<public>";
+      defaultAccess = "allow";
+    };
+    org.getobjects.appserver.core.WOResourceRequestHandler = {
+      protectedBy   = "<public>";
+      defaultAccess = "allow";
+    };
+    org.getobjects.appserver.core.WOComponentRequestHandler = {
+      protectedBy   = "<public>";
+      defaultAccess = "allow";
+    };
+    
+    /* the control panel */
+    
+    org.getobjects.appserver.publisher.GoControlPanel = {
+      /*
+        Note: resources are retrieved using the control panel, so it is in
+              fact public. Protect sensitive slots individually.
+      */
+      protectedBy   = "<public>";
+      defaultAccess = "allow";
+      
+      slots = {
+        "Products" = {
+          protectedBy = "<public>";
+          valueClass  =
+            "org.getobjects.appserver.products.GoControlPanelProducts";
+         };
+      };
+      
+      methods = {
+      };
+    };
+    
+    org.getobjects.appserver.products.GoControlPanelProducts = {
+      /*
+        Note: resources are retrieved using the control panel, so it is in
+              fact public. Protect sensitive slots individually.
+      */
+      protectedBy   = "<public>";
+      defaultAccess = "allow";
+      
+      slots = {
+      };
+      
+      methods = {
+      };
+    };
+  };
+  
+  categories = {
+  };
+}

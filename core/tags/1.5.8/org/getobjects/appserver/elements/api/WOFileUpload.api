@@ -1,0 +1,16 @@
+<?xml version="1.0"?> 
+
+<wo class="WOFileUpload"
+    superclass="WOInput"
+    xmlns="http://www.opengroupware.org/go/api"
+>
+  <name value="WOFileUpload" ns="http://www.opengroupware.org/go"/>
+
+  <binding name="filePath" settable="YES" required="YES" />
+  <binding name="data" settable="YES" required="YES" />
+  <binding name="string" />
+  <binding name="size" settable="YES" />
+  <binding name="contentType" />
+  <binding name="deleteAfterPush" defaults="YES/NO"/>
+  <binding name="inputStream"/>
+</wo>

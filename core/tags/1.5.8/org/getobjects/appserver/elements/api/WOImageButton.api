@@ -1,0 +1,14 @@
+<?xml version="1.0"?> 
+
+<wo class="WOImageButton"
+    superclass="WOInput"
+    xmlns="http://www.opengroupware.org/go/api"
+>
+  <name value="WOImageButton" ns="http://www.opengroupware.org/go"/>
+
+  <binding name="action" defaults="Actions"/>
+  <binding name="pageName" defaults="Page Names"/>
+  <binding name="x" settable="YES" />
+  <binding name="y" settable="YES"/>
+  <bindings class="WOLinkGenerator" />
+</wo>

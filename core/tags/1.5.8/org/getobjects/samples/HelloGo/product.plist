@@ -1,0 +1,32 @@
+{
+  publicResources = (
+  );
+  
+  factories = {
+  };
+  
+  renderers = {
+  };
+  
+  categories = {
+  };
+  
+  classes = {
+    org.getobjects.samples.HelloGo.LanguageSelector = {
+      protectedBy   = "<public>";
+      defaultAccess = "allow";
+    };
+    
+    org.getobjects.samples.HelloGo.PoJo = {
+      protectedBy   = "<public>";
+      defaultAccess = "allow";
+
+      methods = {
+      	"view" = {
+      	  protectedBy = "<public>";
+      	  pageName    = "PoJoViewer";
+      	};
+      };
+    };
+  };
+}

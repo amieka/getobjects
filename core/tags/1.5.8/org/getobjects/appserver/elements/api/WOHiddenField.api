@@ -1,0 +1,8 @@
+<?xml version="1.0"?> 
+
+<wo class="WOHiddenField"
+    superclass="WOInput"
+    xmlns="http://www.opengroupware.org/go/api"
+>
+    <name value="WOHiddenField" ns="http://www.opengroupware.org/go"/>
+</wo>

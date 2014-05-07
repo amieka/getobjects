@@ -1,0 +1,10 @@
+<?xml version="1.0"?> 
+
+<wo class="WESubmitToRemote"
+    superclass="WOInput"
+    xmlns="http://www.opengroupware.org/go/api"
+>
+  <name value="WESubmitToRemote" ns="http://www.opengroupware.org/go"/>
+
+  <bindings class="WELinkToRemote"/>
+</wo>

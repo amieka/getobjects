@@ -1,0 +1,15 @@
+<?xml version="1.0"?> 
+
+<wo class="WEObserveField"
+    superclass="WEPrototypeElement"
+    xmlns="http://www.opengroupware.org/go/api"
+>
+  <name value="WEObserveField" ns="http://www.opengroupware.org/go"/>
+
+  <bindings class="WELinkToRemote"/>
+  <binding name="name" required="YES"/>
+  
+  <binding name="frequency"/>
+  <binding name="function"/>
+  <binding name="on"/>
+</wo>
