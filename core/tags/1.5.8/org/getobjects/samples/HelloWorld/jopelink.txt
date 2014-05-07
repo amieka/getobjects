@@ -1,0 +1,5 @@
+org.getobjects.woextensions
+org.getobjects.weextensions
+org.getobjects.weprototype
+org.getobjects.ext.tinymce
+org.getobjects.ext.dtree

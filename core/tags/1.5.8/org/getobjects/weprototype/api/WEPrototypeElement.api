@@ -1,0 +1,6 @@
+<?xml version="1.0"?> 
+
+<wo class="WEPrototypeElement"
+    superclass="WODynamicElement"
+    xmlns="http://www.opengroupware.org/go/api"
+/>

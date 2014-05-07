@@ -1,0 +1,23 @@
+<?xml version="1.0"?> 
+
+<wo class="WEAutocompleteField"
+    superclass="WEPrototypeElement"
+    xmlns="http://www.opengroupware.org/go/api"
+>
+  <name value="WEAutocompleteField" ns="http://www.opengroupware.org/go"/>
+
+  <bindings class="WOLinkGenerator"/>
+  <bindings class="WOListWalker"/>
+
+  <binding name="name" required="YES"/>
+  <binding name="elementName"/>
+  <binding name="class"/>
+
+  <binding name="tokens"/>
+  <binding name="updateElement"/>
+  <binding name="afterUpdateElement"/>
+  <binding name="frequency"/>
+  <binding name="indicator"/>
+  <binding name="select"/>
+  <binding name="minChars"/>
+</wo>

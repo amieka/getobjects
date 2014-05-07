@@ -1,0 +1,15 @@
+<?xml version="1.0"?> 
+
+<wo class="WOCopyValue"
+    superclass="WODynamicElement"
+    xmlns="http://www.opengroupware.org/go/api"
+>
+  <name value="WOCopyValue" ns="http://www.opengroupware.org/go"/>
+  <name value="put" ns="http://www.opengroupware.org/go"/>
+
+  <binding name="copyValues" />
+  <binding name="finishValues" />
+  <binding name="resetValues"  defaults="YES/NO"/>
+  <binding name="if" defaults="YES/NO"/>
+  <binding name="ifnot" defaults="YES/NO"/>
+</wo>
