@@ -1,0 +1,3 @@
+# Introduction #
+
+JavaScript is a programming language. Usually used for dynamic pages in web browsers, but in the case of GETobjects also used on the server side.

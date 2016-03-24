@@ -1,0 +1,20 @@
+# Introduction #
+
+Continually plagiarize stand-alone e-business and technically sound e-commerce. Phosfluorescently productivate accurate synergy after team building paradigms. Rapidiously conceptualize process-centric initiatives through mission-critical e-tailers.
+
+
+# Details #
+
+Remember:
+  * all radios in the same set must have the same form 'name' (aka name binding)
+  * but no element may have the same 'id' in a webpage
+  * hence: the 'idname' is not useful in the context of radio buttons
+
+# Tips #
+
+To generate a unique id in a repetition you can use varpat associations:
+```
+  <wo:radio name="accountid"
+            varpat:id="accountid_%(item.id)s"
+            value="$item.id" />
+```
